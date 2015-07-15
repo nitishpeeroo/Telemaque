@@ -8,28 +8,31 @@ class UserController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-        session_start();
+        
+        
         $this->view->form = new Application_Form_UserConnection();
         if ($this->_request->isPost()) {
             
             //sign in
-            if ($_POST['type'] = 1) {
-
+            if ($_POST['type'] = 'signin') {
+                
                 $login = $_POST['login'];
                 $mdp = $_POST['password'];
+                
                 $user = new Application_Model_User();
                 $connection = $user->login($login, $mdp);
+                
 //                var_dump($connection);die();
                 if (!isset($connection['id_user'])) {
                     echo "vous n'exister pas";
                 } else {
-                
-                    $_SESSION['user'] = $connection;
+                    $this -> sess = new Zend_Session_Namespace('user');
+                    $this -> sess->data = $connection;
                     
                     $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index'),null,true));
                 }
             // sign up
-            } elseif ($_POST['type'] == 2) {
+            } elseif ($_POST['type'] == 'signup') {
 
                 $login = $_POST['login'];
                 $mdp = $_POST['password'];
@@ -47,14 +50,6 @@ class UserController extends Zend_Controller_Action {
                 }
             }
         }
-    }
-    
-    public function destroyAction(){
-        if(isset($_SESSION['user'])){
-            unset($_SESSION['user']);
-            session_destroy();
-        }
-           $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index'),null,true));
     }
 
 }
