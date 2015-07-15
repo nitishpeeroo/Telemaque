@@ -3,16 +3,16 @@
 class IndexController extends Zend_Controller_Action {
 
     public function indexAction()   {
-              session_start();
+        zend_session::start(); 
         $this->view->headTitle('Accueil');
         
-        if(isset($_SESSION['user']))
-        {
+        $ns = new Zend_Session_Namespace('user');
         
-            $this->view->firstname = $_SESSION['user']['firstname_user'];
-            $this->view->lastname = $_SESSION['user']['lastname_user'];
-            $this->view->rank = $_SESSION['user']['label_rank'];
-            $this->view->lvl = $_SESSION['user']['id_rank'];
+        if(!empty($ns->data))
+        {    
+            $this->view->firstname = $ns->data['firstname_user'];
+            $this->view->lastname = $ns->data['lastname_user'];
+            $this->view->lvl = $ns->data['id_rank'];
         }
     }
 }

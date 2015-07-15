@@ -1,0 +1,8 @@
+
+first name: <?= $this->firstname ?><br/>
+last name: <?= $this->lastname ?><br/>
+mail: <?= $this->mail ?><br/>
+phone: <?= $this->phone ?><br/>
+adresse: <?= $this->address ?><br/>
+
+<a  href="<?php echo $this->url(array('controller' => 'user', 'action' => 'modify'), null, true); ?>" >modifier</a>

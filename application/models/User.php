@@ -9,15 +9,16 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
 
     public function login($login, $password) {
         try {
+            
             $select = $this->select()
                     ->setIntegrityCheck(false)
                     ->from(array('u' => DB_TABLE_USER))
                     ->joinInner(array('r' => DB_TABLE_RANK)
-                            ,'u.id_rank = r.id_rank')
+                            ,'u.level_user = r.id_rank')
                     ->where('u.login_user = ?', $login)
                     ->where('u.password_user = ?', $password);
-
             $row = $this->fetchAll($select)->toArray();
+            
             $this->data = $row[0];
         
             $flag = false;
@@ -54,5 +55,5 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
         }
         return $flag;
     }
-
+    
 }
