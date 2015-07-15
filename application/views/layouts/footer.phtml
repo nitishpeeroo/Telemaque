@@ -105,25 +105,27 @@
                     <hr>
                     <p>Copyright © Your Website | <a href="">Privacy Policy</a> | <a href="">Terms of Use</a></p>
                     </footer>
-                    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+                    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
                     <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
                     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
                     <script type="text/javascript" src="<?php echo $this->baseUrl("/js/jquery.js"); ?>"></script>
                     <script type="text/javascript" src="<?php echo $this->baseUrl("/js/bootstrap.js"); ?>"></script>
+                    <script type="text/javascript" src="<?php echo $this->baseUrl("/js/myScript.js"); ?>"></script>
+                                        <script type="text/javascript" src="<?php echo $this->baseUrl("/js/lightbox-plus-jquery.min.js"); ?>"></script>
                     <script>
                         $(document).ready(function () {
-                            $(document).ready(function () {
-                                $(".dropdown").hover(
-                                        function () {
-                                            $('.dropdown-menu', this).stop(true, true).slideDown("fast");
-                                            $(this).toggleClass('open');
-                                        },
-                                        function () {
-                                            $('.dropdown-menu', this).stop(true, true).slideUp("fast");
-                                            $(this).toggleClass('open');
-                                        }
-                                );
-                            });
+
+                            $(".dropdown").hover(
+                                    function () {
+                                        $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                                        $(this).toggleClass('open');
+                                    },
+                                    function () {
+                                        $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                                        $(this).toggleClass('open');
+                                    }
+                            );
+
                         });
                         $(".dropdown-toggleDEFAULT").on('mouseover', function () {
                             $(".open").attr("class", "dropdown");
