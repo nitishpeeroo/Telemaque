@@ -54,41 +54,6 @@
 		margin-top: 50px;
 }
 
-/*********************************************
-					VIEW
-*********************************************/
-
-/*.content-wrapper {
-	max-width: 1140px;
-	background: #fff;
-	margin: 0 auto;
-	margin-top: 25px;
-	margin-bottom: 10px;
-	border: 0px;
-	border-radius: 0px;
-}
-
-.container-fluid{
-	max-width: 1140px;
-	margin: 0 auto;
-}
-
-.view-wrapper {
-	float: right;
-	max-width: 70%;
-	margin-top: 25px;
-}
-
-.container {
-	padding-left: 0px;
-	padding-right: 0px;
-	max-width: 100%;
-}*/
-
-/*********************************************
-				ITEM 
-*********************************************/
-
 .service1-items {
 	padding: 0px 0 0px 0;
 	float: left;
