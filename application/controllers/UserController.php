@@ -5,9 +5,11 @@ class UserController extends Zend_Controller_Action {
     public function init() {
 
         parent::init();
+        zend_session::start();
     }
 
-    public function indexAction() {
+    public function indexAction() 
+    {
         
         
         $this->view->form = new Application_Form_UserConnection();
@@ -51,5 +53,14 @@ class UserController extends Zend_Controller_Action {
             }
         }
     }
+    
+    public function destroyAction() 
+    {
+        Zend_Session:: namespaceUnset("user");
+        Zend_Session::destroy(true);
+        $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'index'), null, true));
+    }
+    
+    
 
 }

@@ -118,11 +118,11 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><?= $this->firstname . " " . $this->lastname; ?><span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#1"><span class="glyphicon glyphicon-wrench"></span> Paramètre de mon compte</a></li>
+                                    <li><a href="<?php echo $this->url(array('controller' => 'parameter', 'action' => 'index'), null, true); ?>"><span class="glyphicon glyphicon-wrench"></span> Paramètre de mon compte</a></li>
                                     <li class="divider">
                                     </li>
                                     <li class="divider"></li>
-                                    <li><a href="<?php Zend_Session:: namespaceUnset("user"); Zend_Session::destroy(true); echo $this->url(array('controller' => 'user', 'action' => 'index'), null, true); ?>">
+                                    <li><a href="<?php  echo $this->url(array('controller' => 'user', 'action' => 'destroy'), null, true); ?>">
                                     <span class="glyphicon glyphicon-off"></span>
                                     Se Déconnecter</a></li>
                                 </ul>
