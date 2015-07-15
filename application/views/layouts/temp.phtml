@@ -1,0 +1,103 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"      http-equiv="Content-Type">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="<?php echo $this->baseUrl('css/bootstrap.css'); ?>"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('css/style.css'); ?>"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('css/megaMenu.css'); ?>"/>
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+
+    </head>
+    <body>
+        <header>
+            <div class="bs-example" data-example-id="default-navbar">
+                <nav class="navbar navbar-default navbar-fixed-top">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'),null,true); ?>">Telemaque</a>
+                        </div>
+                        <!---------------------->
+
+
+
+
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-left">       
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Catégorie<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="index.php?page=client&uc=viewprofil">
+                                                <span class="glyphicon glyphicon-wrench"></span> Paramètre de mon compte
+                                            </a>
+                                        </li>                                           
+                                    </ul>
+                                </li>
+                                <li>
+                                    <form class="navbar-form"  style="margin-left: 30%;" role="search" action="<?php echo $this->url(array('controller' => 'article', 'action' => 'search')); ?>" method="POST">
+                                        <div class="form-group">
+                                            <input type="text" name="search" class="form-control" placeholder="Produit, Catégorie">
+                                        </div>
+                                        <button type="submit" class="btn btn-default" >Rechercher</button>
+                                    </form>
+                                </li>
+                            </ul>
+
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <?php if ($this->lvl == 0): ?>
+                                    <li>
+                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'index'),null,true); ?>">
+                                            Se connecter
+                                        </a>
+                                    </li> 
+                                    <li>
+                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'index'),null,true); ?>">
+                                            S'inscrire
+                                        </a>
+                                    </li> 
+                                <?php else: ?>
+                                    <?php if ($this->lvl == 1): ?>
+                                        <li>
+                                            <a href="#">
+                                                Mon panier
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><?= $this->firstname . " " . $this->lastname; ?> - <?= $this->rank; ?><span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="index.php?page=client&uc=viewprofil"><span class="glyphicon glyphicon-wrench"></span> Paramètre de mon compte</a></li>
+                                            <li class="divider">
+                                            </li>
+                                            <?php if ($this->lvl == 1): ?>
+                                                <li><a href="./index.php?page=mailer&uc=contactAdmin"><span class="glyphicon glyphicon-envelope"></span> Contacter l'administrateur</a></li>
+                                            <?php endif; ?>
+                                            <li class="divider"></li>
+                                            <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'destroy'),null,true); ?>">
+
+
+                                                    <span class="glyphicon glyphicon-off"></span>
+                                                    Se Déconnecter</a></li>
+                                        </ul>
+                                    </li>
+                                <?php endif; ?>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+        </header>
+        <div class = "container">
+
+
+
+

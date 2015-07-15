@@ -1,0 +1,13 @@
+<?php
+
+echo $this->doctype('HTML5');
+include ('header.phtml');
+echo $this->headTitle();
+echo $this->headMeta();
+echo $this->headLink();
+echo $this->headStyle();
+echo $this->headScript();
+//include ('login.phtml');
+echo $this->layout()->content;
+include ('footer.phtml');
+?> 
