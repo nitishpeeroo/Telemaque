@@ -10,12 +10,8 @@ class Application_Model_Category extends Zend_Db_Table_Abstract {
 
         $select = $this->select()
                 ->setIntegrityCheck(false)
-                ->from(array('a' => DB_TABLE_CATEGORY), array(
-            'a.id_category',
-            'a.label_category',
-            'a.parent'
-        ));
-
+                ->from(array('a' => DB_TABLE_CATEGORY), array('a.id_category','a.label_category', 'a.parent'));
+               // ->joinInner(array('i' => DB_TABLE_IMAGE_WEBSITE),'a.id_category = i.id_category');
         try {
             $tab = $this->fetchAll($select)->toArray();
         } catch (Exception $ex) {
