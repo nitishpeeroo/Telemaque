@@ -1,0 +1,41 @@
+<form method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'article','type'=>'ajout'), null, true); ?>">
+    Title : <input type="text" name="title" />
+    <br/>
+    Image : <input type="file" name="image" enctype="multipart/form-data"/>
+            <input type="hidden" name="MAX_FILE_SIZE" value="6000" />
+    Quantité : <input type="text" name="quantity" />
+    <br/>
+    category: <select name="category" >
+                <?php foreach ($this->category as $value): ?>
+                    <option value="<?= $value['id_category']; ?>"><?= $value['label_category']; ?></option>
+                <?php endforeach; ?>
+              </select>
+    <br/>
+    Prix : <input type="text" name="price" />
+    <br/>
+    Description courte : <textarea name="descritptionCourt" id="" height="50px" cols="30" ></textarea>
+    <br/>
+    Description détaillé : <textarea name="descritption" id="" cols="30" rows="10"></textarea>
+    <input type="submit" value="valider"/>
+</form>
+
+
+<table>
+    <span>Visualisation des articles</span>
+    <tr>
+        <th width="200px" height="50px">Image</th>
+        <th width="200px" height="50px">Title</th>
+        <th width="200px" height="50px">Description</th>
+        <th width="200px" height="50px">price</th>
+        <th width="200px" height="50px">modification</th>
+    </tr>
+    <?php foreach ($array as $value) :?>
+    <tr style="border-bottom: 1px solid black;">
+        <td><?= $value['image']; ?></td>
+        <td><?= $value['title']; ?></td>
+        <td><?= $value['quantity']; ?></td>
+        <td><?= $value['price']; ?></td>
+        <td><a href="#1">modifier</a></td>
+    </tr>
+    <?php endforeach; ?>
+</table>

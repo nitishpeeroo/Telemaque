@@ -115,4 +115,34 @@ class UserController extends Zend_Controller_Action {
         $this->view->phone = $ns->data['phone_user'];
         $this->view->address = $ns->data['address_user'];
     }
+    
+    public function articleAction()
+    {
+        $ns = new Zend_Session_Namespace('user');
+        $articles = new Application_Model_Article();
+        $categorys = new Application_Model_Category();
+        
+        if($this->_request->isPost())
+        {
+            var_dump($_POST);die;
+            $title = $_POST['title'];
+            
+            $image = @file_get_contents($_FILES['image']['tmp_name']);
+            
+            $quantity = $_POST['quantity'];
+            $category = $_POST['category']; 
+            $price = $_POST['price'];
+            $descritptionCourt = $_POST['descritptionCourt'];
+            $descritption = $_POST['descritption'];
+            
+            echo $title."<br/>".$image."<br/>".$quantity."<br/>".$category."<br/>".$price."<br/>".$descritptionCourt."<br/>".$descritption;
+            
+            die;
+        }
+        
+        
+        $this->view->category = $categorys->getRubrique();
+        
+        $this->view->articles = $articles->getUserArticle($ns->data['id_user']);
+    }
 }
