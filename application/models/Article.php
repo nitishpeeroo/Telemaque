@@ -105,23 +105,23 @@ class Application_Model_Article extends Zend_Db_Table_Abstract {
     }
 
     public function searchArticle($label) {
-
         $select = $this->select()
                 ->setIntegrityCheck(false)
-                ->from(DB_TABLE_ARTICLE)
-                ->where('label_article like ?', '%' . $label . '%');
+                ->from(array('s' => DB_TABLE_SELL))
+                ->joinInner(array('i' => DB_TABLE_IMAGE) ,'s.id_sell = i.id_sell')
+                ->where('s.title like "%'.$label.'%"');
         try {
-
             $row = $this->fetchAll($select)->toArray();
         } catch (Exception $ex) {
 
-            echo 'ERROR_SELECT_GETARTICLE : ' . $ex->getMessage();
+            echo 'ERROR_SELECT_GETSELL : ' . $ex->getMessage();
             return false;
         }
-        
-
         $this->data = $row;
         return $this->data;
+    }
+    public function countArticle($article){
+        return (count($article));
     }
 
 }
