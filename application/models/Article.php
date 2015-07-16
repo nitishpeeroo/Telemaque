@@ -123,5 +123,29 @@ class Application_Model_Article extends Zend_Db_Table_Abstract {
     public function countArticle($article){
         return (count($article));
     }
+    
+    public function getUserArticle($idUser) {
+
+        $select = $this->select()
+                ->setIntegrityCheck(false)
+                ->from(array('s' => DB_TABLE_SELL))
+                ->joinInner(array('c' => DB_TABLE_CATEGORY)
+                            ,'s.id_category = c.id_category')
+                ->joinInner(array('i' => DB_TABLE_IMAGE)
+                            ,'s.id_sell = i.id_sell')
+                ->where('id_user = ?', $idUser);
+
+        try {
+
+            $row = $this->fetchAll($select)->toArray();
+        } catch (Exception $ex) {
+
+            echo 'ERROR_SELECT_GETARTICLE : ' . $ex->getMessage();
+            return false;
+        }
+
+        $this->data = $row;
+        return $this->data;
+    }
 
 }
