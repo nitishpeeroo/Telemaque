@@ -2,9 +2,10 @@
 
 class IndexController extends Zend_Controller_Action {
 
-    public function indexAction()   {
-        zend_session::start(); 
-        $this->view->headTitle('Accueil');
+    public function init() {
+        
+        parent::init();
+        zend_session::start();
         
         $ns = new Zend_Session_Namespace('user');
         
@@ -14,5 +15,11 @@ class IndexController extends Zend_Controller_Action {
             $this->view->lastname = $ns->data['lastname_user'];
             $this->view->lvl = $ns->data['id_rank'];
         }
+        
+    }
+    public function indexAction()   { 
+        $this->view->headTitle('Accueil');
+        
+        
     }
 }

@@ -1,0 +1,11 @@
+
+<form method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter','type'=> 'apply'), null, true); ?>">
+    first name: <input type="text" value="<?= $this->firstname ?>" name="firstname"><br/>
+    last name:  <input type="text" value="<?= $this->lastname ?>" name="lastname"><br/>
+    mail:       <input type="text" value="<?= $this->mail ?>" name="mail"><br/>
+    phone:      <input type="text" value="<?= $this->phone ?>" name="phone"><br/>
+    adresse:    <input type="text" value="<?= $this->address ?>" name="address"><br/>
+    mot de passe:        <input type="password" name="password">
+    second mot de passe: <input type="password" name="password">
+    <input type="submit" value="valider">
+</form>
