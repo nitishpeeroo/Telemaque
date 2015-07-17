@@ -64,5 +64,51 @@ class ArticleController extends Zend_Controller_Action {
         }
 
     }
+    
+    public function modifyAction() {
+        $fiche = $this->_getParam('fiche');
+        $article = new Application_Model_Sell();
+        
+        $ns = new Zend_Session_Namespace('user');
+        $sell = new Application_Model_Sell();
+        $images = new Application_Model_Image();
+        $categorys = new Application_Model_Category();
+        
+        if($this->_request->isPost())
+        {        
+            $title = $_POST['title'];
+            
+            // image data 
+            $image = @file_get_contents($_FILES['image']['tmp_name']);
+            $nameImage = $_FILES['image']['name'];
+            
+            // sell data
+            $quantity = $_POST['quantity'];
+            $category = $_POST['category'];
+            $price = $_POST['price'];
+            $descritptionCourt = $_POST['descritptionCourt'];
+            $descritption = $_POST['descritption'];
+            $idUser = $ns->data['id_user'];
+            
+            
+            // recuperation de idSell après insertion
+            //$idSell = $sell->updateSell($title,$image,$quantity,$category,$price,$descritptionCourt,$descritption, $idUser);
+            
+ 
+            // insertion de l'image grace a l'idSell
+            //$ResultImage = $images->updateImage($idSell, $image, $nameImage);
+//            if($ResultImage == true)
+//            {
+//                $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'article'), null, true));
+//            }    
+        }           
+        $produit = $article->getArticle($fiche); 
+        $this->view->produit = $produit;
+        
+        foreach ($this->view->produit as &$p) {
+            $p['img64'] = base64_encode($p['image']);
+            $p['type'] = pathinfo($p['name_image'], PATHINFO_EXTENSION);
+        }
+    }
 
 }
