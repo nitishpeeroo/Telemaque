@@ -155,6 +155,8 @@ class UserController extends Zend_Controller_Action {
         }       
         $this->view->category = $categorys->getRubrique();
         
+        $this->view->souscategory = $categorys->getSousRubrique();
+        
         $table = $sell->getUserSell($ns->data['id_user']);      
         
         

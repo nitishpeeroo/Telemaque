@@ -10,6 +10,12 @@
                     <option value="<?= $value['id_category']; ?>"><?= $value['label_category']; ?></option>
                 <?php endforeach; ?>
               </select>
+    Sous category: <select name="category" >
+                <?php foreach ($this->souscategory as $value): ?>
+                    <option value="<?= $value['id_category']; ?>"><?= $value['parent'].'-'.$value['label_category']; ?></option>
+                <?php endforeach; ?>
+              </select>
+    
     <br/>
     Prix : <input type="text" name="price" />
     <br/>
