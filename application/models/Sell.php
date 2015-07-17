@@ -82,5 +82,44 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
         $this->data = $row;
         return $this->data[0]['id_sell'];
     }
+    
+        public function searchArticle($label) {
+        $select = $this->select()
+                ->setIntegrityCheck(false)
+                ->from(array('s' => DB_TABLE_SELL))
+                ->joinInner(array('i' => DB_TABLE_IMAGE), 's.id_sell = i.id_sell')
+                ->where('s.title like "%' . $label . '%"');
+        try {
+            $row = $this->fetchAll($select)->toArray();
+        } catch (Exception $ex) {
+
+            echo 'ERROR_SELECT_GETSELL : ' . $ex->getMessage();
+            return false;
+        }
+        $this->data = $row;
+        return $this->data;
+    }
+    
+        public function countArticle($article) {
+        return (count($article));
+    }
+    public function getArticle($id) {
+        $select = $this->select()
+                ->setIntegrityCheck(false)
+                ->from(array('s' => DB_TABLE_SELL))
+                ->joinInner(array('i' => DB_TABLE_IMAGE), 's.id_sell = i.id_sell')
+                ->joinInner(array('u' => DB_TABLE_USER), 's.id_user = u.id_user')
+                ->where('s.id_sell = ?', $id);
+        try {
+            $row = $this->fetchAll($select)->toArray();
+        } catch (Exception $ex) {
+
+            echo 'ERROR_SELECT_GETARTICLE : ' . $ex->getMessage();
+            return false;
+        }
+
+        $this->data = $row;
+        return $this->data;
+    }
 
 }

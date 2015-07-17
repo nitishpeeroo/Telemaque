@@ -14,7 +14,7 @@ class ArticleController extends Zend_Controller_Action {
 
         if (isset($_GET['search'])) {
             $label = $_GET['search'];
-            $article = new Application_Model_Article();
+            $article = new Application_Model_Sell();
             $produit = $article->searchArticle($label);
             $total = $article->countArticle($produit);
             $perPage = 12;
@@ -49,7 +49,7 @@ class ArticleController extends Zend_Controller_Action {
 
     public function productAction() {
         $fiche = $this->_getParam('fiche');
-        $article = new Application_Model_Article();
+        $article = new Application_Model_Sell();
         $produit = $article->getArticle($fiche);
         $this->view->produit = $produit;
         foreach ($this->view->produit as &$p) {
