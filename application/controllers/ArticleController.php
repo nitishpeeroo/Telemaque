@@ -5,7 +5,13 @@ class ArticleController extends Zend_Controller_Action {
     public function init() {
 
         parent::init();
+        $ns = new Zend_Session_Namespace('user');
 
+        if (!empty($ns->data)) {
+            $this->view->firstname = $ns->data['firstname_user'];
+            $this->view->lastname = $ns->data['lastname_user'];
+            $this->view->lvl = $ns->data['id_rank'];
+        }
         $this->article = new Application_Model_Article();
         $this->category = new Application_Model_Category();
     }
@@ -56,6 +62,7 @@ class ArticleController extends Zend_Controller_Action {
             $p['img64'] = base64_encode($p['image']);
             $p['type'] = pathinfo($p['name_image'], PATHINFO_EXTENSION);
         }
+
     }
 
 }

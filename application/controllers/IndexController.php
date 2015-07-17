@@ -15,6 +15,14 @@ class IndexController extends Zend_Controller_Action {
 
     public function indexAction() {
         $this->view->headTitle('Accueil');
+        $sell = new Application_Model_Sell();
+        $product = $sell->getNewsArticles(10);
+        $product = $sell->convertImageSousRubrique($product);
+        $this->view->product = $product;
     }
+    
+
+    
+        
 
 }
