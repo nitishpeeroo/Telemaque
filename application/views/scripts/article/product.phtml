@@ -40,7 +40,7 @@
 				<span class="input-group-btn">
 					<button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
 				</span>
-				<input type="text" class="form-control text-center" value="1">
+				<input type="text" class="form-control text-center" id="number_product" value="1">
 				<span class="input-group-btn">
 					<button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
 				</span>
@@ -76,6 +76,7 @@
                         <div class="btn-group wishlist">
                             <form method="POST" action="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index'), null, true); ?>">
                                 <input type="hidden" name="id_product" value="<?php  echo $p['id_sell']; ?>">
+                                 <input type="hidden" name="qte_product" id="qte_product" value="1">
                                 <button type="submit" class="btn btn-danger">
                                     Acheter Immédiatement
                                 </button>

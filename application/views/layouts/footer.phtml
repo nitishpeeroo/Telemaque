@@ -231,7 +231,13 @@
 			newVal = 1;
 		}
 	}
+        $("#qte_product").val(newVal);
 	btn.closest('.number-spinner').find('input').val(newVal);
+});
+
+$(document).on('keyup', '#number_product', function () {    
+	var btn = $(this).val();
+        $("#qte_product").val(btn);
 });
                     </script>
                     </html>
