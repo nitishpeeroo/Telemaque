@@ -10,9 +10,11 @@ class PanierController extends Zend_Controller_Action {
         $this->view->headTitle('Panier');
         if ($this->_request->isPost()) {
             $id= $_POST['id_product'];
-            setcookie("cookie[$id]", "cookiethree");
-            setcookie("cookie[two]", "cookietwo");
-            setcookie("cookie[one]", "cookieone");
+            $qte = $_POST['qte_product'];
+            $price = $_POST['price_product'];
+            setcookie("cookie[id]", $id);
+            setcookie("cookie[qte]", $qte);
+            setcookie("cookie[price]", $price);
 
           
         }

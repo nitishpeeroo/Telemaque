@@ -77,6 +77,7 @@
                             <form method="POST" action="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index'), null, true); ?>">
                                 <input type="hidden" name="id_product" value="<?php  echo $p['id_sell']; ?>">
                                  <input type="hidden" name="qte_product" id="qte_product" value="1">
+                                  <input type="hidden" name="price_product" value="<?php  echo $p['price']; ?>">
                                 <button type="submit" class="btn btn-danger">
                                     Acheter Immédiatement
                                 </button>
