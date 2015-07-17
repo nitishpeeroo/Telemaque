@@ -1,0 +1,84 @@
+<?php $p = $this->produit[0]; ?>
+<div class="container-fluid">
+    <div class="content-wrapper">	
+        <div class="item-container">	
+            <form action="<?= $this->url(array('controller' => 'user', 'action' => 'parameter','fiche'=>$p['id_sell'] ), null, true); ?>" method="POST">
+            <div class="container">	
+                <div class="col-md-5">
+                    <div class="product col-md-7 service-image-left">
+                        <center>
+                            <a class="example-image-link" href="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" data-lightbox="example-1">
+                            <img style="padding-top: 30%;"   width="240" height="auto" src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" /></a>
+                        </center>
+                    </div>
+                    <div class="container service1-items col-sm-5 col-md-5 pull-left">
+                        <center>
+                            <a id="item-1" class="service1-item" data-lightbox="example-set" href="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" data-lightbox="example-1">
+                                <img src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" alt=""></img>
+                            </a>
+                            <a id="item-2" class="service1-item" data-lightbox="example-set" href="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" data-lightbox="example-1">
+                                <img src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" alt=""></img>
+                            </a>
+                            <a id="item-3" class="service1-item" data-lightbox="example-set" href="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" data-lightbox="example-1">
+                                <img src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" alt=""></img>
+                            </a>
+                        </center>
+                    </div>
+                    <input type="file" name="image" enctype="multipart/form-data" />
+                    <input type="hidden" name="MAX_FILE_SIZE" value="6000" />
+                </div>
+
+                <div class="col-md-7">
+                    <div class="product-title">Titre :<input type="text" value="<?php echo $p['title']; ?>" /></div>
+                    <div class="product-desc">Description courte :<textarea type="text" /><?php echo $p['description_courte']; ?></textarea></div>
+
+                    <hr>
+                    <div class="container">
+                        <div class="col-md-2">
+                            <div class="product-price">Prix :<input type="text" value="<?php echo $p['price']; ?>" /></div>
+                        </div>      
+                    </div> 
+                    <div class="container">
+                        <div class="col-md-2">
+                            Quantité : 
+                            <div class="input-group number-spinner">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                </span>
+                                <input type="text" class="form-control text-center" value="<?php echo $p['quantity']; ?>">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="container">
+                        <hr>
+                        <select name="statut">
+                            <option value="0" >En vente</option>
+                            <option value="1" selected="selected">Pas en vente</option>
+                        </select>
+                    </div>
+                </div> 
+            </div>
+            <div class="container-fluid">		
+                <div class="col-md-12 product-info">
+                    <ul id="myTab" class="nav nav-tabs nav_tabs">
+                        <li class="active"><a href="#service-one" data-toggle="tab">DESCRIPTION</a></li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade in active" id="service-one">
+
+                            <section class="container product-info">
+                               <textarea name="" id="" cols="150" rows="10"><?php echo $p['description']; ?></textarea>
+                            </section>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+                <input type="submit" value="Enregistrer" />
+            </form>
+        </div>
+    </div>

@@ -43,7 +43,7 @@
         <td><?= $value['description_courte']; ?></td>
         <td><?= $value['quantity']; ?></td>
         <td><?= $value['price']; ?></td>
-        <td><a href="#1">modifier</a></td>
+        <td><a href="<?= $this->url(array('controller' => 'article', 'action' => 'modify', 'fiche' => $value['id_sell']), null, true); ?>">modifier</a></td>
     </tr>
     <?php endforeach; ?>
 </table>
