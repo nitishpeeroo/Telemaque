@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-3">
+        <br>
+        <!-- START CONTENT ITEM -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="well well-small">
+                    <ul class="nav nav-list">
+                        <li class="nav-header">Brands</li>
+                        <li class="active"><a href="#"><span class="glyphicon glyphicon-ok"></span> Brand A</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-ok"></span> Brand B</a></li>
+                        <li class="active"><a href="#"><span class="glyphicon glyphicon-ok"></span> Brand C</a></li>
+                        <hr>
+                        <li class="nav-header">Price</li>
+                        <li class="active"><a href="#"><span class="glyphicon glyphicon-ok"></span> € 10 - € 50</a></li>
+                        <li class="active"><a href="#"><span class="glyphicon glyphicon-ok"></span> € 50 - € 100</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-ok"></span> € 100 - € 250</a></li>
+                        <hr>
+                        <li class="nav-header">Color</li>
+                        <li><a href="#"><span class="glyphicon glyphicon-ok"></span> Orange</a></li>
+                        <li class="active"><a href="#"><span class="glyphicon glyphicon-ok"></span> Red</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-ok"></span> Yellow</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <?php foreach ($this->produit as $p) { 
+               
+                ?>
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="thumbnail">
+                        <img src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" />
+                        <div class="caption">
+                            <h4 class="pull-right"><?php echo $p['price']." €"; ?></h4>
+                            <h4><a href="<?php echo $this->url(array('controller' => 'article', 'action' => 'product',"fiche"=> $p['id_sell']),null,true); ?>"><?php echo $p['title']; ?></a>
+                            </h4>
+                            <p><?php echo $p['description_courte']; ?></p>
+                        </div>
+                    </div>
+                </div>
+
+            <?php } ?>
+        </div>
+    </div>
+    <div class="container">
+        <ul class="pagination">
+            <?php echo $this->pagination; ?>
+        </ul>
+    </div>
+    
+</div>

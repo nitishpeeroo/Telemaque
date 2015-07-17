@@ -48,8 +48,6 @@ class ArticleController extends Zend_Controller_Action {
     }
 
     public function productAction() {
-
-
         $fiche = $this->_getParam('fiche');
         $article = new Application_Model_Article();
         $produit = $article->getArticle($fiche);

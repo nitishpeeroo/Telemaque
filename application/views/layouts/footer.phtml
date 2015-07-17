@@ -44,24 +44,23 @@
                             $navbar = new Application_Model_Category();
                             $rubrique = $navbar->getRubrique();
                             foreach ($rubrique as $key => $val) {
-                                if ($val['parent'] == null) {
-                                    echo"<li><a href=''><i class=''></i>" . $val['label_category'] . "</a></li>";
-                                }
-                            }
+                                ?>
+                                <li><a href='#'><?php echo $val['label_category']; ?> </a></li>
+                            <?php }
                             ?>
                         </ul>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h3>Contact:</h3>
-                        <p>Vous avez une question ? Contacter moi!</p>
-                        <p><a href="" title="Contact me!"><i class="fa fa-envelope"></i> Contact</a></p>
+                        <p>Une question ? Contacter Nous :</p>
+                        <p><a href="contact@telemaque.fr" title="Contact me!"><i class="fa fa-envelope"></i> Contact</a></p>
                         <h3>Retrouver nous sur:</h3>
                         <a href="" id="gh" target="_blank" title="Twitter"><span class="fa-stack fa-lg">
                                 <i class="fa fa-square-o fa-stack-2x"></i>
                                 <i class="fa fa-twitter fa-stack-1x"></i>
                             </span>
                             Twitter</a>
-                        <a href=""  target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                        <a href="https://github.com/nitishpeeroo/Telemaque"  target="_blank" title="GitHub"><span class="fa-stack fa-lg">
                                 <i class="fa fa-square-o fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x"></i>
                             </span>
@@ -115,6 +114,7 @@
                     <script type="text/javascript" src="<?php echo $this->baseUrl("/js/bootstrap.js"); ?>"></script>
                     <script type="text/javascript" src="<?php echo $this->baseUrl("/js/myScript.js"); ?>"></script>
                     <script type="text/javascript" src="<?php echo $this->baseUrl("/js/lightbox-plus-jquery.min.js"); ?>"></script>
+                     <script type="text/javascript" src="<?php echo $this->baseUrl("/js/paiement.js"); ?>"></script>
                     <script>
                         $(document).ready(function () {
 
