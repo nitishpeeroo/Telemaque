@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('css/product.css'); ?>"/>
         <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('css/style.css'); ?>"/>
         <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('css/lightbox.css'); ?>"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('css/panier.css'); ?>"/>
     </head>
     <body>
         <header>
@@ -36,23 +37,24 @@
                                             <?php
                                             $navbar = new Application_Model_Category();
                                             $rubrique = $navbar->getRubrique();
-                                            $ssrubrique = $rubrique;
+                                            $ssrubrique = $navbar->getSousRubrique();
+                                            $ssrubrique = $navbar->convertImageSousRubrique($ssrubrique);
                                             $i = 0;
                                             foreach ($rubrique as $key => $val) {
-                                                if ($val['parent'] == null) {
-                                                    if ($i == 0) {
-                                                        echo"<div class='tab-pane active' id='" . $val['label_category'] . "'>";
-                                                    } else {
-                                                        echo"<div class='tab-pane' id='" . $val['label_category'] . "'>";
-                                                    }
-                                                    echo"<ul class='nav-list list-inline'>";
-                                                    foreach ($ssrubrique as $s) {
-                                                        if ($s['parent'] == $val['id_category']) {
-                                                            echo"<li><a href='#'><img src='http://content.nike.com/content/dam/one-nike/globalAssets/menu_header_images/OneNike_Global_Nav_Icons_Running.png'><span>" . $s['label_category'] . "</span></a></li>";
-                                                        }
-                                                    }
-                                                    echo "</ul></div> ";
+                                                if ($i == 0) {
+                                                    echo"<div class='tab-pane active' id='" . $val['label_category'] . "'>";
+                                                } else {
+                                                    echo"<div class='tab-pane' id='" . $val['label_category'] . "'>";
                                                 }
+                                                echo"<ul class='nav-list list-inline'>";
+                                                foreach ($ssrubrique as $s) {
+                                                    if ($s['parent'] == $val['id_category']) {
+                                                        ?>
+                                                        <li><a method="GET" href="<?php echo $this->url(array('controller' => 'category', 'action' => 'index', 'type' => $s['id_category']), null, true); ?>"> <img width="80" height="80px" src="data:image/<?php echo $s['type'] . ' ;base64,' . $s['img64'] ?>" alt=""><span><?php echo $s['label_category']; ?></span></a></li>
+                                                    <?php
+                                                    }
+                                                }
+                                                echo "</ul></div> ";
                                                 $i++;
                                             }
                                             ?>
@@ -63,12 +65,10 @@
                                         <?php
                                         $i = 0;
                                         foreach ($rubrique as $key => $val) {
-                                            if ($val['parent'] == null) {
-                                                if ($i == 0) {
-                                                    echo"<li class='active'><a href='#" . $val['label_category'] . "' role='tab' data-toggle='tab'>" . $val['label_category'] . "</a></li>";
-                                                } else {
-                                                    echo"<li><a href='#" . $val['label_category'] . "' role='tab' data-toggle='tab'>" . $val['label_category'] . "</a></li>";
-                                                }
+                                            if ($i == 0) {
+                                                echo"<li class='active'><a href='#" . $val['label_category'] . "' role='tab' data-toggle='tab'>" . $val['label_category'] . "</a></li>";
+                                            } else {
+                                                echo"<li><a href='#" . $val['label_category'] . "' role='tab' data-toggle='tab'>" . $val['label_category'] . "</a></li>";
                                             }
                                             $i++;
                                         }
@@ -91,20 +91,70 @@
                         <ul class="nav navbar-nav navbar-right">
                             <?php if ($this->lvl == 0): ?>
                                 <li> <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'index'), null, true); ?>">Mon compte</a></li>
-                            <?php else: ?>
-
-
+<?php else: ?>
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mon panier <span class="caret"></span></a>
-                                    <!--<ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 7 - Items<span class="caret"></span></a>
+                                    <ul class="dropdown-menu dropdown-cart" role="menu">
+                                        <li>
+                                            <span class="item">
+                                                <span class="item-left">
+                                                    <img src="http://lorempixel.com/50/50/" alt="" />
+                                                    <span class="item-info">
+                                                        <span>Item name</span>
+                                                        <span>23$ Qte: 1</span>
+                                                    </span>
+                                                </span>
+                                                <span class="item-right">
+                                                    <button class="btn btn-xs btn-danger pull-right">x</button>
+                                                </span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="item">
+                                                <span class="item-left">
+                                                    <img src="http://lorempixel.com/50/50/" alt="" />
+                                                    <span class="item-info">
+                                                        <span>Item name</span>
+                                                        <span>23$</span>
+                                                    </span>
+                                                </span>
+                                                <span class="item-right">
+                                                    <button class="btn btn-xs btn-danger pull-right">x</button>
+                                                </span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="item">
+                                                <span class="item-left">
+                                                    <img src="http://lorempixel.com/50/50/" alt="" />
+                                                    <span class="item-info">
+                                                        <span>Item name</span>
+                                                        <span>23$</span>
+                                                    </span>
+                                                </span>
+                                                <span class="item-right">
+                                                    <button class="btn btn-xs btn-danger pull-right">x</button>
+                                                </span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="item">
+                                                <span class="item-left">
+                                                    <img src="http://lorempixel.com/50/50/" alt="" />
+                                                    <span class="item-info">
+                                                        <span>Item name</span>
+                                                        <span>23$</span>
+                                                    </span>
+                                                </span>
+                                                <span class="item-right">
+                                                    <button class="btn btn-xs btn-danger pull-right">x</button>
+                                                </span>
+                                            </span>
+                                        </li>
                                         <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>-->
+                                        <li><a class="text-center" href="">Voir mon panier</a></li>
+                                    </ul>
                                 </li>
-
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><?= $this->firstname . " " . $this->lastname; ?><span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
@@ -118,8 +168,7 @@
                                                 Se Déconnecter</a></li>
                                     </ul>
                                 </li>
-
-                            <?php endif; ?>
+<?php endif; ?>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
