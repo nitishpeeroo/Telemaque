@@ -1,4 +1,4 @@
-<form method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'article','type'=>'ajout'), null, true); ?>">
+<form method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'article','type'=>'ajout'), null, true); ?>" enctype="multipart/form-data" >
     Title : <input type="text" name="title" />
     <br/>
     Image : <input type="file" name="image" enctype="multipart/form-data"/>
@@ -26,13 +26,15 @@
         <th width="200px" height="50px">Image</th>
         <th width="200px" height="50px">Title</th>
         <th width="200px" height="50px">Description</th>
+        <th width="200px" height="50px">quantity</th>
         <th width="200px" height="50px">price</th>
         <th width="200px" height="50px">modification</th>
     </tr>
-    <?php foreach ($array as $value) :?>
+    <?php foreach ($this->articles as $value) : ?>
     <tr style="border-bottom: 1px solid black;">
-        <td><?= $value['image']; ?></td>
+        <td><img src="data:image/<?= $value['name_image'] . ';base64,' . $value['image'] ?>" alt="" /></td>
         <td><?= $value['title']; ?></td>
+        <td><?= $value['description_courte']; ?></td>
         <td><?= $value['quantity']; ?></td>
         <td><?= $value['price']; ?></td>
         <td><a href="#1">modifier</a></td>

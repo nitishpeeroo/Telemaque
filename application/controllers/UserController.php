@@ -2,7 +2,8 @@
 
 class UserController extends Zend_Controller_Action {
 
-    public function init() {
+    public function init() 
+    {
         
         parent::init();
         zend_session::start();
@@ -118,31 +119,56 @@ class UserController extends Zend_Controller_Action {
     
     public function articleAction()
     {
+        
         $ns = new Zend_Session_Namespace('user');
-        $articles = new Application_Model_Article();
+        $sell = new Application_Model_Sell();
+        $images = new Application_Model_Image();
         $categorys = new Application_Model_Category();
         
         if($this->_request->isPost())
-        {
-            var_dump($_POST);die;
+        {        
             $title = $_POST['title'];
             
+            // image data 
             $image = @file_get_contents($_FILES['image']['tmp_name']);
+            $nameImage = $_FILES['image']['name'];
             
+            // sell data
             $quantity = $_POST['quantity'];
-            $category = $_POST['category']; 
+            $category = $_POST['category'];
             $price = $_POST['price'];
             $descritptionCourt = $_POST['descritptionCourt'];
             $descritption = $_POST['descritption'];
+            $idUser = $ns->data['id_user'];
             
-            echo $title."<br/>".$image."<br/>".$quantity."<br/>".$category."<br/>".$price."<br/>".$descritptionCourt."<br/>".$descritption;
             
-            die;
-        }
-        
-        
+            // recuperation de idSell après insertion
+            $idSell = $sell->addSell($title,$image,$quantity,$category,$price,$descritptionCourt,$descritption, $idUser);
+            
+ 
+            // insertion de l'image grace a l'idSell
+            $ResultImage = $images->addImage($idSell, $image, $nameImage);
+            if($ResultImage == true)
+            {
+                $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'article'), null, true));
+            }    
+        }       
         $this->view->category = $categorys->getRubrique();
         
-        $this->view->articles = $articles->getUserArticle($ns->data['id_user']);
+        $table = $sell->getUserSell($ns->data['id_user']);      
+        
+        
+        foreach ($table as &$value) {
+            $value['image'] = base64_encode($value['image']);
+            $value['name_image'] = pathinfo($table['name_image'],PATHINFO_EXTENSION);
+        }
+        
+        $this->view->articles = $table;
+        
+        
+        
+        
     }
+    
+  
 }
