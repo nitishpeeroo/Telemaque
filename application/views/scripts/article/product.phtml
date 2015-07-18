@@ -31,20 +31,20 @@
                     <div class="product-desc"><?php echo $p['description_courte']; ?></div>
 
                     <hr>
-                    <div class="col-md-2">
-                        <div class="product-price"><?php echo $p['price']; ?> €</div></div>
-                    <div class="col-md-3">    <?php echo $p['quantity']; ?> exemplaires</div>
+                    <div class="col-md-3">
+                        <div class="product-price"><?php echo number_format($p['price'], 2, ',', ' '); ?> €</div></div>
+                    <div class="col-md-3"><div class="product-quantity"><?php echo $p['quantity']; ?> exemplaires</div></div>
                     <div class="container">
                         <div class="col-md-2">
-			<div class="input-group number-spinner">
-				<span class="input-group-btn">
-					<button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-				</span>
-				<input type="text" class="form-control text-center" id="number_product" value="1">
-				<span class="input-group-btn">
-					<button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-				</span>
-			</div>
+                            <div class="input-group number-spinner">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                </span>
+                                <input type="text" class="form-control text-center" id="number_product" value="1">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <?php if ($p['quantity'] > 0) { ?>
@@ -67,19 +67,47 @@
                     <?php } ?>
                     <div class="container">
                         <hr>
-                        <div class="btn-group cart">
-                            <button type="button" class="btn btn-success">
-                                Ajouter au Panier
-                            </button>
+                        <!-------------Modal---------->
+                        <div style="display: none;" id="gridSystemModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                        <h4 class="modal-title" id="gridModalLabel"><?php echo $p['title']; ?></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-xs-6 col-md-3">
+                                                    <img style="max-height:100px;" src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" alt="">                                             
+                                                    
+                                                </div>
+                                                <span style="font-weight: bold; color: #009600; font-size: 1.8em;"> Cet article a été ajouté au panier !</span>
+                                                <span   id="quantite" style="color: #141414; font-size: 1.6em; display: block; text-transform: capitalize;">Quantité : 1</span>
 
-                        </div>
-                        <div class="btn-group wishlist">
-                            <form method="POST" action="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index'), null, true); ?>">
-                                <input type="hidden" name="id_product" value="<?php  echo $p['id_sell']; ?>">
-                                 <input type="hidden" name="qte_product" id="qte_product" value="1">
-                                  <input type="hidden" name="price_product" value="<?php  echo $p['price']; ?>">
-                                <button type="submit" class="btn btn-danger">
-                                    Acheter Immédiatement
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Poursuivre mes achats</button>
+                                        <button type="button" class="btn btn-primary">Voir mon panier</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                        <div class="bs-example bs-example-padded-bottom">
+                            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#gridSystemModal">
+                                Commander
+                            </button>
+                        </div><!-- /example -->
+                        <div class="btn-group cart">
+                            <form method="POST" acton="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index'), null, true); ?>">
+                                <input type="hidden" name="id_product" value="<?php echo $p['id_sell']; ?>">
+                                <input type="hidden" name="qte_product" id="qte_product" value="1">
+                                <input type="hidden" name="price_product" value="<?php echo $p['price']; ?>">
+                                <button type="submit" class="btn btn-success" data-toggle="modal">
+                                    Commander
                                 </button>
                             </form>
                         </div>

@@ -107,9 +107,8 @@
                     <hr>
                     <p>Copyright © Your Website | <a href="">Privacy Policy</a> | <a href="">Terms of Use</a></p>
                     </footer>
-                    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
                     <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
                     <script type="text/javascript" src="<?php echo $this->baseUrl("/js/jquery.js"); ?>"></script>
                     <script type="text/javascript" src="<?php echo $this->baseUrl("/js/bootstrap.js"); ?>"></script>
                     <script type="text/javascript" src="<?php echo $this->baseUrl("/js/myScript.js"); ?>"></script>
@@ -216,28 +215,31 @@
                                     }
                             );
                         });
-                        
-                        $(document).on('click', '.number-spinner button', function () {    
-	var btn = $(this),
-		oldValue = btn.closest('.number-spinner').find('input').val().trim(),
-		newVal = 0;
-	
-	if (btn.attr('data-dir') == 'up') {
-		newVal = parseInt(oldValue) + 1;
-	} else {
-		if (oldValue > 1) {
-			newVal = parseInt(oldValue) - 1;
-		} else {
-			newVal = 1;
-		}
-	}
-        $("#qte_product").val(newVal);
-	btn.closest('.number-spinner').find('input').val(newVal);
-});
 
-$(document).on('keyup', '#number_product', function () {    
-	var btn = $(this).val();
-        $("#qte_product").val(btn);
-});
+                        $(document).on('click', '.number-spinner button', function () {
+                            var btn = $(this),
+                                    oldValue = btn.closest('.number-spinner').find('input').val().trim(),
+                                    newVal = 0;
+
+                            if (btn.attr('data-dir') == 'up') {
+                                newVal = parseInt(oldValue) + 1;
+                            } else {
+                                if (oldValue > 1) {
+                                    newVal = parseInt(oldValue) - 1;
+                                } else {
+                                    newVal = 1;
+                                }
+                            }
+                            $("#qte_product").val(newVal);
+                            btn.closest('.number-spinner').find('input').val(newVal);
+                             var qte = $("#quantite").text("Quantité : "+ newVal);
+                      
+                        });
+
+                        $(document).on('keyup', '#number_product', function () {
+                            var btn = $(this).val();
+                            $("#qte_product").val(btn);
+                          var qte = $("#quantite").text("Quantité : "+ btn);
+                        });
                     </script>
                     </html>

@@ -43,6 +43,9 @@
 .product-price{
 	font-size: 22px;
 }
+.product-quantity{
+    font-size: 17px;
+}
 
 .product-stock{
 	color: #74DF00;

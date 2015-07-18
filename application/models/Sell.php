@@ -7,7 +7,6 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
     public $data = array();
 
     public function addSell($title, $image, $quantity, $category, $price, $descritptionCourt, $descritption, $idUser) {
-
         try {
             $data = array(
                 'id_user' => $idUser,
@@ -21,21 +20,16 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
                 'dt_creation' => date('Y-m-d H:i:s'),
                 'dt_modification' => date('Y-m-d H:i:s'),
             );
-
             $this->insert($data);
-
             $idSell = $this->getLastUserIdSell($title, $idUser, $category);
         } catch (Exception $ex) {
-
             echo 'ERROR_INSERT_ADDSELL : ' . $ex->getMessage();
             return false;
         }
-
         return $idSell;
     }
 
     public function getUserSell($idUser) {
-
         $select = $this->select()
                 ->setIntegrityCheck(false)
                 ->from(array('s' => DB_TABLE_SELL))
@@ -44,38 +38,29 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
                 ->joinInner(array('i' => DB_TABLE_IMAGE)
                         , 's.id_sell = i.id_sell')
                 ->where('id_user = ?', $idUser);
-
         try {
-
             $row = $this->fetchAll($select)->toArray();
         } catch (Exception $ex) {
-
             echo 'ERROR_SELECT_GETARTICLE : ' . $ex->getMessage();
             return false;
         }
-
         $this->data = $row;
         return $this->data;
     }
 
     public function getLastUserIdSell($title, $idUser, $category) {
-
         $select = $this->select()
                 ->setIntegrityCheck(false)
                 ->from(array('s' => DB_TABLE_SELL))
                 ->where('title = ?', $title)
                 ->where('id_user = ?', $idUser)
                 ->where('id_category = ?', $category);
-
         try {
-
             $row = $this->fetchAll($select)->toArray();
         } catch (Exception $ex) {
-
             echo 'ERROR_SELECT_GETARTICLE : ' . $ex->getMessage();
             return false;
         }
-
         $this->data = $row;
         return $this->data[0]['id_sell'];
     }
@@ -89,7 +74,6 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
         try {
             $row = $this->fetchAll($select)->toArray();
         } catch (Exception $ex) {
-
             echo 'ERROR_SELECT_GETSELL : ' . $ex->getMessage();
             return false;
         }
@@ -111,11 +95,9 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
         try {
             $row = $this->fetchAll($select)->toArray();
         } catch (Exception $ex) {
-
             echo 'ERROR_SELECT_GETARTICLE : ' . $ex->getMessage();
             return false;
         }
-
         $this->data = $row;
         return $this->data;
     }
@@ -130,23 +112,18 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
         try {
             $row = $this->fetchAll($select)->toArray();
         } catch (Exception $ex) {
-
             echo 'ERROR_SELECT_GETARTICLE : ' . $ex->getMessage();
             return false;
         }
-   
-
         $this->data = $row;
         return $this->data;
     }
     
-        public function convertImageSousRubrique($ssrubrique) {
+    public function convertImageSousRubrique($ssrubrique) {
         foreach ($ssrubrique as &$p) {
             $p['img64'] = base64_encode($p['image']);
             $p['type'] = pathinfo($p['name_image'], PATHINFO_EXTENSION);
         }
         return $ssrubrique;
     }
-    
-
 }
