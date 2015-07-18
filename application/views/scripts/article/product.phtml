@@ -1,4 +1,4 @@
-<?php $p = $this->produit[0]; var_dump($_SESSION['panier']); ?>
+<?php $p = $this->produit[0];?>
 <div class="container-fluid">
     <div class="content-wrapper">	
         <div class="item-container">	
@@ -42,7 +42,7 @@
                                     <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
                                 </span>
                                 <input type="text" class="form-control text-center" id="number_product" value="1">
-                                             <input type="hidden" name="id_product" value="<?php echo $p['id_sell']; ?>">
+                                            
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                                 </span>
@@ -101,6 +101,7 @@
                             </div><!-- /.modal-dialog -->
                         </div><!-- /.modal -->
                         <div class="bs-example bs-example-padded-bottom">
+                             <input type="hidden" name="id_product" value="<?php echo $p['id_sell']; ?>">
                             <button type="button" class="btn btn-success btn-lg commander" data-toggle="modal" data-target="#gridSystemModal">
                                 Commander
                             </button>

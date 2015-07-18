@@ -13,7 +13,7 @@ class PanierController extends Zend_Controller_Action {
         }
         zend_session::start();
         $panier = new Zend_Session_Namespace('panier');
-          $ns = new Zend_Session_Namespace('user');
+        $ns = new Zend_Session_Namespace('user');
 
         if (!empty($ns->data)) {
             $this->view->firstname = $ns->data['firstname_user'];
@@ -23,20 +23,42 @@ class PanierController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
+
         $sell = new Application_Model_Sell();
-        $this->view->headTitle('Panier');
         if (isset($_SESSION['panier'])) {
+
             $session = $_SESSION['panier'];
+            if (!empty($session)) {
 
-            $tab = array();
-            foreach ($session as $key => $val) {
+                $type = $this->_getParam('type');
+                if ($type != null) {
+                    $id = $this->_getParam('id');
+                    if ($id != null) {
+                        $this->deletepanier($id);
+                    }
+                }
+                $session = $_SESSION['panier'];
+                if (!empty($session)) {
+                    $tab = array();
+                    foreach ($session as $key => $val) {
 
-                $tab[] = $key;
+                        $tab[] = $key;
+                    }
+                    $panier = $sell->getArticle(null, $tab);
+                    $panier = $sell->convertImageSousRubrique($panier);
+                    $this->view->panier = $panier;
+                    $this->view->session = $session;
+                } else {
+                    $this->view->panier = null;
+                    $this->view->session = null;
+                }
+            } else {
+                $this->view->panier = null;
+                $this->view->session = null;
             }
-            $panier = $sell->getArticle(null, $tab);
-            $panier = $sell->convertImageSousRubrique($panier);
-            $this->view->panier = $panier;
-            $this->view->session = $session;
+        } else {
+            $this->view->panier = null;
+            $this->view->session = null;
         }
     }
 
@@ -68,6 +90,10 @@ class PanierController extends Zend_Controller_Action {
         }
         $panier = $_SESSION['panier'];
         $this->_helper->json($panier);
+    }
+
+    public function deletepanier($id) {
+        unset($_SESSION['panier'][$id]);
     }
 
 }

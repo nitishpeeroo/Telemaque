@@ -52,7 +52,7 @@
                                                     if ($s['parent'] == $val['id_category']) {
                                                         ?>
                                                         <li><a method="GET" href="<?php echo $this->url(array('controller' => 'category', 'action' => 'index', 'type' => $s['id_category']), null, true); ?>"> <img width="80" height="80px" src="data:image/<?php echo $s['type'] . ' ;base64,' . $s['img64'] ?>" alt=""><span><?php echo $s['label_category']; ?></span></a></li>
-                                                    <?php
+                                                        <?php
                                                     }
                                                 }
                                                 echo "</ul></div> ";
@@ -92,68 +92,77 @@
                         <ul class="nav navbar-nav navbar-right">
                             <?php if ($this->lvl == 0): ?>
                                 <li> <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'index'), null, true); ?>">Mon compte</a></li>
-<?php else: ?>
+                                <?php
+                            else:
+                                if (isset($_SESSION['panier'])) {
+
+
+                                    $session = $_SESSION['panier'];
+                                    if (!empty($session)) {
+                                        $tab = array();
+                                        foreach ($session as $key => $val) {
+
+                                            $tab[] = $key;
+                                        }
+                                        $sell = new Application_Model_Sell();
+
+                                        $panier = $sell->getArticle(null, $tab);
+                                        $panier = $sell->convertImageSousRubrique($panier);
+                                    } else {
+                                        $session = null;
+                                        $panier = null;
+                                    }
+                                }
+                                ?>
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 7 - Articles<span class="caret"></span></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span> 
+                                        <?php
+                                        if (count($session) > 0) {
+                                            if (count($session) == 1) {
+                                                echo "1 produit";
+                                            } else {
+                                                echo count($session) . " produits";
+                                            }
+                                        } else {
+                                            echo "Panier";
+                                        }
+                                        ?>
+                                        <span class="caret"></span>
+                                    </a>
                                     <ul class="dropdown-menu dropdown-cart" role="menu">
-                                        <li>
-                                            <span class="item">
-                                                <span class="item-left">
-                                                    <img src="http://lorempixel.com/50/50/" alt="" />
-                                                    <span class="item-info">
-                                                        <span>Item name</span>
-                                                        <span>23$ Qte: 1</span>
+                                        <?php
+                                        if ($panier != null && $session != null) {
+                                            foreach ($panier as $key => $val) {
+                                                ?>
+                                                <li>
+                                                    <span class="item">
+                                                        <span class="item-left">
+                                                            <img  style="max-height: 50px; max-width: 50px;" src="data:image/<?php echo $val['type'] . ' ;base64,' . $val['img64'] ?>" />
+                                                            <span class="item-info">
+                                                                <span><center><a href="<?php echo $this->url(array('controller' => 'article', 'action' => 'product', "fiche" => $val['id_sell']), null, true); ?>"><?php echo $val['title']; ?></a></center></span>
+                                                                <span><?php echo $val['price'] . " € "; ?> </span>
+                                                                <span>Quantité: <?php echo $session[$val['id_sell']]; ?></span>
+                                                            </span>
+                                                        </span>
+                                                    </span>
+                                                </li>
+                                            <?php } ?>
+                                            <li class="divider"></li>
+                                            <li><a class="text-center" href="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index'), null, true); ?>">Voir mon panier</a></li>
+
+                                        <?php } else { ?>
+                                            <li>
+                                                <span class="item">
+                                                    <span class="item-container">
+
+                                                        <span class="item-info">
+                                                            <center> Vide</center>
+                                                        </span>
                                                     </span>
                                                 </span>
-                                                <span class="item-right">
-                                                    <button class="btn btn-xs btn-danger pull-right">x</button>
-                                                </span>
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span class="item">
-                                                <span class="item-left">
-                                                    <img src="http://lorempixel.com/50/50/" alt="" />
-                                                    <span class="item-info">
-                                                        <span>Item name</span>
-                                                        <span>23$</span>
-                                                    </span>
-                                                </span>
-                                                <span class="item-right">
-                                                    <button class="btn btn-xs btn-danger pull-right">x</button>
-                                                </span>
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span class="item">
-                                                <span class="item-left">
-                                                    <img src="http://lorempixel.com/50/50/" alt="" />
-                                                    <span class="item-info">
-                                                        <span>Item name</span>
-                                                        <span>23$</span>
-                                                    </span>
-                                                </span>
-                                                <span class="item-right">
-                                                    <button class="btn btn-xs btn-danger pull-right">x</button>
-                                                </span>
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span class="item">
-                                                <span class="item-left">
-                                                    <img src="http://lorempixel.com/50/50/" alt="" />
-                                                    <span class="item-info">
-                                                        <span>Item name</span>
-                                                        <span>23$</span>
-                                                    </span>
-                                                </span>
-                                                <span class="item-right">
-                                                    <button class="btn btn-xs btn-danger pull-right">x</button>
-                                                </span>
-                                            </span>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li><a class="text-center" href="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index'),null,true); ?>">Voir mon panier</a></li>
+                                            </li>                  
+                                        <?php } ?>
                                     </ul>
                                 </li>
                                 <li class="dropdown">
@@ -169,7 +178,7 @@
                                                 Se Déconnecter</a></li>
                                     </ul>
                                 </li>
-<?php endif; ?>
+                            <?php endif; ?>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->

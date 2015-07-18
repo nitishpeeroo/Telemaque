@@ -11,3 +11,24 @@
     background: #C4E17F linear-gradient(to right, #C4E17F, #C4E17F 12.5%, #F7FDCA 12.5%, #F7FDCA 25%, #FECF71 25%, #FECF71 37.5%, #F0776C 37.5%, #F0776C 50%, #DB9DBE 50%, #DB9DBE 62.5%, #C49CDE 62.5%, #C49CDE 75%, #669AE1 75%, #669AE1 87.5%, rgb(98, 194, 228) 87.5%, rgb(98, 194, 228)) repeat scroll 0% 0%;
     border-radius: 5px;
 }
+.paniervide {
+    background: transparent url("http://i4.cdscdn.com/RWD/panier/panierVide.png") no-repeat scroll center 0px;
+    padding: 200px 0px 60px 410px;
+    margin: 0px auto;
+    width: 730px;
+}
+
+.paniervide a {
+    border-radius: 3px;
+    color: #FFF;
+    display: inline-block;
+    padding: 0.9em 0px;
+    text-align: center;
+    text-decoration: none;
+    width: 15.5em;
+}
+.btGreen {
+    background-color: #30CB00;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAsCAIAAAArRUU2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NkQ2QUQ3MkNENDM2MTFFMjk5NjZGM0E4NTU1QzZCNUMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NkQ2QUQ3MkRENDM2MTFFMjk5NjZGM0E4NTU1QzZCNUMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2RDZBRDcyQUQ0MzYxMUUyOTk2NkYzQTg1NTVDNkI1QyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2RDZBRDcyQkQ0MzYxMUUyOTk2NkYzQTg1NTVDNkI1QyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjH/5SQAAAAuSURBVHjaYjA4zcDE8J+B6f9/CA1m/4Oy/0HF/6GJ/aMuDbcTyT4UdyDcBxBgADv3PfjOlNmDAAAAAElFTkSuQmCC");
+    border-color: #269C02;
+}
