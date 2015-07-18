@@ -85,13 +85,24 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
         return (count($article));
     }
 
-    public function getArticle($id) {
-        $select = $this->select()
-                ->setIntegrityCheck(false)
-                ->from(array('s' => DB_TABLE_SELL))
-                ->joinInner(array('i' => DB_TABLE_IMAGE), 's.id_sell = i.id_sell')
-                ->joinInner(array('u' => DB_TABLE_USER), 's.id_user = u.id_user')
-                ->where('s.id_sell = ?', $id);
+    public function getArticle($id = null, $tab = array()) {
+        
+        if (count($tab) > 0) {
+            $select = $this->select()
+                    ->setIntegrityCheck(false)
+                    ->from(array('s' => DB_TABLE_SELL))
+                    ->joinInner(array('i' => DB_TABLE_IMAGE), 's.id_sell = i.id_sell')
+                    ->joinInner(array('u' => DB_TABLE_USER), 's.id_user = u.id_user')
+                    ->where('s.id_sell IN (?)', $tab);
+          
+        } else {
+            $select = $this->select()
+                    ->setIntegrityCheck(false)
+                    ->from(array('s' => DB_TABLE_SELL))
+                    ->joinInner(array('i' => DB_TABLE_IMAGE), 's.id_sell = i.id_sell')
+                    ->joinInner(array('u' => DB_TABLE_USER), 's.id_user = u.id_user')
+                    ->where('s.id_sell = ?', $id);
+        }
         try {
             $row = $this->fetchAll($select)->toArray();
         } catch (Exception $ex) {
@@ -118,7 +129,7 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
         $this->data = $row;
         return $this->data;
     }
-    
+
     public function convertImageSousRubrique($ssrubrique) {
         foreach ($ssrubrique as &$p) {
             $p['img64'] = base64_encode($p['image']);
@@ -126,4 +137,5 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
         }
         return $ssrubrique;
     }
+
 }

@@ -1,4 +1,4 @@
-<?php $p = $this->produit[0]; ?>
+<?php $p = $this->produit[0]; var_dump($_SESSION['panier']); ?>
 <div class="container-fluid">
     <div class="content-wrapper">	
         <div class="item-container">	
@@ -7,7 +7,8 @@
                     <div class="product col-md-7 service-image-left">
                         <center>
                             <a class="example-image-link" href="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" data-lightbox="example-1">
-                                <img  width="240" height="auto" src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" /></a>
+                                <img  width="240" height="auto" src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" />
+                            </a>
                         </center>
                     </div>
 
@@ -41,6 +42,7 @@
                                     <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
                                 </span>
                                 <input type="text" class="form-control text-center" id="number_product" value="1">
+                                             <input type="hidden" name="id_product" value="<?php echo $p['id_sell']; ?>">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                                 </span>
@@ -91,26 +93,18 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Poursuivre mes achats</button>
-                                        <button type="button" class="btn btn-primary">Voir mon panier</button>
+                                         <form method="POST" action="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index'), null, true); ?>">
+                                        <button type="submit" class="btn btn-primary">Voir mon panier</button>
+                                         </form>
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
                         </div><!-- /.modal -->
                         <div class="bs-example bs-example-padded-bottom">
-                            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#gridSystemModal">
+                            <button type="button" class="btn btn-success btn-lg commander" data-toggle="modal" data-target="#gridSystemModal">
                                 Commander
                             </button>
                         </div><!-- /example -->
-                        <div class="btn-group cart">
-                            <form method="POST" acton="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index'), null, true); ?>">
-                                <input type="hidden" name="id_product" value="<?php echo $p['id_sell']; ?>">
-                                <input type="hidden" name="qte_product" id="qte_product" value="1">
-                                <input type="hidden" name="price_product" value="<?php echo $p['price']; ?>">
-                                <button type="submit" class="btn btn-success" data-toggle="modal">
-                                    Commander
-                                </button>
-                            </form>
-                        </div>
                     </div>
                 </div> 
             </div>
