@@ -68,9 +68,7 @@ class PanierController extends Zend_Controller_Action {
 
     public function factureAction() {
         $this->view->headTitle('Facture');
-        if (isset($_POST['id_product'])) {
-            $this->view->id = $_POST['id_product'];
-        }
+
     }
 
     public function addpanierAction() {

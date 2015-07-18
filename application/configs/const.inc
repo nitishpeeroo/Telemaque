@@ -9,5 +9,6 @@ define('DB_TABLE_USER', DB_NAME_TELEMAQUE . '.user');
 define('DB_TABLE_RANK', DB_NAME_TELEMAQUE . '.rank');
 define('DB_TABLE_SELL', DB_NAME_TELEMAQUE . '.sell');
 define('DB_TABLE_IMAGE', DB_NAME_TELEMAQUE . '.image');
-define('DB_TABLE_IMAGE_WEBSITE', DB_NAME_TELEMAQUE . '.image_website');
+define('DB_TABLE_IMAGE_RUBRIQUE', DB_NAME_TELEMAQUE . '.image_rubrique');
+define('DB_TABLE_IMAGE_WEBSITE', DB_NAME_TELEMAQUE.'.image_web');
 
