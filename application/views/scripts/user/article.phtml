@@ -26,24 +26,41 @@
 </form>
 
 
-<table>
-    <span>Visualisation des articles</span>
-    <tr>
-        <th width="200px" height="50px">Image</th>
-        <th width="200px" height="50px">Title</th>
-        <th width="200px" height="50px">Description</th>
-        <th width="200px" height="50px">quantity</th>
-        <th width="200px" height="50px">price</th>
-        <th width="200px" height="50px">modification</th>
-    </tr>
-    <?php foreach ($this->articles as $value) : ?>
-    <tr style="border-bottom: 1px solid black;">
-        <td><img src="data:image/<?= $value['name_image'] . ';base64,' . $value['image'] ?>" alt="" /></td>
-        <td><?= $value['title']; ?></td>
-        <td><?= $value['description_courte']; ?></td>
-        <td><?= $value['quantity']; ?></td>
-        <td><?= $value['price']; ?></td>
-        <td><a href="<?= $this->url(array('controller' => 'article', 'action' => 'modify', 'fiche' => $value['id_sell']), null, true); ?>">modifier</a></td>
-    </tr>
-    <?php endforeach; ?>
-</table>
+
+
+<div class="container">
+
+    <hgroup class="mb20">
+		<h1>Vos articles mise en vente</h1>
+		<h2 class="lead"><strong class="text-danger">3</strong> results were found for the search for <strong class="text-danger">Lorem</strong></h2>								
+	</hgroup>
+
+    <section class="col-xs-12 col-sm-6 col-md-12">
+
+<?php foreach ($this->articles as $value) { ?>
+        <article class="search-result row">
+			<div class="col-xs-12 col-sm-12 col-md-3">
+							<a href="#" title="Lorem ipsum" class="thumbnail"><img src="data:image/<?= $value['name_image'] . ';base64,' . $value['image'] ?>" alt="" /></a>
+
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-2">
+				<ul class="meta-search">
+                                    <li><i class="glyphicon glyphicon-calendar"></i> <span><?php echo substr($value['dt_creation'],0,-8); ?></span></li>
+					<li><i class="glyphicon glyphicon-time"></i> <span><?php echo substr($value['dt_creation'],10,-3); ?></span></li>
+					<li><i class="glyphicon glyphicon-tags"></i> <span>Food</span></li>
+                                        <li><i class="glyphicon glyphicon-euro"></i> <span><?php echo number_format($value['price'],2,',',' ')." €";?></span></li>
+                                        <li><i class="glyphicon glyphicon-shopping-cart"></i><span><?php echo $value['quantity']." en stock"; ?></span></li>
+				</ul>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-7">
+				<h3><a href="#" title=""><?php echo $value['title']; ?></a></h3>
+				<p><?php echo $value['description']; ?></p>	
+                               
+                <span class="plus"><a href="<?= $this->url(array('controller' => 'article', 'action' => 'modify', 'fiche' => $value['id_sell']), null, true); ?>" title="Lorem ipsum"><i class="glyphicon glyphicon glyphicon-wrench"></i></a></span>
+			</div>
+			<span class="clearfix borda"></span>
+		</article>
+<?php } ?>
+
+	</section>
+</div>

@@ -222,8 +222,10 @@
                                     newVal = 0;
 
                             if (btn.attr('data-dir') == 'up') {
+                                alert("up");
                                 newVal = parseInt(oldValue) + 1;
                             } else {
+                                alert("down");
                                 if (oldValue > 1) {
                                     newVal = parseInt(oldValue) - 1;
                                 } else {
@@ -233,10 +235,7 @@
                             $("#qte_product").val(newVal);
                             btn.closest('.number-spinner').find('input').val(newVal);
                              var qte = $("#quantite").text("Quantité : "+ newVal);
-                             
-                             
-                             
-                      
+
                         });
 
                         $(document).on('keyup', '#number_product', function () {
