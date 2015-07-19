@@ -15,4 +15,5 @@ $(".commander").on('click', function (e) {
     });
 
 });
-
+//--------------Upload d'image
+// Code goes here

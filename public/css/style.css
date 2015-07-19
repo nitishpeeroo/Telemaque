@@ -35,7 +35,7 @@
 }
 
 
-
+//--------------Gestion des articles-------------------------------
 
 .container { margin-top: 20px; }
 .mb20 { margin-bottom: 20px; } 
@@ -60,3 +60,22 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
 .search-result span.plus a:hover { background-color: #414141; }
 .search-result span.plus a i { color: #fff !important; }
 .search-result span.border { display: block; width: 97%; margin: 0 15px; border-bottom: 1px dotted #ccc; }
+
+
+//-------------------------Form upload d'image----------------------------
+
+/* layout.css Style */
+/* Styles go here */
+
+/* skin.css Style*/
+.upload-drop-zone {
+  color: #ccc;
+  border-style: dashed;
+  border-color: #ccc;
+  line-height: 200px;
+  text-align: center
+}
+.upload-drop-zone.drop {
+  color: #222;
+  border-color: #222;
+}
