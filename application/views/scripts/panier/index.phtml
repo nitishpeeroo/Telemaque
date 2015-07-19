@@ -1,51 +1,65 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
-            <?php  if($this->panier != null && $this->session != null){  ?>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Désignation</th>
-                        <th>Quantité</th>
-                        <th class="text-center">Prix</th>
-                        <th class="text-center">Total TTC</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                  
-                    $total = 0;
-                    foreach ($this->panier as $key => $val) {
-                        $total += $val['price'] * $this->session[$val['id_sell']];
-                        ?>
+            <?php if ($this->panier != null && $this->session != null) { ?>
+                <table class="table table-hover">
+                    <thead>
                         <tr>
-                            <td class="col-sm-8 col-md-6">
-                                <div class="media">
-                                    <a class="thumbnail pull-left" href="#"> 
-                                        <img max-height="72" class="media-object" src="data:image/<?php echo $val['type'] . ' ;base64,' . $val['img64'] ?>" style="width: 72px; height: 72px;"> 
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading"><a href="<?php echo $this->url(array('controller' => 'article', 'action' => 'product', "fiche" => $val['id_sell']), null, true); ?>"><?php echo $val['title'] ?></a></h4>
-                                        <h5 class="media-heading"> vendu par <a href="#"><?php echo $val['login_user']; ?></a></h5>
-                                        <span>Disponibilité: </span><span class="text-success"><strong>En Stock</strong></span>
-
-                                    </div>
-                                </div></td>
-                            <td class="col-sm-1 col-md-1" style="text-align: center">
-                                <input type="email" class="form-control" id="exampleInputEmail1" value=" <?php echo $this->session[$val['id_sell']]; ?>">
-                            </td>
-                            <td class="col-sm-1 col-md-1 text-center"><strong><?php echo number_format($val['price'], '2', ',', ' ') . " €"; ?></strong></td>
-                            <td class="col-sm-1 col-md-1 text-center"><strong><?php echo number_format($val['price'] * $this->session[$val['id_sell']], '2', ',', ' ') . " €"; ?></strong></td>
-                            <td class="col-sm-1 col-md-1">
-                                <form method="GET" action="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index', 'type' => 'delete', 'id' => $val['id_sell']), null, true); ?>">
-                                    <button type="submit" class="btn btn-danger">
-                                        <span class="glyphicon glyphicon-remove"></span> Retirer du panier
-                                    </button>
-                                </form>
-                            </td>
+                            <th>Désignation</th>
+                            <th>Quantité</th>
+                            <th class="text-center">Prix</th>
+                            <th class="text-center">Total TTC</th>
+                            <th> </th>
                         </tr>
-                    <?php } ?>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $total = 0;
+                        foreach ($this->panier as $key => $val) {
+                            $total += $val['price'] * $this->session[$val['id_sell']];
+                            ?>
+                            <tr>
+                                <td class="col-sm-8 col-md-6">
+                                    <div class="media">
+                                        <a class="thumbnail pull-left" href="#"> 
+                                            <img max-height="72" class="media-object" src="data:image/<?php echo $val['type'] . ' ;base64,' . $val['img64'] ?>" style="width: 72px; height: 72px;"> 
+                                        </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><a href="<?php echo $this->url(array('controller' => 'article', 'action' => 'product', "fiche" => $val['id_sell']), null, true); ?>"><?php echo $val['title'] ?></a></h4>
+                                            <h5 class="media-heading"> vendu par <a href="#"><?php echo $val['login_user']; ?></a></h5>
+                                            <span>Disponibilité: </span><span class="text-success"><strong>En Stock</strong></span>
+
+                                        </div>
+                                    </div></td>
+<!--                                <td class="col-sm-1 col-md-1" style="text-align: center">
+                                    <input type="email" class="form-control" id="exampleInputEmail1" value=" <?php echo $this->session[$val['id_sell']]; ?>">
+                                </td>-->
+                                      <td class="col-sm-1 col-md-2" style="text-align: center">
+                                    
+                      
+                            <div class="input-group number-spinner">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                </span>
+                                <input type="text" class="form-control text-center" class="modifQuantite" value="<?php echo $this->session[$val['id_sell']]; ?>">
+
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                </span>
+                            </div>
+                        
+                              </td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong><?php echo number_format($val['price'], '2', ',', ' ') . " €"; ?></strong></td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong><?php echo number_format($val['price'] * $this->session[$val['id_sell']], '2', ',', ' ') . " €"; ?></strong></td>
+                                <td class="col-sm-1 col-md-1">
+                                    <form method="GET" action="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index', 'type' => 'delete', 'id' => $val['id_sell']), null, true); ?>">
+                                        <button type="submit" class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-remove"></span> Retirer du panier
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php } ?>
         <!--<tr>
             <td>   </td>
             <td>   </td>
@@ -60,39 +74,39 @@
             <td><h5>Estimated shipping</h5></td>
             <td class="text-right"><h5><strong>$6.94</strong></h5></td>
         </tr>-->
-                    <tr>
-                        <td class="text-left">  
-                            <button type="submit" class="btn btn-primary">
-                                Recalculer <span class="glyphicon"></span>
-                            </button>
-                        </td>
-                        <td>   </td>
+                        <tr>
+                            <td class="text-left">  
+                                
+                            </td>
+                            <td>   </td>
 
-                        <td colspan="2" ><h3>Total de votre panier</h3></td>
-                        <td class="text-right"><h3><strong><?php echo number_format($total, "2", ",", " ") . " €"; ?></strong></h3></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>
-                            <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-shopping-cart"></span> Poursuivre mes achats
-                            </button></td>
-                        <td>
-                            <form method="POST" action="<?php echo $this->url(array('controller' => 'panier', 'action' => 'paiement'), null, true); ?>">
-                                <button type="submit" class="btn btn-success">
-                                    Commander <span class="glyphicon glyphicon-play"></span>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <?php }else{ ?>
-            <div class="paniervide">
-                <a href="/" class="sbt btGreen">Continuez vos achats !</a>
-            </div>
+                            <td colspan="2" ><h3>Total de votre panier</h3></td>
+                            <td class="text-right"><h3><strong><?php echo number_format($total, "2", ",", " ") . " €"; ?></strong></h3></td>
+                        </tr>
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>
+                                <form method="POST" action="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, true); ?>">
+                                    <button type="submit" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span> Poursuivre mes achats
+                                    </button>
+                                </form></td>
+                            <td>
+                                <form method="POST" action="<?php echo $this->url(array('controller' => 'panier', 'action' => 'paiement'), null, true); ?>">
+                                    <button type="submit" class="btn btn-success">
+                                        Commander <span class="glyphicon glyphicon-play"></span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            <?php } else { ?>
+                <div class="paniervide">
+                    <a href="/" class="sbt btGreen">Continuez vos achats !</a>
+                </div>
             <?php } ?>
         </div>
     </div>

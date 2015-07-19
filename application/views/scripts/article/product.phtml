@@ -1,4 +1,4 @@
-<?php $p = $this->produit[0];?>
+<?php $p = $this->produit[0]; ?>
 <div class="container-fluid">
     <div class="content-wrapper">	
         <div class="item-container">	
@@ -42,7 +42,7 @@
                                     <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
                                 </span>
                                 <input type="text" class="form-control text-center" id="number_product" value="1">
-                                            
+
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                                 </span>
@@ -81,8 +81,8 @@
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-xs-6 col-md-3">
-                                                    <img style="max-height:100px;" src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" alt="">                                             
-                                                    
+                                                    <img style="max-height:100px; max-width: 100px;" src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" alt="">                                             
+
                                                 </div>
                                                 <span style="font-weight: bold; color: #009600; font-size: 1.8em;"> Cet article a été ajouté au panier !</span>
                                                 <span   id="quantite" style="color: #141414; font-size: 1.6em; display: block; text-transform: capitalize;">Quantité : 1</span>
@@ -92,16 +92,27 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Poursuivre mes achats</button>
-                                         <form method="POST" action="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index'), null, true); ?>">
-                                        <button type="submit" class="btn btn-primary">Voir mon panier</button>
-                                         </form>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                 <div class="col-md-4">
+                                                      <form method="GET" action="<?php echo $this->url(array('controller' => 'category', 'action' => 'index','type'=>$p['id_category']), null, true); ?>">
+                                                <button type="submit" class="btn btn-default">Poursuivre mes achats</button>
+                                                      </form>
+                                                 </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <form method="POST" action="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index'), null, true); ?>">
+                                                    <button type="submit" class="btn btn-primary">Voir mon panier</button>
+                                                </form>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
                         </div><!-- /.modal -->
                         <div class="bs-example bs-example-padded-bottom">
-                             <input type="hidden" name="id_product" value="<?php echo $p['id_sell']; ?>">
+                            <input type="hidden" name="id_product" value="<?php echo $p['id_sell']; ?>">
                             <button type="button" class="btn btn-success btn-lg commander" data-toggle="modal" data-target="#gridSystemModal">
                                 Commander
                             </button>
