@@ -24,6 +24,43 @@
     Description détaillé : <textarea name="descritption" id="" cols="30" rows="10"></textarea>
     <input type="submit" value="valider"/>
 </form>
+<div class="col-md-12">
+    <div class="form-style-10">
+        <h1>Créer votre produit<span>Sign up and tell us what you think of the site!</span></h1>
+        <form>
+            <div class="section"><span>1</span>Présentation générale</div>
+            <div class="inner-wrap">
+                <label>Titre<input type="text" name="field1" /></label>
+                <label>Image<input type="file" name="image" enctype="multipart/form-data"/>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="6000" /></label>
+
+            </div>
+
+            <div class="section"><span>2</span>Caractéristique</div>
+            <div class="inner-wrap">
+                <label>Description courte <textarea name="field2"></textarea></label>
+                <label>Description longue<textarea name="field2"></textarea></label>
+                <label>Prix<input type="text" name="field4" /></label>
+                <label>Quantité<input type="text" name="field4" /></label>
+            </div>
+
+            <div class="section"><span>3</span>Rubrique</div>
+            <div class="inner-wrap">
+
+                <table>
+                    <tr>
+                        <td>Catégorie 1</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="button-section">
+                <input type="submit" name="Sign Up" />
+
+            </div>
+        </form>
+    </div>
+</div>
+
 
 
 <?php if (count($this->articles) > 0) { ?>
@@ -57,19 +94,18 @@
                             <li><i class="glyphicon glyphicon-calendar"></i> <span><?php echo substr($value['dt_creation'], 0, -8); ?></span></li>
                             <li><i class="glyphicon glyphicon-time"></i> <span><?php echo substr($value['dt_creation'], 10, -3); ?></span></li>
                             <li><i class="glyphicon glyphicon-tags"></i> <span>
-                                <?php 
-                                 foreach ($this->category as $c) {
-                                if ($c['id_category'] == $value['parent']) {
-                                    echo $c['label_category']." - ";
-                                }
-                            }
-                                echo $value['label_category']; ?>
+                                    <?php
+                                    foreach ($this->category as $c) {
+                                        if ($c['id_category'] == $value['parent']) {
+                                            echo $c['label_category'] . " - ";
+                                        }
+                                    }
+                                    echo $value['label_category'];
+                                    ?>
                                 </span></li>
                             <li><i class="glyphicon glyphicon-euro"></i> <span><?php echo number_format($value['price'], 2, ',', ' ') . " €"; ?></span></li>
                             <li><i class="glyphicon glyphicon-shopping-cart"></i><span><?php echo $value['quantity'] . " en stock"; ?></span></li>
-                            <?php
-                           
-                            ?>
+                            <?php ?>
                         </ul>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-7">

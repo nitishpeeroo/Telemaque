@@ -21,6 +21,10 @@ class IndexController extends Zend_Controller_Action {
         $this->view->product = $product;
     }
     
+    public function contactAction(){
+        
+    }
+    
 
     
         
