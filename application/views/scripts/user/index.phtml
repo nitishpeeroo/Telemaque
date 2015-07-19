@@ -1,7 +1,7 @@
 <div class = "col-md-6">
     <div class="wrapper">
 
-        <form class="form-signindefault" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'index' ,'type' => 'signin'),null,true); ?>" method="post" name="Login_Form" class="form-signin">       
+        <form class="form-signindefault" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'index', 'type' => 'signin'), null, true); ?>" method="post" name="Login_Form" class="form-signin">       
             <h3 class="form-signin-heading">Identifiez vous pour poursuivre</h3>
             <hr class="colorgraph"><br>
 
@@ -23,7 +23,7 @@
 </div>
 <div class="col-md-6">
     <div class="wrapper">
-        <form class="form-signindefault" role="form" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'index' ,'type' => 'signup'),null,true); ?>" method="POST" class="form-signin" id="passwordForm">
+        <form class="form-signindefault" role="form" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'index', 'type' => 'signup'), null, true); ?>" method="POST" class="form-signin" id="passwordForm">
             <h2> Vous êtes nouveau client <small>Inscrivez vous gratuitement</small></h2>
             <hr class="colorgraph">
             <div class="row">
@@ -41,42 +41,50 @@
             <div class="form-group">
                 <input type="email" name="email" id="display_name" class="form-control input-lg" placeholder="Email" tabindex="5" required=""/>
             </div>
-<!--            <div class="row">
-                <div class="col-sm-6">
-                    <span class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> <br>
-                </div>
-            </div>-->
+            <!--            <div class="row">
+                            <div class="col-sm-6">
+                                <span class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> <br>
+                            </div>
+                        </div>-->
             <div class="form-group">
                 <input type="text" name="login" id="email" class="form-control input-lg" placeholder="login" tabindex="6" required=""/>
-            <div class="row">
-                <div class="col-sm-6">
-                    <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 8 caractères<br>
-                    <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 1 lettre majuscule
+                <div class="row">
+                    <div class="col-sm-6">
+                        <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 8 caractères<br>
+                        <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 1 lettre majuscule
+                    </div>
+                    <div class="col-sm-6">
+                        <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 1 lettre minuscule<br>
+                        <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 1 chiffre
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 1 lettre minuscule<br>
-                    <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 1 chiffre
-                </div>
-            </div>
-            <div class="form-group">
                 <div class="form-group">
-                    <input type="password" name="password" id="password1" class="form-control input-lg" placeholder="Mot de passe" tabindex="7" autocomplete="off" required=""/>
+                    <div class="form-group">
+                        <input type="password" name="password" id="password1" class="form-control input-lg" placeholder="Mot de passe" tabindex="7" autocomplete="off" required=""/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <input type="password" name="password2" id="password2" class="form-control input-lg" placeholder="Confirmez votre mot de passe" autocomplete="off" tabindex="8" required=""/>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Mot de passe identique
+                <div class="form-group">
+                    <input type="password" name="password2" id="password2" class="form-control input-lg" placeholder="Confirmez votre mot de passe" autocomplete="off" tabindex="8" required=""/>
                 </div>
-            </div>
-            <hr class="colorgraph">
-            <div class="row">
-                <div class="col-xs-12">
-                    <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">S'inscrire</button>  			
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Mot de passe identique
+                    </div>
                 </div>
-            </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <center>
+                        <div class="g-recaptcha" data-sitekey="6Lc9CgoTAAAAALI9YC2yEDB5uLjXllHg8r-2B2DG"></div>
+                        </center>
+                    </div>
+                </div>
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">S'inscrire</button>  			
+                    </div>
+                </div>
         </form>
     </div>
 </div>
