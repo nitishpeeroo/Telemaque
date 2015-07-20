@@ -159,7 +159,8 @@
                                                         </span>
                                                     </span>
                                                 </span>
-                                            </li>     
+                                            </li>
+                                            
                                         <?php } else { ?>
                                             <li>
                                                 <span class="item">
@@ -170,7 +171,11 @@
                                                         </span>
                                                     </span>
                                                 </span>
-                                            </li>                  
+                                            </li>
+                                            <li class="divider" style="display:none;"></li>
+                                            <li class="div-panier"  style="display:none;">
+                                                <a class="text-center" id="voir-panier"  href="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index'), null, true); ?>">Voir mon panier</a>
+                                            </li>
                                         <?php } ?>
                                     </ul>
                                 </li>

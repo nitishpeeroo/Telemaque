@@ -1,6 +1,13 @@
 $(".commander").on('click', function (e) {
+    if ($('.bg-danger').is(':visible')) {
+        return false;
+        e.preventdefault();
+    }
     var quantite = $('.number-spinner').find('input').val();
     var id_product = $("input[name='id_product']").val();
+    var image = $("img").attr('src');
+    var title = $(".product-title").text();
+    var prix = $(".product-price").text();
     $.ajax({
         url: '/panier/addpanier',
         type: "POST",
@@ -12,6 +19,26 @@ $(".commander").on('click', function (e) {
 
     ).done(function (data) {
 
+        if ($('.item-info').text() != "") {
+            $('.item-info').hide();
+        } 
+        var panier = $(".dropdown-cart").children().first();
+        var text = "";
+        text += "<li>";
+        text += '<span class="item" id="item-' + id_product + '">';
+        text += '<span class="item-left">';
+        text += '<img style="max-height: 50px; max-width: 50px;" src="' + image + '" />';
+        text += '<span class="item-info">';
+        text += '<span><center><a href="/article/product/fiche/' + id_product + '">' + title + '</a></center></span>';
+        text += '<span>Prix : ' + prix + ' </span>';
+        text += '<span id="qte-panier-' + id_product + '">Quantité :' + quantite + '</span>';
+        text += ' </span>';
+        text += ' </span>';
+        text += ' </span>';
+        text += ' </li>';
+        panier.append(text);
+          $(".divider").show();
+          $('.div-panier').show();
     });
 
 });
@@ -62,13 +89,13 @@ $(".btn-default").on("click", function (e) {
                     $('#total').attr("price", total);
                     $('#item-' + id).remove();
                     var qtePanier = $("#panier").attr("nb");
-                    qtePanier --;
-                    if(qtePanier > 1){
-                         $("#panier").text(qtePanier + " produits");
-                    }else{
-                         $("#panier").text(qtePanier + " produit");
+                    qtePanier--;
+                    if (qtePanier > 1) {
+                        $("#panier").text(qtePanier + " produits");
+                    } else {
+                        $("#panier").text(qtePanier + " produit");
                     }
-                     
+
                     if (total == 0) {
                         $(".table-hover").remove();
                         $(".paniervide").show();

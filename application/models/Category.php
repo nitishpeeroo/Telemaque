@@ -27,7 +27,8 @@ class Application_Model_Category extends Zend_Db_Table_Abstract {
                 ->setIntegrityCheck(false)
                 ->from(array('c' => DB_TABLE_CATEGORY), array('c.id_category', 'c.label_category', 'c.parent'))
                 ->joinInner(array('i' => DB_TABLE_IMAGE_RUBRIQUE), 'c.id_category = i.id_category')
-                ->where('c.parent !=  0 ');
+                ->where('c.parent !=  0 ')
+                ->order('c.parent');
         try {
             $tab = $this->fetchAll($select)->toArray();
         } catch (Exception $ex) {
