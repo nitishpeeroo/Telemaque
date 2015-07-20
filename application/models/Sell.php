@@ -139,4 +139,33 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
         return $ssrubrique;
     }
 
+    public function updateSell($title, $image, $quantity,$price, $descritptionCourt, $descritption, $idSell) {
+        try {
+            $data = array(
+                'title' => $title,
+                'quantity' => $quantity,
+                'price' => $price,
+                'description_courte' => $descritptionCourt,
+                'description' => $descritption,
+                'dt_modification' => date('Y-m-d H:i:s'),
+            );
+            $this->update($data,'id_sell = ' . $idSell);
+        } catch (Exception $ex) {
+            echo 'ERROR_INSERT_ADDSELL : ' . $ex->getMessage();
+            return false;
+        }
+    }
+    
+    public function updatePriceQuantity($quantity,$price,$idSell) {
+        try {
+            $data = array(
+                'quantity' => $quantity,
+                'price' => $price,
+            );
+            $this->update($data,'id_sell = ' . $idSell);
+        } catch (Exception $ex) {
+            echo 'ERROR_INSERT_ADDSELL : ' . $ex->getMessage();
+            return false;
+        }
+    }
 }
