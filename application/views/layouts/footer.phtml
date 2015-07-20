@@ -220,30 +220,69 @@
                         $(document).on('click', '.number-spinner button', function () {
                             var btn = $(this),
                                     oldValue = btn.closest('.number-spinner').find('input').val().trim(),
-                                    newVal = 0;
+                                    newVal = 0
+                            var max = $("#qteMax").text();
 
                             if (btn.attr('data-dir') == 'up') {
-                                alert("up");
+
                                 newVal = parseInt(oldValue) + 1;
+                                if (newVal > 10) {
+                                    $('.bg-danger').show();
+                                } else {
+                                    $('.bg-danger').hide();
+                                }
+                                if (max != 10) {
+                                    if (newVal > max) {
+                                        $('.bg-danger').show();
+                                    } else {
+                                        $('.bg-danger').hide();
+                                    }
+                                }
                             } else {
-                                alert("down");
                                 if (oldValue > 1) {
                                     newVal = parseInt(oldValue) - 1;
+                                    if (newVal > 10) {
+                                        $('.bg-danger').show();
+                                    } else {
+                                        $('.bg-danger').hide();
+                                    }
+                                    if (max != 10) {
+                                        if (newVal > max) {
+                                            $('.bg-danger').show();
+                                        } else {
+                                            $('.bg-danger').hide();
+                                        }
+                                    }
                                 } else {
                                     newVal = 1;
                                 }
                             }
                             $("#qte_product").val(newVal);
                             btn.closest('.number-spinner').find('input').val(newVal);
-                             var qte = $("#quantite").text("Quantité : "+ newVal);
+                            var qte = $("#quantite").text("Quantité : " + newVal);
 
                         });
 
                         $(document).on('keyup', '#number_product', function () {
+                             var max = $("#qteMax").text();
                             var btn = $(this).val();
                             $("#qte_product").val(btn);
-                          var qte = $("#quantite").text("Quantité : "+ btn);
+                            if (btn > 10) {
+                                $('.bg-danger').show();
+                            } else {
+                                $('.bg-danger').hide();
+                            }
+                            if (max != 10) {
+                              
+                                if (btn > max) {
+                                    $('.bg-danger').show();
+                                } else {
+                                    $('.bg-danger').hide();
+                                }
+                            }
+                            var qte = $("#quantite").text("Quantité : " + btn);
+
                         });
-                       
+
                     </script>
                     </html>

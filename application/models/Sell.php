@@ -70,7 +70,8 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
                 ->setIntegrityCheck(false)
                 ->from(array('s' => DB_TABLE_SELL))
                 ->joinInner(array('i' => DB_TABLE_IMAGE), 's.id_sell = i.id_sell')
-                ->where('s.title like "%' . $label . '%"');
+                ->where('s.title like "%' . $label . '%"')
+                ->where('s.is_checked != 2');
         try {
             $row = $this->fetchAll($select)->toArray();
         } catch (Exception $ex) {
