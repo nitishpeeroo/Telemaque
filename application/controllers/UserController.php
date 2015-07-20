@@ -125,6 +125,7 @@ class UserController extends Zend_Controller_Action {
        
         if ($this->_request->isPost()) {
             
+            
             if($this->_getParam('type') == 'ajout')
             {
                 $title = $_POST['title'];
@@ -157,6 +158,15 @@ class UserController extends Zend_Controller_Action {
                 $price = $_POST['price']; 
                 $sell->updatePriceQuantity($quantity,$price,$idSell);
             }
+            
+            
+        }
+        if($this->_getParam('data'))
+        {
+            $SellCopy = $sell->getArticle($this->_getParam('data'),array());
+            $this->view->image = base64_encode($SellCopy[0]['image']);
+            $this->view->name_for_image = pathinfo($SellCopy[0]['name_image'], PATHINFO_EXTENSION);
+            $this->view->name_image = $SellCopy[0]['name_image'];
         }
         $this->view->category = $categorys->getRubrique();
 
