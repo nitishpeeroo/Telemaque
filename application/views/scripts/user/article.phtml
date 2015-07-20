@@ -1,7 +1,8 @@
 <form method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'article', 'type' => 'ajout'), null, true); ?>" enctype="multipart/form-data" >
     Title : <input type="text" name="title" />
     <br/>
-    Image : <input type="file" name="image" enctype="multipart/form-data"/>
+    <img src="data:image/<?= $this->name_for_image . ';base64,' . $this->image ?>" alt="" />
+    Image : <input type="file" name="image" enctype="multipart/form-data" />
     <input type="hidden" name="MAX_FILE_SIZE" value="6000" />
     Quantité : <input type="text" name="quantity" />
     <br/>
