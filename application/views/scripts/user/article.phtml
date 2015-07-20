@@ -111,8 +111,15 @@
                     <div class="col-xs-12 col-sm-12 col-md-7">
                         <h3><a href="#" title=""><?php echo $value['title']; ?></a></h3>
                         <p><?php echo $value['description']; ?></p>	
-
-                        <span class="plus"><a href="<?= $this->url(array('controller' => 'article', 'action' => 'modify', 'fiche' => $value['id_sell']), null, true); ?>" title="Lorem ipsum"><i class="glyphicon glyphicon glyphicon-wrench"></i></a></span>
+                        
+                        <?php if($value['quantity'] < 1): ?>
+                            <form method="POST" action="<?= $this->url(array('controller' => 'user', 'action' => 'article','type' => 'update'), null, true); ?>">
+                                Prix :<input type="text" name="price" />Qt :<input type="text" name="quantity" /><input type="hidden" value="<?= $value['id_sell']  ?>" name="idSell" /><input type="submit" />
+                            </form>
+                        <?php endif; ?>
+                        <?php if($value['is_checked'] == 0): ?>
+                            <span class="plus"><a href="<?= $this->url(array('controller' => 'article', 'action' => 'modify', 'fiche' => $value['id_sell']), null, true); ?>" title="Lorem ipsum"><i class="glyphicon glyphicon glyphicon-wrench"></i></a></span>
+                        <?php endif; ?>
                     </div>
                     <span class="clearfix borda"></span>
                 </article>

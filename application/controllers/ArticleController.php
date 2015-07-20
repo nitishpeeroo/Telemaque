@@ -73,6 +73,7 @@ class ArticleController extends Zend_Controller_Action {
         $sell = new Application_Model_Sell();
         $images = new Application_Model_Image();
         $categorys = new Application_Model_Category();
+        $produit = $article->getArticle($fiche); 
         
         if($this->_request->isPost())
         {        
@@ -86,23 +87,25 @@ class ArticleController extends Zend_Controller_Action {
             $quantity = $_POST['quantity'];
             $category = $_POST['category'];
             $price = $_POST['price'];
-            $descritptionCourt = $_POST['descritptionCourt'];
-            $descritption = $_POST['descritption'];
+            $descritptionCourt = $_POST['description_courte'];
+            $descritption = $_POST['description'];
             $idUser = $ns->data['id_user'];
-            
-            
-            // recuperation de idSell après insertion
-            //$idSell = $sell->updateSell($title,$image,$quantity,$category,$price,$descritptionCourt,$descritption, $idUser);
-            
- 
+
+            // recuperation de idSell après modification
+            $sell->updateSell($title,$image,$quantity,$price,$descritptionCourt,$descritption, $fiche);   
+
             // insertion de l'image grace a l'idSell
-            //$ResultImage = $images->updateImage($idSell, $image, $nameImage);
-//            if($ResultImage == true)
-//            {
-//                $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'article'), null, true));
-//            }    
+            $produit = $article->getArticle($fiche); 
+            if($nameImage != '')
+            {
+                $ResultImage = $images->updateImage($produit[0]['id_image'], $image, $nameImage);
+            }
+            if($ResultImage == true)
+            {
+                $this->_redirect($this->view->url(array('controller' => 'article', 'action' => 'modify','fiche'=> $fiche), null, true));
+            }    
         }           
-        $produit = $article->getArticle($fiche); 
+        
         $this->view->produit = $produit;
         
         foreach ($this->view->produit as &$p) {

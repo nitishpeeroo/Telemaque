@@ -122,31 +122,40 @@ class UserController extends Zend_Controller_Action {
         $sell = new Application_Model_Sell();
         $images = new Application_Model_Image();
         $categorys = new Application_Model_Category();
-
+       
         if ($this->_request->isPost()) {
-            $title = $_POST['title'];
+            
+            if($this->_getParam('type') == 'ajout')
+            {
+                $title = $_POST['title'];
 
-            // image data 
-            $image = @file_get_contents($_FILES['image']['tmp_name']);
-            $nameImage = $_FILES['image']['name'];
+                // image data 
+                $image = @file_get_contents($_FILES['image']['tmp_name']);
+                $nameImage = $_FILES['image']['name'];
 
-            // sell data
-            $quantity = $_POST['quantity'];
-            $category = $_POST['category'];
-            $price = $_POST['price'];
-            $descritptionCourt = $_POST['descritptionCourt'];
-            $descritption = $_POST['descritption'];
-            $idUser = $ns->data['id_user'];
+                // sell data
+                $quantity = $_POST['quantity'];
+                $category = $_POST['category'];
+                $price = $_POST['price'];
+                $descritptionCourt = $_POST['descritptionCourt'];
+                $descritption = $_POST['descritption'];
+                $idUser = $ns->data['id_user'];
 
+                // recuperation de idSell après insertion
+                $idSell = $sell->addSell($title, $image, $quantity, $category, $price, $descritptionCourt, $descritption, $idUser);
 
-            // recuperation de idSell après insertion
-            $idSell = $sell->addSell($title, $image, $quantity, $category, $price, $descritptionCourt, $descritption, $idUser);
-
-
-            // insertion de l'image grace a l'idSell
-            $ResultImage = $images->addImage($idSell, $image, $nameImage);
-            if ($ResultImage == true) {
-                $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'article'), null, true));
+                // insertion de l'image grace a l'idSell
+                $ResultImage = $images->addImage($idSell, $image, $nameImage);
+                if ($ResultImage == true) {
+                    $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'article'), null, true));
+                }
+            }
+            if($this->_getParam('type') == 'update')
+            {
+                $idSell = $_POST['idSell'];
+                $quantity = $_POST['quantity'];                
+                $price = $_POST['price']; 
+                $sell->updatePriceQuantity($quantity,$price,$idSell);
             }
         }
         $this->view->category = $categorys->getRubrique();
@@ -154,7 +163,6 @@ class UserController extends Zend_Controller_Action {
         $this->view->souscategory = $categorys->getSousRubrique();
 
         $table = $sell->getUserSell($ns->data['id_user']);
-        ;
 
 
         foreach ($table as &$value) {

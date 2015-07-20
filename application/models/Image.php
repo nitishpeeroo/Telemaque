@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_Image extends Zend_Db_Table_Abstract {
+class   Application_Model_Image extends Zend_Db_Table_Abstract {
 
     protected $_dbname = DB_NAME_TELEMAQUE;
     protected $_name = DB_TABLE_IMAGE;
@@ -22,6 +22,16 @@ class Application_Model_Image extends Zend_Db_Table_Abstract {
             return false;
         }
 
+        return true;
+    }
+    
+    public function updateImage($idImage, $image, $nameImage) {
+        $data = array(
+            'image' => $image,
+            'name_image' => $nameImage,
+        );
+        $this->update($data,'id_image = ' . $idImage);
+        
         return true;
     }
 }
