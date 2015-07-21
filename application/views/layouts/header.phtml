@@ -16,7 +16,7 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-default" role="navigation">
+            <nav class="navbar navbar-default" role="navigation" style="max-height: 51.3px;">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
@@ -90,7 +90,7 @@
                             </div>
 
                         </form>
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav navbar-right" <?php  if (isset($_SESSION['user'])){echo 'style="margin-top: -50px;"';} ?>>
                             <?php if ($this->lvl == 0): ?>
                                 <li> <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'index'), null, true); ?>">Mon compte</a></li>
                                 <?php

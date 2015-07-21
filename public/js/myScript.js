@@ -179,7 +179,7 @@ $(document).ready( function() {
         if( input.length ) {
            
         } else {
-            if( log ) alert(log);
+//            if( log ) alert(log);
         }
         
     });
