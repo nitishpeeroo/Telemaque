@@ -77,7 +77,6 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
             echo 'ERROR_SELECT_GETSELL : ' . $ex->getMessage();
             return false;
         }
-        var_dump($row);
         $this->data = $row;
         return $this->data;
     }
