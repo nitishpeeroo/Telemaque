@@ -200,4 +200,8 @@ $(".select-sous-category").on("click",function(e){
 //Gestion des category lors de la création d'une vente
 $(".select-sous-category").on("click",function(e){
    var id_sous_category = $(this).attr("data");
-})
+});
+//Visualisation du produit créer
+$("#reviewProduct").on("click",function(e){
+   alert("ok"); 
+});

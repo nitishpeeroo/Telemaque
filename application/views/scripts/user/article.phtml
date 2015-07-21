@@ -1,3 +1,4 @@
+<div style="display: none;">
 <form method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'article', 'type' => 'ajout'), null, true); ?>" enctype="multipart/form-data" >
     Title : <input type="text" name="title" />
     <br/>
@@ -44,6 +45,7 @@
     Description détaillé : <textarea name="descritption" id="" cols="30" rows="10"></textarea>
     <input type="submit" value="valider"/>
 </form>
+</div>
 <?php include 'createProduct.phtml'; ?>
 <!-----Gestion du nombre de produit attente / valider / refuser---------->
 <?php
