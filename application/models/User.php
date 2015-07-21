@@ -16,7 +16,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
                     ->joinInner(array('r' => DB_TABLE_RANK)
                             ,'u.level_user = r.id_rank')
                     ->where('u.login_user = ?', $login)
-                    ->where('u.password_user = ?', $password);
+                    ->where('u.password_user = ?', md5($password));
             $row = $this->fetchAll($select)->toArray();
             
             $this->data = $row[0];
@@ -63,7 +63,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
         try {
             $data = array(
                 'login_user' => $login,
-                'password_user' => $password,
+                'password_user' => md5($password),
                 'lastname_user' => $lastname,
                 'firstname_user' => $firstname,
                 'mail_user' => $mail,
@@ -96,7 +96,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
             else
             {
                 $data = array(
-                    'password_user' => $password,
+                    'password_user' => md5($password),
                     'lastname_user' => $lastname,
                     'firstname_user' => $firstname,
                     'mail_user' => $mail,

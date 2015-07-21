@@ -12,7 +12,6 @@ class CategoryController extends Zend_Controller_Action {
             $this->view->lastname = $ns->data['lastname_user'];
             $this->view->lvl = $ns->data['id_rank'];
         }
-
         $this->category = new Application_Model_Category();
     }
 
