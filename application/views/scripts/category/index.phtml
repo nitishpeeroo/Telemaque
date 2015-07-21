@@ -30,7 +30,7 @@
             <?php foreach ($this->produit as $p) { 
                 ?>
                 <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
+                    <div class="thumbnail" style="min-height: 367.8px;">
                         <img style="min-height: 250px; max-height: 250px;" src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" />
                         <div class="caption">
                             <h4 class="pull-right"><?php echo $p['price']." €"; ?></h4>

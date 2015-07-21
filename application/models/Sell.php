@@ -33,10 +33,8 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
         $select = $this->select()
                 ->setIntegrityCheck(false)
                 ->from(array('s' => DB_TABLE_SELL))
-                ->joinInner(array('c' => DB_TABLE_CATEGORY)
-                        , 's.id_category = c.id_category')
-                ->joinInner(array('i' => DB_TABLE_IMAGE)
-                        , 's.id_sell = i.id_sell')
+                ->joinInner(array('c' => DB_TABLE_CATEGORY), 's.id_category = c.id_category')
+                ->joinInner(array('i' => DB_TABLE_IMAGE), 's.id_sell = i.id_sell')
                 ->where('id_user = ?', $idUser);
         try {
             $row = $this->fetchAll($select)->toArray();
@@ -47,6 +45,7 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
         $this->data = $row;
         return $this->data;
     }
+    
 
     public function getLastUserIdSell($title, $idUser, $category) {
         $select = $this->select()
@@ -78,6 +77,7 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
             echo 'ERROR_SELECT_GETSELL : ' . $ex->getMessage();
             return false;
         }
+        var_dump($row);
         $this->data = $row;
         return $this->data;
     }
@@ -87,7 +87,7 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
     }
 
     public function getArticle($id = null, $tab = array()) {
-        
+
         if (count($tab) > 0) {
             $select = $this->select()
                     ->setIntegrityCheck(false)
@@ -95,7 +95,6 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
                     ->joinInner(array('i' => DB_TABLE_IMAGE), 's.id_sell = i.id_sell')
                     ->joinInner(array('u' => DB_TABLE_USER), 's.id_user = u.id_user')
                     ->where('s.id_sell IN (?)', $tab);
-          
         } else {
             $select = $this->select()
                     ->setIntegrityCheck(false)
@@ -119,6 +118,7 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
                 ->setIntegrityCheck(false)
                 ->from(array('s' => DB_TABLE_SELL))
                 ->joinInner(array('i' => DB_TABLE_IMAGE), 's.id_sell = i.id_sell')
+                ->where('s.is_checked != 2')
                 ->order('s.dt_creation')
                 ->limit($nb);
         try {
@@ -139,7 +139,7 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
         return $ssrubrique;
     }
 
-    public function updateSell($title, $image, $quantity,$price, $descritptionCourt, $descritption, $idSell) {
+    public function updateSell($title, $image, $quantity, $price, $descritptionCourt, $descritption, $idSell) {
         try {
             $data = array(
                 'title' => $title,
@@ -149,23 +149,24 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
                 'description' => $descritption,
                 'dt_modification' => date('Y-m-d H:i:s'),
             );
-            $this->update($data,'id_sell = ' . $idSell);
+            $this->update($data, 'id_sell = ' . $idSell);
         } catch (Exception $ex) {
             echo 'ERROR_INSERT_ADDSELL : ' . $ex->getMessage();
             return false;
         }
     }
-    
-    public function updatePriceQuantity($quantity,$price,$idSell) {
+
+    public function updatePriceQuantity($quantity, $price, $idSell) {
         try {
             $data = array(
                 'quantity' => $quantity,
                 'price' => $price,
             );
-            $this->update($data,'id_sell = ' . $idSell);
+            $this->update($data, 'id_sell = ' . $idSell);
         } catch (Exception $ex) {
             echo 'ERROR_INSERT_ADDSELL : ' . $ex->getMessage();
             return false;
         }
     }
+
 }

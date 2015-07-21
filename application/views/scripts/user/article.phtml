@@ -10,28 +10,31 @@
             <option value="<?= $value['id_category']; ?>"><?= $value['label_category']; ?></option>
         <?php endforeach; ?>
     </select>
- 
+
     Sous category: <select name="category" >
         <?php foreach ($this->souscategory as $value): ?>
             <option value="<?= $value['id_category']; ?>"><?= $value['parent'] . '-' . $value['label_category']; ?></option>
         <?php endforeach; ?>
     </select>
     <br />
-    <?php foreach ($this->category as $key => $val){?>
-        
-    <select style="display: none;" name="category-<?php echo $val['id_category']; ?>" >
-         <?php foreach ($this->souscategory as $s){ 
-                if($val['id_category'] == $s['parent']){?>
-              
-                <option value="<?php echo $s['id_category']; ?>"><?php echo $s['label_category']; ?></option>
-         <?php }
-         
-                }?>
-            </select>
-    <?php
+    <?php foreach ($this->category as $key => $val) { ?>
+
+        <select style="display: none;" name="category-<?php echo $val['id_category']; ?>" >
+            <?php
+            foreach ($this->souscategory as $s) {
+                if ($val['id_category'] == $s['parent']) {
+                    ?>
+
+                    <option value="<?php echo $s['id_category']; ?>"><?php echo $s['label_category']; ?></option>
+                    <?php
+                }
+            }
+            ?>
+        </select>
+        <?php
     }
-?>
-                
+    ?>
+
 
     <br/>
     Prix : <input type="text" name="price" />
@@ -41,72 +44,242 @@
     Description détaillé : <textarea name="descritption" id="" cols="30" rows="10"></textarea>
     <input type="submit" value="valider"/>
 </form>
-
-
-<?php if (count($this->articles) > 0) { ?>
-
-    <div class="container">
-
-        <hgroup class="mb20">
-            <h1>Vos articles mise en vente</h1>
-
-            <h3><strong > 
-                    <?php
-                    if (count($this->articles) == 1) {
-                        echo count($this->articles) . " article";
-                    } else {
-                        echo count($this->articles) . " articles";
-                    }
-                    ?>
-                </strong></h3>								
-        </hgroup>
-
-        <section class="col-xs-12 col-sm-6 col-md-12">
-
-            <?php foreach ($this->articles as $value) { ?>
-                <article class="search-result row">
-                    <div class="col-xs-12 col-sm-12 col-md-3">
-                        <a href="#" title="Lorem ipsum" class="thumbnail"><img src="data:image/<?= $value['name_image'] . ';base64,' . $value['image'] ?>" alt="" /></a>
-
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-2">
-                        <ul class="meta-search">
-                            <li><i class="glyphicon glyphicon-calendar"></i> <span><?php echo substr($value['dt_creation'], 0, -8); ?></span></li>
-                            <li><i class="glyphicon glyphicon-time"></i> <span><?php echo substr($value['dt_creation'], 10, -3); ?></span></li>
-                            <li><i class="glyphicon glyphicon-tags"></i> <span>
-                                    <?php
-                                    foreach ($this->category as $c) {
-                                        if ($c['id_category'] == $value['parent']) {
-                                            echo $c['label_category'] . " - ";
-                                        }
-                                    }
-                                    echo $value['label_category'];
-                                    ?>
-                                </span></li>
-                            <li><i class="glyphicon glyphicon-euro"></i> <span><?php echo number_format($value['price'], 2, ',', ' ') . " €"; ?></span></li>
-                            <li><i class="glyphicon glyphicon-shopping-cart"></i><span><?php echo $value['quantity'] . " en stock"; ?></span></li>
-                            <?php ?>
-                        </ul>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-7">
-                        <h3><a href="#" title=""><?php echo $value['title']; ?></a></h3>
-                        <p><?php echo $value['description']; ?></p>	
-                        
-                        <?php if($value['quantity'] < 1): ?>
-                            <form method="POST" action="<?= $this->url(array('controller' => 'user', 'action' => 'article','type' => 'update'), null, true); ?>">
-                                Prix :<input type="text" name="price" />Qt :<input type="text" name="quantity" /><input type="hidden" value="<?= $value['id_sell']  ?>" name="idSell" /><input type="submit" />
-                            </form>
-                        <?php endif; ?>
-                        <?php if($value['is_checked'] == 0): ?>
-                            <span class="plus"><a href="<?= $this->url(array('controller' => 'article', 'action' => 'modify', 'fiche' => $value['id_sell']), null, true); ?>" title="Lorem ipsum"><i class="glyphicon glyphicon glyphicon-wrench"></i></a></span>
-                        <?php endif; ?>
-                    </div>
-                    <span class="clearfix borda"></span>
-                </article>
-            <?php } ?>
-
-        </section>
-
-    </div>
-<?php }
+<?php require 'createProduct.phtml'; ?>
+<!-----Gestion du nombre de produit attente / valider / reufser---------->
+<?php
+$attente = 0;
+$valider = 0;
+$refuser = 0;
+if (count($this->articles) > 0) {
+    foreach ($this->articles as $value) {
+        if ($value['is_checked'] == "0") {
+            $attente++;
+        } elseif ($value['is_checked'] == "1") {
+            $valider++;
+        } elseif ($value['is_checked'] == "2") {
+            $refuser++;
+        }
+    }
+}
 ?>
+<!----------------FIN--------------------------------------------->
+
+<div class="container-fluid">		
+    <div class="col-md-12 product-info">
+        <ul id="myTab" class="nav nav-tabs nav_tabs">
+            <li class="active"><a href="#service-one" data-toggle="tab">Article en attente de validation (<?= $attente; ?>)</a></li>
+            <li><a href="#service-two" data-toggle="tab">Article valider (<?= $valider; ?>)</a></li>
+            <li><a href="#service-three" data-toggle="tab">Article refuser (<?= $refuser; ?>)</a></li>
+
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="service-one">
+                <?php if (count($this->articles) > 0) { ?>
+                    <div class="container">
+                        <hgroup class="mb20">
+                            <h3><strong > 
+                                    <?php
+                                    if ($attente == 1 || $attente == 0) {
+                                        echo $attente . " article";
+                                    } else {
+                                        echo $attente . " articles";
+                                    }
+                                    ?>
+                                </strong></h3>								
+                        </hgroup>
+
+                        <section class="col-xs-12 col-sm-6 col-md-12">
+
+                            <?php
+                            foreach ($this->articles as $value) {
+                                if ($value['is_checked'] == "0") {
+                                    ?>
+                                    <article class="search-result row">
+                                        <div class="col-xs-12 col-sm-12 col-md-3">
+                                            <a href="#" title="Lorem ipsum" class="thumbnail"><img src="data:image/<?= $value['name_image'] . ';base64,' . $value['image'] ?>" alt="" /></a>
+
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-2">
+                                            <ul class="meta-search">
+                                                <li><i class="glyphicon glyphicon-calendar"></i> <span><?php echo substr($value['dt_creation'], 0, -8); ?></span></li>
+                                                <li><i class="glyphicon glyphicon-time"></i> <span><?php echo substr($value['dt_creation'], 10, -3); ?></span></li>
+                                                <li><i class="glyphicon glyphicon-tags"></i> <span>
+                                                        <?php
+                                                        foreach ($this->category as $c) {
+                                                            if ($c['id_category'] == $value['parent']) {
+                                                                echo $c['label_category'] . " - ";
+                                                            }
+                                                        }
+                                                        echo $value['label_category'];
+                                                        ?>
+                                                    </span></li>
+                                                <li><i class="glyphicon glyphicon-euro"></i> <span><?php echo number_format($value['price'], 2, ',', ' ') . " €"; ?></span></li>
+                                                <li><i class="glyphicon glyphicon-shopping-cart"></i><span><?php echo $value['quantity'] . " en stock"; ?></span></li>
+                                                <?php ?>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7">
+                                            <h3><a href="#" title=""><?php echo $value['title']; ?></a></h3>
+                                            <p><?php echo $value['description']; ?></p>	
+
+                                            <?php if ($value['quantity'] < 1): ?>
+                                                <form method="POST" action="<?= $this->url(array('controller' => 'user', 'action' => 'article', 'type' => 'update'), null, true); ?>">
+                                                    Prix :<input type="text" name="price" />Qt :<input type="text" name="quantity" /><input type="hidden" value="<?= $value['id_sell'] ?>" name="idSell" /><input type="submit" />
+                                                </form>
+                                            <?php endif; ?>
+                                            <?php if ($value['is_checked'] == 0): ?>
+                                                <span class="plus"><a href="<?= $this->url(array('controller' => 'article', 'action' => 'modify', 'fiche' => $value['id_sell']), null, true); ?>" title="Lorem ipsum"><i class="glyphicon glyphicon glyphicon-wrench"></i></a></span>
+                                            <?php endif; ?>
+                                        </div>
+                                        <span class="clearfix borda"></span>
+                                    </article>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </section>
+
+                    </div>
+                <?php } ?>
+            </div>
+            <div class="tab-pane fade" id="service-two">
+                <?php if (count($this->articles) > 0) { ?>
+                    <div class="container">
+                        <hgroup class="mb20">
+                            <h3><strong > 
+                                    <?php
+                                    if ($valider == 1 || $valider == 0) {
+                                        echo $valider . " article";
+                                    } else {
+                                        echo $valider . " articles";
+                                    }
+                                    ?>
+                                </strong></h3>								
+                        </hgroup>
+
+                        <section class="col-xs-12 col-sm-6 col-md-12">
+
+                            <?php
+                            foreach ($this->articles as $value) {
+                                if ($value['is_checked'] == "1") {
+                                    ?>
+                                    <article class="search-result row">
+                                        <div class="col-xs-12 col-sm-12 col-md-3">
+                                            <a href="#" title="Lorem ipsum" class="thumbnail"><img src="data:image/<?= $value['name_image'] . ';base64,' . $value['image'] ?>" alt="" /></a>
+
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-2">
+                                            <ul class="meta-search">
+                                                <li><i class="glyphicon glyphicon-calendar"></i> <span><?php echo substr($value['dt_creation'], 0, -8); ?></span></li>
+                                                <li><i class="glyphicon glyphicon-time"></i> <span><?php echo substr($value['dt_creation'], 10, -3); ?></span></li>
+                                                <li><i class="glyphicon glyphicon-tags"></i> <span>
+                                                        <?php
+                                                        foreach ($this->category as $c) {
+                                                            if ($c['id_category'] == $value['parent']) {
+                                                                echo $c['label_category'] . " - ";
+                                                            }
+                                                        }
+                                                        echo $value['label_category'];
+                                                        ?>
+                                                    </span></li>
+                                                <li><i class="glyphicon glyphicon-euro"></i> <span><?php echo number_format($value['price'], 2, ',', ' ') . " €"; ?></span></li>
+                                                <li><i class="glyphicon glyphicon-shopping-cart"></i><span><?php echo $value['quantity'] . " en stock"; ?></span></li>
+                                                <?php ?>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7">
+                                            <h3><a href="#" title=""><?php echo $value['title']; ?></a></h3>
+                                            <p><?php echo $value['description']; ?></p>	
+
+                                            <?php if ($value['quantity'] < 1): ?>
+                                                <form method="POST" action="<?= $this->url(array('controller' => 'user', 'action' => 'article', 'type' => 'update'), null, true); ?>">
+                                                    Prix :<input type="text" name="price" />Qt :<input type="text" name="quantity" /><input type="hidden" value="<?= $value['id_sell'] ?>" name="idSell" /><input type="submit" />
+                                                </form>
+                                            <?php endif; ?>
+                                            <?php if ($value['is_checked'] == 0): ?>
+                                                <span class="plus"><a href="<?= $this->url(array('controller' => 'article', 'action' => 'modify', 'fiche' => $value['id_sell']), null, true); ?>" title="Lorem ipsum"><i class="glyphicon glyphicon glyphicon-wrench"></i></a></span>
+                                            <?php endif; ?>
+                                        </div>
+                                        <span class="clearfix borda"></span>
+                                    </article>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </section>
+                    </div>
+                <?php } ?>
+            </div>
+            <div class="tab-pane fade" id="service-three">
+                <?php if (count($this->articles) > 0) { ?>
+                    <div class="container">
+                        <hgroup class="mb20">
+                            <h3><strong > 
+                                    <?php
+                                    if ($refuser == 1 || $refuser == 0) {
+                                        echo $refuser . " article";
+                                    } else {
+                                        echo $refuser . " articles";
+                                    }
+                                    ?>
+                                </strong></h3>								
+                        </hgroup>
+
+                        <section class="col-xs-12 col-sm-6 col-md-12">
+
+                            <?php
+                            foreach ($this->articles as $value) {
+                                if ($value['is_checked'] == "2") {
+                                    ?>
+                                    <article class="search-result row">
+                                        <div class="col-xs-12 col-sm-12 col-md-3">
+                                            <a href="#" title="Lorem ipsum" class="thumbnail"><img src="data:image/<?= $value['name_image'] . ';base64,' . $value['image'] ?>" alt="" /></a>
+
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-2">
+                                            <ul class="meta-search">
+                                                <li><i class="glyphicon glyphicon-calendar"></i> <span><?php echo substr($value['dt_creation'], 0, -8); ?></span></li>
+                                                <li><i class="glyphicon glyphicon-time"></i> <span><?php echo substr($value['dt_creation'], 10, -3); ?></span></li>
+                                                <li><i class="glyphicon glyphicon-tags"></i> <span>
+                                                        <?php
+                                                        foreach ($this->category as $c) {
+                                                            if ($c['id_category'] == $value['parent']) {
+                                                                echo $c['label_category'] . " - ";
+                                                            }
+                                                        }
+                                                        echo $value['label_category'];
+                                                        ?>
+                                                    </span></li>
+                                                <li><i class="glyphicon glyphicon-euro"></i> <span><?php echo number_format($value['price'], 2, ',', ' ') . " €"; ?></span></li>
+                                                <li><i class="glyphicon glyphicon-shopping-cart"></i><span><?php echo $value['quantity'] . " en stock"; ?></span></li>
+                                                <?php ?>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7">
+                                            <h3><a href="#" title=""><?php echo $value['title']; ?></a></h3>
+                                            <p><?php echo $value['description']; ?></p>	
+
+                                            <?php if ($value['quantity'] < 1): ?>
+                                                <form method="POST" action="<?= $this->url(array('controller' => 'user', 'action' => 'article', 'type' => 'update'), null, true); ?>">
+                                                    Prix :<input type="text" name="price" />Qt :<input type="text" name="quantity" /><input type="hidden" value="<?= $value['id_sell'] ?>" name="idSell" /><input type="submit" />
+                                                </form>
+                                            <?php endif; ?>
+                                            <?php if ($value['is_checked'] == 0): ?>
+                                                <span class="plus"><a href="<?= $this->url(array('controller' => 'article', 'action' => 'modify', 'fiche' => $value['id_sell']), null, true); ?>" title="Lorem ipsum"><i class="glyphicon glyphicon glyphicon-wrench"></i></a></span>
+                                            <?php endif; ?>
+                                        </div>
+                                        <span class="clearfix borda"></span>
+                                    </article>
+                                <?php
+                                }
+                            }
+                            ?>
+                        </section>
+
+                    </div>
+<?php } ?>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>

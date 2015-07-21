@@ -54,7 +54,8 @@ class Application_Model_Category extends Zend_Db_Table_Abstract {
                 ->from(array('s' => DB_TABLE_SELL), array('s.id_sell', 's.id_user', 's.id_category', 's.description', 's.price', 's.quantity', 's.is_checked', 's.title', 's.dt_creation', 's.dt_modification', 's.description_courte'))
                 ->joinInner(array('c' => DB_TABLE_CATEGORY), 'c.id_category = s.id_category')
                 ->joinInner(array('i' => DB_TABLE_IMAGE), 's.id_sell = i.id_sell')
-                ->where('c.id_category =?', $categorie);
+                ->where('c.id_category =?', $categorie)
+                ->where('s.is_checked != 2');
         try {
             $tab = $this->fetchAll($select)->toArray();
         } catch (Exception $ex) {

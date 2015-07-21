@@ -41,27 +41,37 @@
                                 if ($p['quantity'] == 1) {
                                     echo "<span id='qteMax'>1</span> de disponible";
                                 } else {
-                                    echo "<span id='qteMax'>".$p['quantity'] ."</span> de disponibles";
+                                    echo "<span id='qteMax'>" . $p['quantity'] . "</span> de disponibles";
                                 }
                             }
                             ?>
-                          
-                        </div></div>
-                    <div class="container">
-                        <div class="col-md-2">
-                            <div class="input-group number-spinner">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                </span>
-                                <input type="text" class="form-control text-center" id="number_product" value="1">
 
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                </span>
+                        </div></div>
+
+                    <?php
+                    if (isset($_SESSION)) {
+                        $rank = $_SESSION['user']['data']['id_rank'];
+                        if (($rank == "1" || $rank == 2) && $rank != null) {
+                            ?>
+                            <div class="container">
+                                <div class="col-md-2">
+                                    <div class="input-group number-spinner">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                        </span>
+                                        <input type="text" class="form-control text-center" id="number_product" value="1">
+
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                        </span>
+                                    </div>
+                                    <div style="display: none;" class="bg-danger"><center>Veuiller saisir une quantité inférieur</center></div>
+                                </div>
                             </div>
-                            <div style="display: none;" class="bg-danger"><center>Veuiller saisir une quantité inférieur</center></div>
-                        </div>
-                    </div>
+                            <?php
+                        }
+                    }
+                    ?>
                     <?php if ($p['quantity'] > 0) { ?>
                         <div class="col-md-2">
                             <div class="container">
@@ -124,12 +134,30 @@
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
                         </div><!-- /.modal -->
-                        <div class="bs-example bs-example-padded-bottom">
-                            <input type="hidden" name="id_product" value="<?php echo $p['id_sell']; ?>">
-                            <button type="button" class="btn btn-success btn-lg commander" data-toggle="modal" data-target="#gridSystemModal">
-                                Commander
-                            </button>
-                        </div><!-- /example -->
+                        <?php
+                        if (isset($_SESSION)) {
+                            $rank = $_SESSION['user']['data']['id_rank'];
+                            if (($rank == "1" || $rank == 2) && $rank != null) {
+                                ?>
+                                <div class="bs-example bs-example-padded-bottom">
+                                    <input type="hidden" name="id_product" value="<?php echo $p['id_sell']; ?>">
+                                    <button type="button" class="btn btn-success btn-lg commander" data-toggle="modal" data-target="#gridSystemModal">
+                                        Commander
+                                    </button>
+                                </div><!-- /example -->
+                                <?php
+                            }else{?>
+                                <div class="bs-example bs-example-padded-bottom">
+                                    <form method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'index'), null, true); ?>">
+                                    <button type="submit" class="btn btn-success btn-lg">
+                                        Connecter vous pour commander
+                                    </button>
+                                    </form>
+                                </div><!-- /example -->
+                          <?php  }
+                        }
+                        ?>
+
                     </div>
                 </div> 
             </div>
