@@ -1,7 +1,6 @@
 <form method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'article', 'type' => 'ajout'), null, true); ?>" enctype="multipart/form-data" >
     Title : <input type="text" name="title" />
     <br/>
-    <img src="data:image/<?= $this->name_for_image . ';base64,' . $this->image ?>" alt="" />
     Image : <input type="file" name="image" enctype="multipart/form-data" />
     <input type="hidden" name="MAX_FILE_SIZE" value="6000" />
     Quantité : <input type="text" name="quantity" />
@@ -42,43 +41,6 @@
     Description détaillé : <textarea name="descritption" id="" cols="30" rows="10"></textarea>
     <input type="submit" value="valider"/>
 </form>
-<div class="col-md-12">
-    <div class="form-style-10">
-        <h1>Créer votre produit<span>Sign up and tell us what you think of the site!</span></h1>
-        <form>
-            <div class="section"><span>1</span>Présentation générale</div>
-            <div class="inner-wrap">
-                <label>Titre<input type="text" name="field1" /></label>
-                <label>Image<input type="file" name="image" enctype="multipart/form-data"/>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="6000" /></label>
-
-            </div>
-
-            <div class="section"><span>2</span>Caractéristique</div>
-            <div class="inner-wrap">
-                <label>Description courte <textarea name="field2"></textarea></label>
-                <label>Description longue<textarea name="field2"></textarea></label>
-                <label>Prix<input type="text" name="field4" /></label>
-                <label>Quantité<input type="text" name="field4" /></label>
-            </div>
-
-            <div class="section"><span>3</span>Rubrique</div>
-            <div class="inner-wrap">
-
-                <table>
-                    <tr>
-                        <td>Catégorie 1</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="button-section">
-                <input type="submit" name="Sign Up" />
-
-            </div>
-        </form>
-    </div>
-</div>
-
 
 
 <?php if (count($this->articles) > 0) { ?>
