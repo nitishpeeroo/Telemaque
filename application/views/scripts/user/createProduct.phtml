@@ -2,7 +2,7 @@
 <div class = "col-md-8">
     <div class="wrapper">
 
-        <form class="form-signindefault" style="max-width: 768px!important;" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'index', 'type' => 'signin'), null, true); ?>" method="post" name="Login_Form" class="form-signin">       
+        <form class="form-signindefault" style="max-width: 768px!important;" method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'article', 'type' => 'ajout'), null, true); ?>" enctype="multipart/form-data"  name="Login_Form" class="form-signin">       
             <h3 class="form-signin-heading"><center>Créer votre produit</center></h3>
             <div class="stepwizard">
                 <div class="stepwizard-row setup-panel">
@@ -30,13 +30,13 @@
                         <h3><center>Informations Générales</center></h3>
                         <div class="form-group">
                             <label class="control-label">Titre du produit</label>
-                            <input  maxlength="100" type="text" required="required" class="form-control" placeholder="Le titre de votre produit"  />
+                            <input  maxlength="100" type="text" name="title" required="required" class="form-control" placeholder="Le titre de votre produit"  />
                         </div>
                         <div class="form-group">
 
                             <label class="control-label">Image du produit</label>
                             <span class="file-input btn btn-block btn-primary btn-file">
-                                Uploader l'image de votre produit <input type="file" multiple required="required">
+                                Uploader l'image de votre produit <input type="file" multiple name="image" required="required">
                             </span>
 
                         </div>
@@ -51,24 +51,24 @@
                         <h3> <center>Caractéristiques</center></h3>
                         <div class="form-group">
                             <label class="control-label">Description courte (max: 140 caractères)</label>
-                            <input maxlength="140" type="text" required="required" class="form-control" placeholder="Description courte" />
+                            <input maxlength="140" type="text" name="descritptionCourt" required="required" class="form-control" placeholder="Description courte" />
                         </div>
                         <div class="form-group">
                             <label class="control-label">Description longue</label>
-                            <textarea></textarea>
+                            <textarea name="descritption" ></textarea>
 
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Quantité</label>
-                                <input maxlength="8" type="text" required="required" class="form-control" placeholder=""  />  </div>
+                                <input maxlength="8" type="text" name="quantity" required="required" class="form-control" placeholder=""  />  </div>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Prix</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">€</span>
-                                    <input data-fv-field="amount" class="form-control" name="amount" type="text">
+                                    <input data-fv-field="amount" class="form-control" name="price" type="text">
                                 </div>
                             </div>
                         </div>
