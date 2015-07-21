@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <div class="col-lg-12 col-md-12" style="background: #EDEFF1 none repeat scroll 0% 0%;">
                 <div class="container">
-                    <div class="col-lg-3">
+<!--                    <div class="col-lg-3">
                         <div class="cuadro_intro_hover " style="background-color:#cccccc;">
                             <p style="text-align:center; margin-top:20px;">
                                 <img src="http://placehold.it/500x330" class="img-responsive" alt="">
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="col-lg-3 col-md-6">
                         <h3>Categories:</h3>
                         <ul>
@@ -55,16 +55,11 @@
                         <p>Une question ? Contacter Nous :</p>
                         <p><a href="<?= $this->url(array('controller' => 'index', 'action' => 'contact'), null, true); ?>" title="Contact me!"><i class="fa fa-envelope"></i> Contact</a></p>
                         <h3>Retrouver nous sur:</h3>
-                        <a href="" id="gh" target="_blank" title="Twitter"><span class="fa-stack fa-lg">
+                        <a href="<?= $data['link_twitter']; ?>" id="gh" target="_blank" title="Twitter"><span class="fa-stack fa-lg">
                                 <i class="fa fa-square-o fa-stack-2x"></i>
                                 <i class="fa fa-twitter fa-stack-1x"></i>
                             </span>
                             Twitter</a>
-                        <a href="https://github.com/nitishpeeroo/Telemaque"  target="_blank" title="GitHub"><span class="fa-stack fa-lg">
-                                <i class="fa fa-square-o fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x"></i>
-                            </span>
-                            GitHub</a>
                     </div>
                     <br/>
                     <div id="fb-root"></div>
@@ -74,13 +69,13 @@
                                 return;
                             js = d.createElement(s);
                             js.id = id;
-                            js.src = "//connect.facebook.net/hu_HU/sdk.js#xfbml=1&version=v2.0";
+                            js.src = "https://connect.facebook.net/fr_fr/all.js#xfbml=1";
                             fjs.parentNode.insertBefore(js, fjs);
                         }(document, 'script', 'facebook-jssdk'));</script>
 
-                    <div class="fb-like" data-href="" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                    <div class="fb-like" data-href="<?= $data['link_facebook']; ?>" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="">Tweet</a>
+                    <a href="<?= $data['link_twitter']; ?>" class="twitter-share-button" data-url="">Tweet</a>
                     <script>!function (d, s, id) {
                             var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
                             if (!d.getElementById(id)) {
