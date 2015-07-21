@@ -6,37 +6,37 @@
         <div class="col-lg-12">
             <div class="col-lg-12 col-md-12" style="background: #EDEFF1 none repeat scroll 0% 0%;">
                 <div class="container">
-<!--                    <div class="col-lg-3">
-                        <div class="cuadro_intro_hover " style="background-color:#cccccc;">
-                            <p style="text-align:center; margin-top:20px;">
-                                <img src="http://placehold.it/500x330" class="img-responsive" alt="">
-                            </p>
-                            <div class="caption">
-                                <div class="blur"></div>
-                                <div class="caption-text">
-                                    <h3 style="border-top:2px solid white; border-bottom:2px solid white; padding:10px;">THIS IS H3</h3>
-                                    <p>Loren ipsum dolor si amet ipsum dolor si amet ipsum dolor...</p>
-                                    <a class=" btn btn-default" href="#"><span class="glyphicon glyphicon-plus"> INFO</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="cuadro_intro_hover " style="background-color:#cccccc;">
-                            <p style="text-align:center; margin-top:20px;">
-                                <img src="http://placehold.it/500x330" class="img-responsive" alt="">
-                            </p>
-
-                            <div class="caption">
-                                <div class="blur"></div>
-                                <div class="caption-text">
-                                    <h3 style="border-top:2px solid white; border-bottom:2px solid white; padding:10px;">THIS IS H3</h3>
-                                    <p>Loren ipsum dolor si amet ipsum dolor si amet ipsum dolor...</p>
-                                    <a class=" btn btn-default" href="#"><span class="glyphicon glyphicon-plus"> INFO</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
+                    <!--                    <div class="col-lg-3">
+                                            <div class="cuadro_intro_hover " style="background-color:#cccccc;">
+                                                <p style="text-align:center; margin-top:20px;">
+                                                    <img src="http://placehold.it/500x330" class="img-responsive" alt="">
+                                                </p>
+                                                <div class="caption">
+                                                    <div class="blur"></div>
+                                                    <div class="caption-text">
+                                                        <h3 style="border-top:2px solid white; border-bottom:2px solid white; padding:10px;">THIS IS H3</h3>
+                                                        <p>Loren ipsum dolor si amet ipsum dolor si amet ipsum dolor...</p>
+                                                        <a class=" btn btn-default" href="#"><span class="glyphicon glyphicon-plus"> INFO</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="cuadro_intro_hover " style="background-color:#cccccc;">
+                                                <p style="text-align:center; margin-top:20px;">
+                                                    <img src="http://placehold.it/500x330" class="img-responsive" alt="">
+                                                </p>
+                    
+                                                <div class="caption">
+                                                    <div class="blur"></div>
+                                                    <div class="caption-text">
+                                                        <h3 style="border-top:2px solid white; border-bottom:2px solid white; padding:10px;">THIS IS H3</h3>
+                                                        <p>Loren ipsum dolor si amet ipsum dolor si amet ipsum dolor...</p>
+                                                        <a class=" btn btn-default" href="#"><span class="glyphicon glyphicon-plus"> INFO</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>-->
                     <div class="col-lg-3 col-md-6">
                         <h3>Categories:</h3>
                         <ul>
@@ -102,6 +102,8 @@
                     <hr>
                     <p>Copyright © Your Website | <a href="">Privacy Policy</a> | <a href="">Terms of Use</a></p>
                     </footer>
+                    <script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
+                    <script>tinymce.init({selector: 'textarea'});</script>
                     <script src='https://www.google.com/recaptcha/api.js'></script>
                     <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
                     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -259,7 +261,7 @@
                         });
 
                         $(document).on('keyup', '#number_product', function () {
-                             var max = $("#qteMax").text();
+                            var max = $("#qteMax").text();
                             var btn = $(this).val();
                             $("#qte_product").val(btn);
                             if (btn > 10) {
@@ -268,7 +270,7 @@
                                 $('.bg-danger').hide();
                             }
                             if (max != 10) {
-                              
+
                                 if (btn > max) {
                                     $('.bg-danger').show();
                                 } else {

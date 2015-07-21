@@ -184,3 +184,15 @@ $(document).ready( function() {
         
     });
 });
+//------------Liste dynamique
+$(".clickListRubrique").on("click",function(e){
+    var id_category = $(this).attr("data");
+    $(".sous-category").hide();
+    $("#"+id_category).show();
+});
+
+$(".select-sous-category").on("click",function(e){
+   var id_sous_category = $(this).attr("data");
+   $(".select-sous-category").attr("class","active select-sous-category");
+   $(this).attr("class","danger select-sous-category");
+})

@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <hr class="colorgraph"><br>
+            <hr class="colorgraph">
 
 
             <form role="form">
@@ -29,7 +29,7 @@
                             <h3>Informations Générales</h3>
                             <div class="form-group">
                                 <label class="control-label">Titre du produit</label>
-                                <input  maxlength="100" type="text" required="required" class="form-control" placeholder="Votre titre de produit"  />
+                                <input  maxlength="100" type="text" required="required" class="form-control" placeholder="Le titre de votre produit"  />
                             </div>
                             <div class="form-group">
 
@@ -39,6 +39,7 @@
                                 </span>
 
                             </div>
+                             <hr class="colorgraph">
                             <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Suivant</button>
                         </div>
                     </div>
@@ -53,7 +54,8 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Description longue</label>
-                                <input maxlength="200" type="text" required="required" class="form-control" placeholder="Description longue"  />
+                                 <textarea></textarea>
+                                
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
@@ -67,10 +69,44 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6">
-                             
+                                <table class="table table-bordered table-hover">
+                                    <tr><td class="info"><center>Rubrique</center></td></tr>
+                                    <?php foreach ($this->category as $value): ?>
+                                        <tr><td class="clickListRubrique active" data="category-<?= $value['id_category']; ?>"><center><?= $value['label_category']; ?></center></td></tr>
+                                    <?php endforeach; ?>
+                                </table>
                             </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
 
-                            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Voyons ensemble votre produit</button>
+                                <?php
+                                foreach ($this->category as $value) {
+                                    ?> 
+                                    <table style="display:none;" class="table table-bordered table-hover sous-category" id="category-<?= $value['id_category']; ?>">
+                                        <tr><td class="info"><center>Sous Rubrique : <?= $value['label_category']; ?></center></td></tr>
+                                        <?php
+                                        foreach ($this->souscategory as $key => $ssrubrique) {
+                                            if ($ssrubrique['parent'] == $value['id_category']) {
+                                                ?>
+                                                <tr>
+                                                    <td class="active select-sous-category" data="<?= $ssrubrique['id_category']; ?>"><?= $ssrubrique['label_category']; ?></td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+                                    </table>
+                                <?php }
+                                ?>
+
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <hr class="colorgraph">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-lg btn-primary btn-block nextBtn" value="Login" type="button">Voyons ensemble votre produit</button>  			
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -83,15 +119,6 @@
                     </div>
                 </div>
             </form>
-
-
-
-            <hr class="colorgraph">
-            <div class="row">
-                <div class="col-xs-12">
-                    <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Se connecter</button>  			
-                </div>
-            </div>
         </form>			
     </div>
 </div>

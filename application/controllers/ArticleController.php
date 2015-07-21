@@ -17,7 +17,6 @@ class ArticleController extends Zend_Controller_Action {
     }
 
     public function searchAction() {
-
         if (isset($_GET['search'])) {
             $label = $_GET['search'];
             $article = new Application_Model_Sell();
