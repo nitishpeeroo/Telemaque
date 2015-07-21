@@ -90,7 +90,7 @@
                             </div>
 
                         </form>
-                        <ul class="nav navbar-nav navbar-right" <?php  if (isset($_SESSION['user'])){echo 'style="margin-top: -50px;"';} ?>>
+                        <ul class="nav navbar-nav navbar-right">
                             <?php if ($this->lvl == 0): ?>
                                 <li> <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'index'), null, true); ?>">Mon compte</a></li>
                                 <?php
