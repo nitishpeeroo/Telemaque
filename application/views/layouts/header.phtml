@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Snippet - Bootsnipp.com</title>
+        <title><?= $website_name; ?></title>
+        <link rel="icon" type="image/png" href="data:image/<?= $data['name_favicon'] . ';base64,' . $data['favicon'] ?>" />
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('css/header.css'); ?>"/>
         <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('css/footer.css'); ?>"/>
@@ -25,7 +26,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" style="" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, true); ?>"></a>
+                        <a class="navbar-brand" style="" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, true); ?>"><img src="data:image/<?= $data['name_logo'] . ';base64,' . $data['logo'] ?>" class="navbar-brand" /><?= $website_name; ?></a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">

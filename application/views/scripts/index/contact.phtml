@@ -62,16 +62,16 @@
             <legend><span class="glyphicon glyphicon-globe"></span> Notre siège social</legend>
             <address>
                 <strong>Telemaque, Inc.</strong><br>
-               75 Boulvard Maupassant<br>
-                Paris 75017<br>
-                France<br>
+                <?= $this->website_address; ?><br>
+                <?= $this->website_ville." ".$this->website_code_postal; ?><br>
+                <?= $this->website_pays; ?><br>
                 <abbr title="Phone">
                     Tel:</abbr>
-               01-48-59-75-45
+               <?= $this->website_phone; ?>
             </address>
             <address>
                 <strong>Notre Email</strong><br>
-                <a href="mailto:#">contact@telemaque.fr</a>
+                <a href="mailto:<?= $this->website_address; ?>"><?= $this->website_email; ?></a>
             </address>
             </form>
         </div>

@@ -1,5 +1,19 @@
 <?php
 echo $this->doctype('HTML5');
+
+//Initialisation des paramètres du site
+$general = new Application_Model_General();
+
+$data_webite = $general->getGeneral();
+$data = $data_webite[0];
+
+$website_name = $data['website_name'];
+$data['favicon'] = base64_encode($data['favicon']);
+$data['name_favicon'] = pathinfo($data['name_favicon'], PATHINFO_EXTENSION);
+$data['logo'] = base64_encode($data['logo']);
+$data['name_logo'] = pathinfo($data['name_logo'], PATHINFO_EXTENSION);
+
+
 include ('header.phtml');
 echo $this->headTitle();
 echo $this->headMeta();
@@ -9,4 +23,3 @@ echo $this->headScript();
 //include ('login.phtml');
 echo $this->layout()->content;
 include ('footer.phtml');
-?> 
