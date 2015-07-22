@@ -120,8 +120,13 @@ class UserController extends Zend_Controller_Action {
         if (empty($ns->data)) {
             $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error','type'=> 'page'), null, true));
         }
-
-        $ns = new Zend_Session_Namespace('user');
+        
+        ///////////////////////////////////////////////////////////////////
+        $commande = new Application_Model_Command();
+        var_dump($commande->getCommande($ns->data['id_user']));die;
+        ///////////////////////////////////////////////////////////////////
+        
+        
         $sell = new Application_Model_Sell();
         $images = new Application_Model_Image();
         $categorys = new Application_Model_Category();

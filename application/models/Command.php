@@ -51,5 +51,24 @@ class Application_Model_Command extends Zend_Db_Table_Abstract {
         $this->data = $row;
         return $this->data;
     }
+    
+    public function getCommande($idUser){
+        $select = $this->select()
+                ->setIntegrityCheck(false)
+                ->from(array('cl' => DB_TABLE_COMMAND_LINE))
+                ->joinInner(array('c' => DB_TABLE_COMMAND), 'cl.id_command = c.id_command')
+                ->joinInner(array('s' => DB_TABLE_SELL), 'cl.id_sell = s.id_sell')
+                ->joinInner(array('u' => DB_TABLE_USER), 's.id_user = u.id_user')
+                ->where('u.id_user = ?', $idUser);
+        try {
+            $row = $this->fetchAll($select)->toArray();
+        } catch (Exception $ex) {
+            echo 'ERROR_GETCOMMANDE : ' . $ex->getMessage();
+            return false;
+        }
+        $this->data = $row;
+        return $this->data;
+    }
+    
 
 }
