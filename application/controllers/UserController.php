@@ -122,8 +122,11 @@ class UserController extends Zend_Controller_Action {
         }
         
         ///////////////////////////////////////////////////////////////////
-        $commande = new Application_Model_Command();
-        var_dump($commande->getCommande($ns->data['id_user']));die;
+        //$commande = new Application_Model_Command();
+        //$commandeline = new Application_Model_Commandline();
+        //$commande->getCommande($ns->data['id_user']);
+        //$commandeline->getCommmandLineSell($ns->data['id_user']);
+        //var_dump($commande->getCommande($ns->data['id_user']));die;
         ///////////////////////////////////////////////////////////////////
         
         
