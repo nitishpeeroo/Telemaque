@@ -125,7 +125,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
                     ->from(array('u' => DB_TABLE_USER))   
                     ->where('u.login_user = ?', $login);
             $row = $this->fetchAll($select)->toArray();
-            $this->data = $row[0];      
+            $this->data = $row[0];          
             $flag = false;
             return sizeof($this->data);
         } 

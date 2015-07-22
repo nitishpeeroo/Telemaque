@@ -38,6 +38,17 @@ class IndexController extends Zend_Controller_Action {
         $this->view->website_ville = $data['website_ville'];
         $this->view->website_code_postal = $data['website_code_postal'];
         $this->view->website_pays = $data['website_pays'];
+        if($this->_request->isPost())
+        {
+            $contact = new Application_Model_Contact();
+            $nom        = $_POST['nom'];
+            $prenom     = $_POST['prenom'];
+            $object     = $_POST['object'];
+            $mailUser   = $_POST['mail'];
+            $message    = $_POST['message'];
+            $contact->sendMail($nom, $prenom , $object, $mailUser, $message);
+            $this->view->mail = "Votre message à bien été envoyé.";
+        }
     }
     
 
