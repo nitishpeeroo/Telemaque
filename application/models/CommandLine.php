@@ -47,10 +47,11 @@ class Application_Model_Commandline extends Zend_Db_Table_Abstract {
     public function getCommmandLineSell($idUser) {
         $select = $this->select()
                 ->setIntegrityCheck(false)
-                ->from(array('cl' => DB_TABLE_COMMAND_LINE))
+                ->from(array('cl' => DB_TABLE_COMMAND_LINE, 'id_command_line', 'id_command', 'id_sell', 'quantity'))
                 ->joinInner(array('c' => DB_TABLE_COMMAND), 'cl.id_command = c.id_command')
-                ->joinInner(array('s' => DB_TABLE_SELL), 's.id_sell = cl.id_sell')
+                ->joinInner(array('s' => DB_TABLE_SELL), 's.id_sell = cl.id_sell',array('id_sell','id_user','id_category','title','priceArticle'=>'price' ))
                 ->joinInner(array('cat' => DB_TABLE_CATEGORY), 's.id_category = cat.id_category')
+                ->joinInner(array('u' => DB_TABLE_USER), 'c.id_user = u.id_user')
                 ->where('c.id_user =?', $idUser);
         try {
             $row = $this->fetchAll($select)->toArray();

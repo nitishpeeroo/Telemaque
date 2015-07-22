@@ -120,19 +120,7 @@ class UserController extends Zend_Controller_Action {
         if (empty($ns->data)) {
             $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error','type'=> 'page'), null, true));
         }
-        
-        ///////////////////////////////////////////////////////////////////
-        //$commande = new Application_Model_Command();
-        //$commandeline = new Application_Model_Commandline();
-        //$commande->getCommande($ns->data['id_user']);
-        //$commandeline->getCommmandLineSell($ns->data['id_user']);
-        ///////////////////////////////////////////////////////////////////
-        
-        
-        $sell = new Application_Model_Sell();
-        $images = new Application_Model_Image();
-        $categorys = new Application_Model_Category();
-       
+
         if ($this->_request->isPost()) {
             
        
@@ -172,6 +160,19 @@ class UserController extends Zend_Controller_Action {
             
             
         }
+        
+        $commande = new Application_Model_Command();
+        $commandeline = new Application_Model_Commandline();    
+        //Les produits de l'utilisateur achetés par d'autre clients.
+        $this->view->commande = $commande->getCommande($ns->data['id_user']);     
+        // Achat du client
+        $this->view->commandeLine = $commandeline->getCommmandLineSell($ns->data['id_user']);
+        //var_dump($this->view->commandeLine); die;
+        
+        $sell = new Application_Model_Sell();
+        $images = new Application_Model_Image();
+        $categorys = new Application_Model_Category();
+        
         $this->view->category = $categorys->getRubrique();
 
         $this->view->souscategory = $categorys->getSousRubrique();
