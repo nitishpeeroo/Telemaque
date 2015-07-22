@@ -89,6 +89,7 @@ class PanierController extends Zend_Controller_Action {
                     foreach ($facture as $f){
                         $total += $f['price'] * $f['quantity'];
                     }
+                    unset($_SESSION['panier']);
                     $this->view->info = $facture;
                     $this->view->idCommand = $idCommand;
                     $this->view->user = $user;

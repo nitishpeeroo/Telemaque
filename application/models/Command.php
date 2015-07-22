@@ -9,7 +9,7 @@ class Application_Model_Command extends Zend_Db_Table_Abstract {
         try {
             $data = array(
                 'id_user' => $idUser,
-                'dt_command' => date('Y-m-d H:i:s'),
+                'dt_command' => date('Y-m-d H:i:s')
             );
             $this->insert($data);
             $idCommand = $this->getLastCommandUser($idUser);

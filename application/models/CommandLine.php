@@ -7,12 +7,15 @@ class Application_Model_Commandline extends Zend_Db_Table_Abstract {
 
     public function addcommandLine($idCommand, $panier) {
         $flag = true;
+        $article= new Application_Model_Sell();
         foreach ($panier as $idProduct => $qte) {
+            $price = $article->getArticle($idProduct, array());
             try {
                 $data = array(
                     'id_command' => $idCommand,
                     'id_sell' => $idProduct,
-                    'quantity' => $qte
+                    'quantity' => $qte,
+                    'price' => $price[0]['price']
                 );
                 $this->insert($data);
             } catch (Exception $ex) {
