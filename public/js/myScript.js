@@ -21,7 +21,7 @@ $(".commander").on('click', function (e) {
 
         if ($('.item-info').text() != "") {
             $('.item-info').hide();
-        } 
+        }
         var panier = $(".dropdown-cart").children().first();
         var text = "";
         text += "<li>";
@@ -37,8 +37,8 @@ $(".commander").on('click', function (e) {
         text += ' </span>';
         text += ' </li>';
         panier.append(text);
-          $(".divider").show();
-          $('.div-panier').show();
+        $(".divider").show();
+        $('.div-panier').show();
     });
 
 });
@@ -141,16 +141,16 @@ $(document).ready(function () {
         }
     });
 
-    allNextBtn.click(function(){
+    allNextBtn.click(function () {
         var curStep = $(this).closest(".setup-content"),
-            curStepBtn = curStep.attr("id"),
-            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='url']"),
-            isValid = true;
+                curStepBtn = curStep.attr("id"),
+                nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+                curInputs = curStep.find("input[type='text'],input[type='url']"),
+                isValid = true;
 
         $(".form-group").removeClass("has-error");
-        for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
+        for (var i = 0; i < curInputs.length; i++) {
+            if (!curInputs[i].validity.valid) {
                 isValid = false;
                 $(curInputs[i]).closest(".form-group").addClass("has-error");
             }
@@ -163,45 +163,64 @@ $(document).ready(function () {
     $('div.setup-panel div a.btn-primary').trigger('click');
 });
 //-------------Upload d'image
-$(document).on('change', '.btn-file :file', function() {
-  var input = $(this),
-      numFiles = input.get(0).files ? input.get(0).files.length : 1,
-      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-  input.trigger('fileselect', [numFiles, label]);
+$(document).on('change', '.btn-file :file', function () {
+    var input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [numFiles, label]);
 });
 
-$(document).ready( function() {
-    $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
-        
+$(document).ready(function () {
+    $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+
         var input = $(this).parents('.input-group').find(':text'),
-            log = numFiles > 1 ? numFiles + ' files selected' : label;
-        
-        if( input.length ) {
-           
+                log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+        if (input.length) {
+
         } else {
 //            if( log ) alert(log);
         }
-        
+
     });
 });
 //------------Liste dynamique
-$(".clickListRubrique").on("click",function(e){
+$(".clickListRubrique").on("click", function (e) {
     var id_category = $(this).attr("data");
     $(".sous-category").hide();
-    $("#"+id_category).show();
+    $("#" + id_category).show();
+    var text = $(this).text();
+    $("#sous-rubrique-choisi").attr("rubrique", text);
 });
+//Gestion des category lors de la création d'une vente
 
-$(".select-sous-category").on("click",function(e){
-   var id_sous_category = $(this).attr("data");
-   $(".select-sous-category").attr("class","active select-sous-category");
-   $(this).attr("class","danger select-sous-category");
+$(".select-sous-category").on("click", function (e) {
+    var id_sous_category = $(this).attr("data");
+    $(".select-sous-category").attr("class", "active select-sous-category");
+    $(this).attr("class", "danger select-sous-category");
+    var text = $(this).text();
+    $("#sous-rubrique-choisi").attr("id-sous-rubrique", id_sous_category);
+    $("#sous-rubrique-choisi").attr("sous-rubrique", text);
+    $("#sous-rubrique-cacher").val(id_sous_category);
 })
 
-//Gestion des category lors de la création d'une vente
-$(".select-sous-category").on("click",function(e){
-   var id_sous_category = $(this).attr("data");
-});
+
 //Visualisation du produit créer
-$("#reviewProduct").on("click",function(e){
-   alert("ok"); 
+$("#reviewProduct").on("click", function (e) {
+    var title = $("input[name='productTitle']").val();
+    var descriptionCourte = $("input[name='productDescritptionCourte']").val();
+    var quantite = $("input[name='productQuantite']").val();
+    var prix = $("input[name='productPrix']").val();
+    var descriptionlongue = tinyMCE.activeEditor.getContent();
+    var idsousrubrique = $("#sous-rubrique-choisi").attr("id-sous-rubrique");
+    var nomsousrubrique = $("#sous-rubrique-choisi").attr("sous-rubrique");
+    var rubrique = $("#sous-rubrique-choisi").attr("rubrique");
+    $("#recapTitle").text(title);
+    $("#recapDescriptionCourte").text(descriptionCourte);
+    $("#recapPrix").text("Prix : " + prix + " €");
+    $("#recapQuantite").text("Quantite : " + quantite);
+    $(".panel-body").text(nomsousrubrique);
+    $(".panel-title").text(rubrique);
+    $("#recapQuantite").after().html(descriptionlongue);
+
 });

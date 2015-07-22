@@ -1,8 +1,7 @@
 <div class = "col-md-2"></div>
 <div class = "col-md-8">
     <div class="wrapper">
-
-        <form class="form-signindefault" style="max-width: 768px!important;" method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'article', 'type' => 'ajout'), null, true); ?>" enctype="multipart/form-data"  name="Login_Form" class="form-signin">       
+        <form class="form-signindefault" style="max-width: 768px!important;" method="POST"action="<?php echo $this->url(array('controller' => 'user', 'action' => 'article', 'type' => 'ajout'), null, true); ?>" enctype="multipart/form-data"  name="Login_Form" class="form-signin">       
             <h3 class="form-signin-heading"><center>Créer votre produit</center></h3>
             <div class="stepwizard">
                 <div class="stepwizard-row setup-panel">
@@ -21,16 +20,13 @@
                 </div>
             </div>
             <hr class="colorgraph">
-
-
-
             <div class="row setup-content" id="step-1">
                 <div class="col-xs-12">
                     <div class="col-md-12">
                         <h3><center>Informations Générales</center></h3>
                         <div class="form-group">
                             <label class="control-label">Titre du produit</label>
-                            <input  maxlength="100" type="text" name="title" required="required" class="form-control" placeholder="Le titre de votre produit"  />
+                            <input  maxlength="100" type="text" name="productTitle" required="required" class="form-control" placeholder="Le titre de votre produit" autocomplete="off"/>
                         </div>
                         <div class="form-group">
 
@@ -38,7 +34,6 @@
                             <span class="file-input btn btn-block btn-primary btn-file">
                                 Uploader l'image de votre produit <input type="file" multiple name="image" required="required">
                             </span>
-
                         </div>
                         <hr class="colorgraph">
                         <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Suivant</button>
@@ -51,24 +46,23 @@
                         <h3> <center>Caractéristiques</center></h3>
                         <div class="form-group">
                             <label class="control-label">Description courte (max: 140 caractères)</label>
-                            <input maxlength="140" type="text" name="descritptionCourt" required="required" class="form-control" placeholder="Description courte" />
+                            <input maxlength="140" type="text" name="productDescritptionCourte" required="required" class="form-control" placeholder="Description courte" />
                         </div>
                         <div class="form-group">
                             <label class="control-label">Description longue</label>
-                            <textarea name="descritption" ></textarea>
-
+                            <textarea name="descritption" id="productDescription" id="toto" ></textarea>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Quantité</label>
-                                <input maxlength="8" type="text" name="quantity" required="required" class="form-control" placeholder=""  />  </div>
+                                <input maxlength="8" type="text" name="productQuantite" required="required" class="form-control" placeholder=""  />  </div>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Prix</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">€</span>
-                                    <input data-fv-field="amount" class="form-control" name="price" type="text">
+                                    <input data-fv-field="amount" class="form-control" name="productPrix" type="text">
                                 </div>
                             </div>
                         </div>
@@ -81,7 +75,6 @@
                             </table>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
-
                             <?php
                             foreach ($this->category as $value) {
                                 ?> 
@@ -101,7 +94,8 @@
                                 </table>
                             <?php }
                             ?>
-
+                            <span id="sous-rubrique-choisi" sous-rubrique="" id-sous-rubrique="" rubrique="" style="display:none;"></span>
+                            <input type="hidden" name="sous-rubrique-hidden" id="sous-rubrique-cacher" value="">
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <hr class="colorgraph">
@@ -117,7 +111,7 @@
             <div class="row setup-content" id="step-3">
                 <div class="col-xs-12">
                     <div class="col-md-12">
-                        <h3><center>Voici votre produit: Un beau bateau</center></h3>
+                        <h3><center>Voici votre produit: <span id="recapTitle"></span></center></h3>
                         <div class="container-fluid">
                             <div class="content-wrapper">	
                                 <div class="item-container">	
@@ -125,19 +119,25 @@
                                         <center>
                                             <img src="http://lorempixel.com/261/261/" />
                                         </center>
+                                        <br /><br />
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title"></h3>
+                                            </div>
+                                            <div class="panel-body"></div>
+                                        </div>
                                     </div>
                                     <div class="col-md-7">
-                                        <div class="product-desc">Une description courte sur 140 caracteres</div>
+                                        <div class="product-desc" id="recapDescriptionCourte"></div>
                                         <div class="row">
-                                            <div class="product-price">Prix : 20 €</div>
-                                            <div class="product-quantity"> Quantité : 50  </div>
-                                                Contrairement à une opinion répandue, le Lorem Ipsum n'est pas simplement du texte aléatoire. Il trouve ses racines dans une oeuvre de la littérature latine classique datant de 45 av. J.-C., le rendant vieux de 2000 ans. Un professeur du Hampden-Sydney College, en Virginie, s'est intéressé à un des mots latins les plus obscurs, consectetur, extrait d'un passage du Lorem Ipsum, et en étudiant tous les usages de ce mot dans la littérature classique, découvrit la source incontestable du Lorem Ipsum. Il provient en fait des sections 1.10.32 et 1.10.33 du "De Finibus Bonorum et Malorum" (Des Suprêmes Biens et des Suprêmes Maux) de Cicéron. Cet ouvrage, très populaire pendant la Renaissance, est un traité sur la théorie de l'éthique. Les premières lignes du Lorem Ipsum, "Lorem ipsum dolor sit amet...", proviennent de la section 1.10.32
+                                            <div class="product-price" id="recapPrix"></div>
+                                            <div class="product-quantity" id="recapQuantite"></div>
                                         </div>
                                     </div> 
                                 </div>
                             </div>
                         </div>
-                         <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
                             <hr class="colorgraph">
                             <div class="row">
                                 <div class="col-xs-12">
@@ -148,7 +148,6 @@
                     </div>
                 </div>
             </div>
-        </form>
-        </form>			
+        </form>		
     </div>
 </div>

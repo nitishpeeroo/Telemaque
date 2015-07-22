@@ -10,5 +10,7 @@ define('DB_TABLE_RANK', DB_NAME_TELEMAQUE . '.rank');
 define('DB_TABLE_SELL', DB_NAME_TELEMAQUE . '.sell');
 define('DB_TABLE_IMAGE', DB_NAME_TELEMAQUE . '.image');
 define('DB_TABLE_IMAGE_RUBRIQUE', DB_NAME_TELEMAQUE . '.image_rubrique');
-define('DB_TABLE_GENERAL', DB_NAME_TELEMAQUE.'.general');
+define('DB_TABLE_GENERAL', DB_NAME_TELEMAQUE . '.general');
+define('DB_TABLE_COMMAND', DB_NAME_TELEMAQUE . '.command');
+define('DB_TABLE_COMMAND_LINE', DB_NAME_TELEMAQUE . '.command_line');
 

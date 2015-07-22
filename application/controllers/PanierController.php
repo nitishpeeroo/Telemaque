@@ -68,6 +68,13 @@ class PanierController extends Zend_Controller_Action {
 
     public function factureAction() {
         $this->view->headTitle('Facture');
+        if(isset($_SESSION['panier']) && isset($_SESSION['user'])){
+          if($_SESSION['user']['data']['id_rank'] =="2"){
+              foreach ($_SESSION['panier'] as $id => $qte){
+                 
+              }
+          }
+        }
     }
 
     public function addpanierAction() {

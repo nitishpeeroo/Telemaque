@@ -125,20 +125,21 @@ class UserController extends Zend_Controller_Action {
        
         if ($this->_request->isPost()) {
             
-            
+       
             if($this->_getParam('type') == 'ajout')
             {
-                $title = $_POST['title'];
+          
+                $title = $_POST['productTitle'];
 
                 // image data 
                 $image = @file_get_contents($_FILES['image']['tmp_name']);
                 $nameImage = $_FILES['image']['name'];
 
                 // sell data
-                $quantity = $_POST['quantity'];
-                $category = $_POST['category'];
-                $price = $_POST['price'];
-                $descritptionCourt = $_POST['descritptionCourt'];
+                $quantity = $_POST['productQuantite'];
+                $category = $_POST['sous-rubrique-hidden'];
+                $price = $_POST['productPrix'];
+                $descritptionCourt = $_POST['productDescritptionCourte'];
                 $descritption = $_POST['descritption'];
                 $idUser = $ns->data['id_user'];
 
