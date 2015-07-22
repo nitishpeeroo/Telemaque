@@ -79,7 +79,7 @@ class PanierController extends Zend_Controller_Action {
                 $dateCommand = $idCommand['dt_command'];
                 $dateCommand = substr($dateCommand,0,-9);
                 $explode = explode("-", $dateCommand);
-                $dateCommand = $explode[2]."-".$explode[1]."-".$explode[0];
+                $dateCommand = $explode[2]."/".$explode[1]."/".$explode[0];
                 $idCommand = $idCommand['id_command'];
                 $valider = $commandLine->addcommandLine($idCommand, $_SESSION['panier']);
                 $user = $command->getUser($idCommand);

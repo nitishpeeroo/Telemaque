@@ -4,19 +4,20 @@
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <address>
-                        <strong><?php $user=$this->user[0]; echo $user['lastname_user']." ".$user['firstname_user']; ?></strong>
+                        <strong><?php $user = $this->user[0];
+echo $user['lastname_user'] . " " . $user['firstname_user']; ?></strong>
                         <br>
-                        <?= $user['address_user'];?>
+<?= $user['address_user']; ?>
                         <br>
-                   Tel: <?= $user['phone_user']; ?>
+                        Tel: <?= $user['phone_user']; ?>
                     </address>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 text-right">
                     <p>
-                        <em>Date: <?php echo $this->dateCommand; ?></em>
+                        <em>Date: <?php echo substr($this->dateCommand); ?></em>
                     </p>
                     <p>
-                        <em>Command N° <?= $this->idCommand;?></em>
+                        <em>Command N° <?= $this->idCommand; ?></em>
                     </p>
                 </div>
             </div>
@@ -35,44 +36,50 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($this->info as $i){?>
-                        <tr>
-                            <td class="col-md-5"><em><?= $i['title'];?></em></h4></td>
-                            <td class="col-md-1" style="text-align: center"> <?= $i['quantity'];?></td>
-                            <td class="col-md-3 text-center"><?php echo number_format($i['price'],2,","," ")." €"; ?></td>
-                            <td class="col-md-3 text-center"><?php echo  number_format($i['price']*$i['quantity'],2,","," ")." €"; ?></td>
-                        </tr>
-                       <?php }?>
-                        
+<?php foreach ($this->info as $i) { ?>
+                            <tr>
+                                <td class="col-md-5"><em><?= $i['title']; ?></em></h4></td>
+                                <td class="col-md-1" style="text-align: center"> <?= $i['quantity']; ?></td>
+                                <td class="col-md-3 text-center"><?php echo number_format($i['price'], 2, ",", " ") . " €"; ?></td>
+                                <td class="col-md-3 text-center"><?php echo number_format($i['price'] * $i['quantity'], 2, ",", " ") . " €"; ?></td>
+                            </tr>
+<?php } ?>
+
 <!--                        <tr>
-                            <td>   </td>
-                            <td>   </td>
-                            <td class="text-right">
-                            <p>
-                                <strong>Subtotal: </strong>
-                            </p>
-                            <p>
-                                <strong>Tax: </strong>
-                            </p></td>
-                            <td class="text-center">
-                            <p>
-                                <strong>$6.94</strong>
-                            </p>
-                            <p>
-                                <strong>$6.94</strong>
-                            </p></td>
-                        </tr>-->
+    <td>   </td>
+    <td>   </td>
+    <td class="text-right">
+    <p>
+        <strong>Subtotal: </strong>
+    </p>
+    <p>
+        <strong>Tax: </strong>
+    </p></td>
+    <td class="text-center">
+    <p>
+        <strong>$6.94</strong>
+    </p>
+    <p>
+        <strong>$6.94</strong>
+    </p></td>
+</tr>-->
                         <tr>
                             <td>   </td>
                             <td>   </td>
                             <td class="text-right"><h4><strong>Total: </strong></h4></td>
-                            <td class="text-center text-danger"><h4><strong><?php echo number_format($this->total,2,","," ")." €"; ?></strong></h4></td>
+                            <td class="text-center text-danger"><h4><strong><?php echo number_format($this->total, 2, ",", " ") . " €"; ?></strong></h4></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                 <form method="POST"action="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, true); ?>">       
+                                <button type="submit" class="btn btn-success btn-lg btn-block">
+                                    Revenir à l'accueil  <span class="glyphicon glyphicon-chevron-right"></span>
+                                </button>
+                                 </form>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-                <button type="button" class="btn btn-success btn-lg btn-block">
-                  Revenir à l'accueil  <span class="glyphicon glyphicon-chevron-right"></span>
-                </button></td>
             </div>
         </div>
     </div>
