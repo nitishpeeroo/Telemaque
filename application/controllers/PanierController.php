@@ -68,12 +68,33 @@ class PanierController extends Zend_Controller_Action {
 
     public function factureAction() {
         $this->view->headTitle('Facture');
-        if(isset($_SESSION['panier']) && isset($_SESSION['user'])){
-          if($_SESSION['user']['data']['id_rank'] =="2"){
-              foreach ($_SESSION['panier'] as $id => $qte){
-                 
-              }
-          }
+        if (isset($_SESSION['panier']) && isset($_SESSION['user'])) {
+            if ($_SESSION['user']['data']['id_rank'] == "2") {
+                $command = new Application_Model_Command();
+                $commandLine = new Application_Model_Commandline();
+                $idCommand = $command->addcommand($_SESSION['user']['data']['id_user']);
+                $dateCommand = $idCommand['dt_command'];
+                $dateCommand = substr($dateCommand,0,-9);
+                $explode = explode("-", $dateCommand);
+                $dateCommand = $explode[2]."-".$explode[1]."-".$explode[0];
+                $idCommand = $idCommand['id_command'];
+                $valider = $commandLine->addcommandLine($idCommand, $_SESSION['panier']);
+                $user = $command->getUser($idCommand);
+                if ($valider === TRUE) {
+                    $facture = $commandLine->getligneCommmand($idCommand);
+                    $total = 0;
+                    foreach ($facture as $f){
+                        $total += $f['price'] * $f['quantity'];
+                    }
+                    $this->view->info = $facture;
+                    $this->view->idCommand = $idCommand;
+                    $this->view->user = $user;
+                    $this->view->dateCommand = $dateCommand;
+                    $this->view->total = $total;
+                } else {
+                    
+                }
+            }
         }
     }
 
