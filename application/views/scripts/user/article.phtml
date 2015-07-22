@@ -338,13 +338,13 @@ $historique = count($this->commandeLine);
                                             <td>N° Commmande</td>
                                             <td>Montant Total</td>
                                             <td>Nombre de produit</td>
-                                            <td>Adresse du client</td>
-                                            <td>Email</td>
-                                            <td>Tel</td>
+                                            <td>Adresse de livraison</td>
+                                          
                                             <td>Date</td>
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         <?php foreach ($this->commandeLine as $value): ?>
                                             <tr class="accordion-toggle" data-toggle="collapse" href="#<?= $value['id_command']; ?>">
                                                 <td>N° <?= $value['id_command']; ?></td>
@@ -356,11 +356,11 @@ $historique = count($this->commandeLine);
                                                 <td><?= $value['dt_command']; ?></td>
                                             </tr>
                                         <?php endforeach; ?>
+
                                     </tbody>
                                 </table>
                                 
                                 <div class="accordion-heading country">
-
                                     <!--                                    <a class="accordion-toggle" data-toggle="collapse" href="#country1">Country</a>-->
                                 </div>
                                 <?php foreach ($this->commandeLine as $value): ?>
