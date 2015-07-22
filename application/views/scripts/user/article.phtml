@@ -1,5 +1,4 @@
 
-
 <!-----Gestion du nombre de produit attente / valider / refuser---------->
 <?php
 $attente = 0;
@@ -332,6 +331,7 @@ $historique = count($this->commandeLine);
                     <div class="container">
                         <div class="row">
                             <div class="span12" style="margin-left: -15px;">
+                              
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
@@ -345,7 +345,7 @@ $historique = count($this->commandeLine);
                                     </thead>
                                     <tbody>
 
-                                        <?php foreach ($this->commandeLine as $value): ?>
+                                        <?php foreach ($this->commande as $value): ?>
                                             <tr class="accordion-toggle" data-toggle="collapse" href="#<?= $value['id_command']; ?>">
                                                 <td>N° <?= $value['id_command']; ?></td>
                                                 <td><?= $value['quantity']*$value['priceArticle']; ?> €</td>

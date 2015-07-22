@@ -72,7 +72,7 @@ class PanierController extends Zend_Controller_Action {
     public function factureAction() {
         $this->view->headTitle('Facture');
         if (isset($_SESSION['panier']) && isset($_SESSION['user'])) {
-            if ($_SESSION['user']['data']['id_rank'] == "2") {
+            if ($_SESSION['user']['data']['id_rank'] != "3") {
                 $command = new Application_Model_Command();
                 $commandLine = new Application_Model_Commandline();
                 $idCommand = $command->addcommand($_SESSION['user']['data']['id_user']);
