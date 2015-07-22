@@ -12,7 +12,8 @@ $data['favicon'] = base64_encode($data['favicon']);
 $data['name_favicon'] = pathinfo($data['name_favicon'], PATHINFO_EXTENSION);
 $data['logo'] = base64_encode($data['logo']);
 $data['name_logo'] = pathinfo($data['name_logo'], PATHINFO_EXTENSION);
-
+$data['website_background_image'] = base64_encode($data['website_background_image']);
+$data['website_background_name'] = pathinfo($data['website_background_image'], PATHINFO_EXTENSION);
 
 include ('header.phtml');
 echo $this->headTitle();
@@ -23,3 +24,12 @@ echo $this->headScript();
 //include ('login.phtml');
 echo $this->layout()->content;
 include ('footer.phtml');
+
+?>
+
+<style>
+    body {
+        background-color: <?= $data['website_background_color'] ?>;
+        background-image: url(data:image/<?= $data['website_background_name'] . ';base64,' . $data['website_background_image'] ?>);
+    }
+</style>

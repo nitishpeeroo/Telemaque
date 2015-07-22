@@ -8,12 +8,12 @@ class UserController extends Zend_Controller_Action {
         zend_session::start();
 
         $ns = new Zend_Session_Namespace('user');
-
         if (!empty($ns->data)) {
             $this->view->firstname = $ns->data['firstname_user'];
             $this->view->lastname = $ns->data['lastname_user'];
             $this->view->lvl = $ns->data['id_rank'];
         }
+        
     }
 
     public function indexAction() {
@@ -24,15 +24,6 @@ class UserController extends Zend_Controller_Action {
         }
 
         if ($this->_request->isPost()) {
-//               require '../models/Recaptcha.php';
-//        $captcha = new Recaptcha("6Lc9CgoTAAAAAFg8ewZxZ5SOjaPDm2htB7_QVtLz");
-//        if ($captcha->checkCode($_POST['g-recaptcha-response']) == false) {
-//            var_dump("sa merdouille");
-//            die();
-//        } else {
-//            var_dump("sa gere");
-//            die();
-//        }
             //sign in
             if ($this->_getParam('type') == 'signin') {
 
@@ -82,7 +73,11 @@ class UserController extends Zend_Controller_Action {
     }
 
     public function parameterAction() {
-        $this->view->headTitle('Gestion u   tilisateur');
+        $ns = new Zend_Session_Namespace('user');
+        if (empty($ns->data)) {
+            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error','type'=> 'page'), null, true));
+        }
+        $this->view->headTitle('Gestion utilisateur');
 
         $ns = new Zend_Session_Namespace('user');
         if ($this->_getParam('type') == "apply") {
@@ -106,6 +101,10 @@ class UserController extends Zend_Controller_Action {
     }
 
     public function modifyAction() {
+        $ns = new Zend_Session_Namespace('user');
+        if (empty($ns->data)) {
+            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error','type'=> 'page'), null, true));
+        }
         $this->view->headTitle('modification utilisateur');
 
         $ns = new Zend_Session_Namespace('user');
@@ -117,6 +116,10 @@ class UserController extends Zend_Controller_Action {
     }
 
     public function articleAction() {
+        $ns = new Zend_Session_Namespace('user');
+        if (empty($ns->data)) {
+            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error','type'=> 'page'), null, true));
+        }
 
         $ns = new Zend_Session_Namespace('user');
         $sell = new Application_Model_Sell();

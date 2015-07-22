@@ -65,6 +65,10 @@ class ArticleController extends Zend_Controller_Action {
     }
     
     public function modifyAction() {
+        $ns = new Zend_Session_Namespace('user');
+        if (empty($ns->data)) {
+            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error','type'=> 'page'), null, true));
+        }
         $fiche = $this->_getParam('fiche');
         $article = new Application_Model_Sell();
         

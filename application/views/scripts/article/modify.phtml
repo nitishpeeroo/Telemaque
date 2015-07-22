@@ -29,13 +29,13 @@
                 </div>
 
                 <div class="col-md-7">
-                    <div class="product-title">Titre :<input type="text" name="title" value="<?php echo $p['title']; ?>" /></div>
-                    <div class="product-desc">Description courte :<textarea type="text" name="description_courte" /><?php echo $p['description_courte']; ?></textarea></div>
+                    <div class="product-title">Titre :<input type="text" maxlength="50" name="title" value="<?php echo $p['title']; ?>" /></div>
+                    <div class="product-desc">Description courte :<input type="text" maxlength="100" name="description_courte" value="<?php echo $p['description_courte']; ?>" /></div>
 
                     <hr>
                     <div class="container">
                         <div class="col-md-2">
-                            <div class="product-price">Prix :<input type="text" name="price" value="<?php echo $p['price']; ?>" /></div>
+                            <div class="product-price">Prix :<input type="number" max="999999.99" min="0"  name="price" value="<?php echo $p['price']; ?>" /></div>
                         </div>      
                     </div> 
                     <div class="container">
@@ -45,7 +45,7 @@
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
                                 </span>
-                                <input type="text" class="form-control text-center" name="quantity" value="<?php echo $p['quantity']; ?>">
+                                <input type="number" class="form-control text-center" max="999" min="0" name="quantity" value="<?php echo $p['quantity']; ?>">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                                 </span>

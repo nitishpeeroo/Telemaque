@@ -4,6 +4,11 @@ class PanierController extends Zend_Controller_Action {
 
     public function init() {
         parent::init();
+        zend_session::start();
+        $ns = new Zend_Session_Namespace('user');
+        if (empty($ns->data)) {
+            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error','type'=> 'page'), null, true));
+        }
         $ajaxContext = $this->_helper->getHelper('AjaxContext');
         $ajaxContext->addActionContext('index', 'html')
                 ->addActionContext('addPanier', array('html', 'json'))
@@ -11,9 +16,7 @@ class PanierController extends Zend_Controller_Action {
         if ($this->_request->isXmlHttpRequest()) {
             $this->_helper->layout->disableLayout();
         }
-        zend_session::start();
         $panier = new Zend_Session_Namespace('panier');
-        $ns = new Zend_Session_Namespace('user');
 
         if (!empty($ns->data)) {
             $this->view->firstname = $ns->data['firstname_user'];

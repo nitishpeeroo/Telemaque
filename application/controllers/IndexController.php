@@ -51,6 +51,12 @@ class IndexController extends Zend_Controller_Action {
         }
     }
     
+    public function errorAction(){
+        if ($this->_getParam('type') == 'page') {
+            $this->view->error = "Vous devez être connecté pour accéder à cette page.";
+        }
+    }
+    
 
     
         
