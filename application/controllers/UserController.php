@@ -13,7 +13,6 @@ class UserController extends Zend_Controller_Action {
             $this->view->lastname = $ns->data['lastname_user'];
             $this->view->lvl = $ns->data['id_rank'];
         }
-        
     }
 
     public function indexAction() {
@@ -51,7 +50,7 @@ class UserController extends Zend_Controller_Action {
                 if ($verif > 0) {
                     $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'index', 'login' => false), null, true));
                 }
-                $stat = $user->inscription($login, $mdp, $firstname, $lastname, $mail, $phone, $address,$cp,$ville);
+                $stat = $user->inscription($login, $mdp, $firstname, $lastname, $mail, $phone, $address, $cp, $ville);
                 $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index'), null, true));
                 if ($stat != -1) {
                     echo "vous êtes inscrit";
@@ -71,7 +70,7 @@ class UserController extends Zend_Controller_Action {
     public function parameterAction() {
         $ns = new Zend_Session_Namespace('user');
         if (empty($ns->data)) {
-            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error','type'=> 'page'), null, true));
+            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error', 'type' => 'page'), null, true));
         }
         $this->view->headTitle('Gestion utilisateur');
 
@@ -88,19 +87,15 @@ class UserController extends Zend_Controller_Action {
             $lastMdp = $_POST['last_password'];
 
             $user = new Application_Model_User();
-            
-            if($lastMdp != null)
-            {
-                $val= $user->verifMdp($lastMdp,$ns->data['id_user']);                
-                if($val)
-                {
-                    $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'modify','type'=> 'error_password'), null, true));
+
+            if ($lastMdp != null) {
+                $val = $user->verifMdp($lastMdp, $ns->data['id_user']);
+                if ($val) {
+                    $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'modify', 'type' => 'error_password'), null, true));
                 }
             }
-            $stat = $user->updateUser($mdp, $firstname, $lastname, $mail, $phone, $address,$ville,$cp, $ns->data['id_user']);
+            $stat = $user->updateUser($mdp, $firstname, $lastname, $mail, $phone, $address, $ville, $cp, $ns->data['id_user']);
             $ns->data = $stat;
-            
-            
         }
 
         $this->view->firstname = $ns->data['firstname_user'];
@@ -110,21 +105,19 @@ class UserController extends Zend_Controller_Action {
         $this->view->address = $ns->data['address_user'];
         $this->view->ville = $ns->data['ville_user'];
         $this->view->cp = $ns->data['codepostal_user'];
-        
     }
 
     public function modifyAction() {
         $ns = new Zend_Session_Namespace('user');
         if (empty($ns->data)) {
-            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error','type'=> 'page'), null, true));
+            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error', 'type' => 'page'), null, true));
         }
-       
-        if($this->_getParam('type') == 'error_password')
-        {
+
+        if ($this->_getParam('type') == 'error_password') {
             $this->view->error = "<b style='color:red;'>Ancien mot de passe incorrect</b>";
         }
         $this->view->headTitle('modification utilisateur');
-        
+
         $ns = new Zend_Session_Namespace('user');
         $this->view->firstname = $ns->data['firstname_user'];
         $this->view->lastname = $ns->data['lastname_user'];
@@ -140,66 +133,74 @@ class UserController extends Zend_Controller_Action {
         $sell = new Application_Model_Sell();
         $images = new Application_Model_Image();
         if (empty($ns->data)) {
-            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error','type'=> 'page'), null, true));
+            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error', 'type' => 'page'), null, true));
         }
 
         if ($this->_request->isPost()) {
-            
-       
-            if($this->_getParam('type') == 'ajout')
-            {
+
+
+            if ($this->_getParam('type') == 'ajout') {
                 $title = $_POST['productTitle'];
 
                 // image data 
                 $image = @file_get_contents($_FILES['image']['tmp_name']);
                 $nameImage = $_FILES['image']['name'];
-                
-                
+
+
                 // sell data
                 $quantity = $_POST['productQuantite'];
                 $category = $_POST['sous-rubrique-hidden'];
                 $price = $_POST['productPrix'];
-                
-                $descritptionCourt = $_POST['productDescritptionCourte'];               
+
+                $descritptionCourt = $_POST['productDescritptionCourte'];
                 $descritption = $_POST['descritption'];
                 $idUser = $ns->data['id_user'];
-                
-                
+
+
                 // recuperation de idSell après insertion
                 $idSell = $sell->addSell($title, $quantity, $category, $price, $descritptionCourt, $descritption, $idUser);
-                
+
                 // insertion de l'image grace a l'idSell
                 $ResultImage = $images->addImage($idSell, $image, $nameImage);
-                
+
                 if ($ResultImage == true) {
                     $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'article'), null, true));
                 }
             }
-            if($this->_getParam('type') == 'update')
-            {
+            if ($this->_getParam('type') == 'update') {
                 $idSell = $_POST['idSell'];
-                $quantity = $_POST['quantity'];                
-                $price = $_POST['price']; 
-                $sell->updatePriceQuantity($quantity,$price,$idSell);
+                $quantity = $_POST['quantity'];
+                $price = $_POST['price'];
+                $sell->updatePriceQuantity($quantity, $price, $idSell);
             }
-            
-            
         }
-        
+
         $commande = new Application_Model_Command();
-        $commandeline = new Application_Model_Commandline();    
+        $commandeline = new Application_Model_Commandline();
         //Les produits de l'utilisateur achetés par d'autre clients.
         //$this->view->commande = $commande->getIdCommand($ns->data['id_user']);     
         // Achat du client
-        $tabCommand =$commande->getIdCommand($ns->data['id_user']);
+        $tabCommand = $commande->getIdCommand($ns->data['id_user']);
         $this->view->command = $tabCommand;
         $this->view->commandeLine = $commandeline->getCommmandLine($tabCommand);
         //var_dump($this->view->commandeLine); die;
-        
+
         $sell = new Application_Model_Sell();
         $images = new Application_Model_Image();
         $categorys = new Application_Model_Category();
-        
+        $user = new Application_Model_User();
+        //Historique des vente effectué par un vendeur : Visualisation des commandes des clients
+        $idProduct = $sell->getIdProductBySeller($ns->data['id_user']);
+        $Commande = $commandeline->getCommandLineByArrayIdProduct($idProduct, true);
+        $detailCommand = $commandeline->getCommandLineByArrayIdProduct($idProduct);
+        $this->view->commandVente = $Commande;
+        $complementCommand = $commandeline->getCommandLineByArrayIdProduct($idProduct);
+        $this->view->complementCommande = $complementCommand;
+        $this->view->detailCommand = $detailCommand;
+      
+        $infoUser = $user->getUserByCommandLine($Commande);
+        $this->view->infoBuyer = $infoUser;
+
         $this->view->category = $categorys->getRubrique();
 
         $this->view->souscategory = $categorys->getSousRubrique();

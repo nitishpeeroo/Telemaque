@@ -7,20 +7,20 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
     public $data = array();
 
     public function addSell($title, $quantity, $category, $price, $descritptionCourt, $descritption, $idUser) {
-            $data = array(
-                'id_user' => $idUser,
-                'title' => $title,
-                'quantity' => $quantity,
-                'id_category' => $category,
-                'price' => $price,
-                'description_courte' => $descritptionCourt,
-                'description' => $descritption,
-                'is_checked' => 0,
-                'dt_creation' => date('Y-m-d H:i:s'),
-                'dt_modification' => date('Y-m-d H:i:s'),
-            );
-        
-        try{
+        $data = array(
+            'id_user' => $idUser,
+            'title' => $title,
+            'quantity' => $quantity,
+            'id_category' => $category,
+            'price' => $price,
+            'description_courte' => $descritptionCourt,
+            'description' => $descritption,
+            'is_checked' => 0,
+            'dt_creation' => date('Y-m-d H:i:s'),
+            'dt_modification' => date('Y-m-d H:i:s'),
+        );
+
+        try {
             $this->insert($data);
             $idSell = $this->getLastUserIdSell($title, $idUser, $category);
         } catch (Exception $ex) {
@@ -46,7 +46,6 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
         $this->data = $row;
         return $this->data;
     }
-    
 
     public function getLastUserIdSell($title, $idUser, $category) {
         $select = $this->select()
@@ -167,6 +166,23 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
             echo 'ERROR_INSERT_ADDSELL : ' . $ex->getMessage();
             return false;
         }
+    }
+
+    public function getIdProductBySeller($idUser) {
+        $select = $this->select()
+                ->setIntegrityCheck(false)
+                ->from(array('s' => DB_TABLE_SELL))
+                ->joinInner(array('u' => DB_TABLE_USER), 'u.id_user = s.id_user')
+                ->where('u.id_user = ?', $idUser);
+        try {
+            $row = $this->fetchAll($select)->toArray();
+        } catch (Exception $ex) {
+            echo 'ERROR_SELECT_getIdProductBySeller : ' . $ex->getMessage();
+            return false;
+        }
+
+        $this->data = $row;
+        return $this->data;
     }
 
 }

@@ -65,10 +65,6 @@ class Application_Model_Commandline extends Zend_Db_Table_Abstract {
     }
 
     public function getCommmandLine($tabIdCommand = array()) {
-//          select * from command_line cl  
-//inner join sell s on s.id_sell = cl.id_sell
-//inner join user u on u.id_user = s.id_user
-//where cl.id_command in(17,18)
         $select = $this->select()
                 ->setIntegrityCheck(false)
                 ->from(array('cl' => DB_TABLE_COMMAND_LINE))
@@ -81,6 +77,31 @@ class Application_Model_Commandline extends Zend_Db_Table_Abstract {
             echo 'ERROR_SELECT_GETCOMMANDLINESELL : ' . $ex->getMessage();
             return false;
         }
+        $this->data = $row;
+        return $this->data;
+    }
+
+    public function getCommandLineByArrayIdProduct($tabProduct = array(), $groupBy = false) {
+        if ($groupBy == false) {
+            $select = $this->select()
+                    ->setIntegrityCheck(false)
+                    ->from(array('cl' => DB_TABLE_COMMAND_LINE))
+                    ->joinInner(array('s' => DB_TABLE_SELL), 's.id_sell = cl.id_sell', array('title'))
+                    ->where('cl.id_sell IN (?)', $tabProduct);
+        } else {
+            $select = $this->select()
+                    ->setIntegrityCheck(false)
+                    ->from(array('cl' => DB_TABLE_COMMAND_LINE))
+                    ->where('cl.id_sell IN (?)', $tabProduct)
+                    ->group('cl.id_command');
+        }
+        try {
+            $row = $this->fetchAll($select)->toArray();
+        } catch (Exception $ex) {
+            echo 'ERROR_SELECT_getCommandLineByArrayIdProduct : ' . $ex->getMessage();
+            return false;
+        }
+       
         $this->data = $row;
         return $this->data;
     }
