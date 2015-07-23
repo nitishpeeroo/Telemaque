@@ -44,12 +44,14 @@ class UserController extends Zend_Controller_Action {
                 $mail = $_POST['email'];
                 $phone = $_POST['phone'];
                 $address = $_POST['address'];
+                $cp = $_POST['code_postal'];
+                $ville = $_POST['ville'];
                 $user = new Application_Model_User();
                 $verif = $user->loginExist($login);
                 if ($verif > 0) {
                     $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'index', 'login' => false), null, true));
                 }
-                $stat = $user->inscription($login, $mdp, $firstname, $lastname, $mail, $phone, $address);
+                $stat = $user->inscription($login, $mdp, $firstname, $lastname, $mail, $phone, $address,$cp,$ville);
                 $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index'), null, true));
                 if ($stat != -1) {
                     echo "vous êtes inscrit";
@@ -81,10 +83,24 @@ class UserController extends Zend_Controller_Action {
             $mail = $_POST['mail'];
             $phone = $_POST['phone'];
             $address = $_POST['address'];
+            $ville = $_POST['ville'];
+            $cp = $_POST['cp'];
+            $lastMdp = $_POST['last_password'];
 
             $user = new Application_Model_User();
-            $stat = $user->updateUser($mdp, $firstname, $lastname, $mail, $phone, $address, $ns->data['id_user']);
+            
+            if($lastMdp != null)
+            {
+                $val= $user->verifMdp($lastMdp,$ns->data['id_user']);                
+                if($val)
+                {
+                    $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'modify','type'=> 'error_password'), null, true));
+                }
+            }
+            $stat = $user->updateUser($mdp, $firstname, $lastname, $mail, $phone, $address,$ville,$cp, $ns->data['id_user']);
             $ns->data = $stat;
+            
+            
         }
 
         $this->view->firstname = $ns->data['firstname_user'];
@@ -92,6 +108,9 @@ class UserController extends Zend_Controller_Action {
         $this->view->mail = $ns->data['mail_user'];
         $this->view->phone = $ns->data['phone_user'];
         $this->view->address = $ns->data['address_user'];
+        $this->view->ville = $ns->data['ville_user'];
+        $this->view->cp = $ns->data['codepostal_user'];
+        
     }
 
     public function modifyAction() {
@@ -99,14 +118,21 @@ class UserController extends Zend_Controller_Action {
         if (empty($ns->data)) {
             $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error','type'=> 'page'), null, true));
         }
+       
+        if($this->_getParam('type') == 'error_password')
+        {
+            $this->view->error = "<b style='color:red;'>Ancien mot de passe incorrect</b>";
+        }
         $this->view->headTitle('modification utilisateur');
-
+        
         $ns = new Zend_Session_Namespace('user');
         $this->view->firstname = $ns->data['firstname_user'];
         $this->view->lastname = $ns->data['lastname_user'];
         $this->view->mail = $ns->data['mail_user'];
         $this->view->phone = $ns->data['phone_user'];
         $this->view->address = $ns->data['address_user'];
+        $this->view->cp = $ns->data['codepostal_user'];
+        $this->view->ville = $ns->data['ville_user'];
     }
 
     public function articleAction() {

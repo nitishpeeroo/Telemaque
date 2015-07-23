@@ -59,7 +59,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
     }
     
 
-    public function inscription($login, $password, $firstname, $lastname, $mail, $phone, $address) {
+    public function inscription($login, $password, $firstname, $lastname, $mail, $phone, $address,$cp,$ville) {
         try {
             $data = array(
                 'login_user' => $login,
@@ -67,10 +67,10 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
                 'lastname_user' => $lastname,
                 'firstname_user' => $firstname,
                 'mail_user' => $mail,
-                //'phone_user' => $phone,
-                //'address_user' => $address,
-                'phone_user' => '0062623',
-                'address_user' => '95 rue 952',
+                'codepostal_user' => $cp,
+                'ville_user' => $ville,
+                'phone_user' => $phone,
+                'address_user' => $address,
                 'level_user' => 1
             );
             return $this->insert($data);
@@ -81,7 +81,7 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
         
     }
     
-    public function updateUser($password, $firstname, $lastname, $mail, $phone, $address,$id) {
+    public function updateUser($password, $firstname, $lastname, $mail, $phone, $address,$ville,$cp,$id) {
         try {
             if($password == '')
             {
@@ -91,6 +91,8 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
                     'mail_user' => $mail,
                     'phone_user' => $phone,
                     'address_user' => $address,
+                    'ville_user' => $ville,
+                    'codepostal_user' => $cp,
                 );
             }
             else
@@ -102,6 +104,8 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
                     'mail_user' => $mail,
                     'phone_user' => $phone,
                     'address_user' => $address,
+                    'ville_user' => $ville,
+                    'codepostal_user' => $cp,
                 );
             }
             $result = false;  
@@ -134,6 +138,27 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
          
         }
         
+    }
+    
+    public function verifMdp($lastMdp,$id)
+    {
+        try {
+            
+            $select = $this->select()
+                    ->setIntegrityCheck(false)
+                    ->from(array('u' => DB_TABLE_USER))   
+                    ->where('u.id_user = ?', $id);
+            $row = $this->fetchAll($select)->toArray();
+            $this->data = $row[0];   
+            if($this->data['password_user'] == md5($lastMdp)) {
+                return true;
+            }
+            else { return false;}
+        } 
+        catch (Exception $ex) {
+            echo $ex->getMessage();
+         
+        }
     }
     
 }
