@@ -167,6 +167,20 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
             return false;
         }
     }
+    
+    public function updateQuantitySell($Quantity, $idSell) {
+        try {
+            $data = array(              
+                'quantity' => $Quantity,
+            );
+            
+            $this->update($data, 'id_sell = ' . $idSell);
+        } catch (Exception $ex) {
+            echo 'ERROR_UPDATE_QUANTITYSELL : ' . $ex->getMessage();
+            return false;
+        }
+        return true;
+    }
 
     public function getIdProductBySeller($idUser) {
         $select = $this->select()
