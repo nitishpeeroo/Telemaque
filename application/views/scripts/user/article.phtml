@@ -18,6 +18,9 @@ if (count($this->articles) > 0) {
     }
 }
 $historique = count($this->commandeLine);
+$vendu = count($this->commande);
+
+
 ?>
 <!----------------FIN--------------------------------------------->
 
@@ -265,24 +268,25 @@ $historique = count($this->commandeLine);
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                        <tr class="accordion-toggle" data-toggle="collapse" href="#country1">
-                                            <td>N° 153</td>
-                                            <td>155 €</td>
-                                            <td>5</td>
-                                            <td>5 rue Petit pas 75005 Paris</td>
-                                            <td>jack.prime@gmail.com</td>
-                                            <td>06 08 52 47 92</td>
-                                            <td> 22/07/2015</td>
+                                        <?php foreach ($this->commande as $value): ?>
+                                        <tr class="accordion-toggle" data-toggle="collapse" href="#n<?= $value['id_command']; ?>">
+                                            <td>N° <?= $value['id_command']; ?></td>
+                                            <td><?= $value['quantity']*$value['price']; ?> €</td>
+                                            <td><?= $value['quantity']; ?></td>
+                                            <td><?= $value['address_user']; ?></td>
+                                            <td><?= $value['mail_user']; ?></td>
+                                            <td><?= $value['phone_user']; ?></td>
+                                            <td><?= $value['dt_command']; ?></td>
                                         </tr>
-
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                                 <div class="accordion-heading country">
 
                                     <!--                                    <a class="accordion-toggle" data-toggle="collapse" href="#country1">Country</a>-->
                                 </div>
-                                <div id="country1" class="accordion-body collapse">
+                                <?php foreach ($this->commande as $value): ?>
+                                <div id="n<?= $value['id_command']; ?>" class="accordion-body collapse">
                                     <div class="accordion-inner">
                                         <table class="table table-striped table-bordered">
                                             <thead>
@@ -295,24 +299,19 @@ $historique = count($this->commandeLine);
                                                 </tr>
                                             </thead>   
                                             <tbody>
+                                                
                                                 <tr>
-                                                    <td>Pantalon noir chat</td>
-                                                    <td>1</td>
-                                                    <td>55 €</td>
-                                                    <td>55 €</td>
-
+                                                    <td><?= $value['title']; ?></td>
+                                                    <td><?= $value['quantity']; ?></td>
+                                                    <td><?= $value['price']; ?> €</td>
+                                                    <td><?= $value['quantity']*$value['price']; ?> €</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Chemise Bleu à carreau</td>
-                                                    <td>4</td>
-                                                    <td>25 €</td>
-                                                    <td>100 €</td>
-                                                </tr>
+                                                                                            
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-
+                                <?php endforeach; ?>  
                             </div>
                         </div>
                     </div>
@@ -339,14 +338,15 @@ $historique = count($this->commandeLine);
                                             <td>Montant Total</td>
                                             <td>Nombre de produit</td>
                                             <td>Adresse de livraison</td>
-                                          
+                                            <td>Adresse mail</td>
+                                            <td>Numéro de telephone</td>
                                             <td>Date</td>
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        <?php foreach ($this->commande as $value): ?>
-                                            <tr class="accordion-toggle" data-toggle="collapse" href="#<?= $value['id_command']; ?>">
+                                        <?php foreach ($this->commandeLine as $value): ?>
+                                            <tr class="accordion-toggle" data-toggle="collapse" href="#l<?= $value['id_command_line']; ?>">
                                                 <td>N° <?= $value['id_command']; ?></td>
                                                 <td><?= $value['quantity']*$value['priceArticle']; ?> €</td>
                                                 <td><?= $value['quantity']; ?></td>
@@ -364,7 +364,7 @@ $historique = count($this->commandeLine);
                                     <!--                                    <a class="accordion-toggle" data-toggle="collapse" href="#country1">Country</a>-->
                                 </div>
                                 <?php foreach ($this->commandeLine as $value): ?>
-                                    <div id="<?= $value['id_command']; ?>" class="accordion-body collapse">
+                                    <div id="l<?= $value['id_command_line']; ?>" class="accordion-body collapse">
                                         <div class="accordion-inner">
                                             <table class="table table-striped table-bordered">
                                                 <thead>
