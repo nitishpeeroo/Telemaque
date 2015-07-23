@@ -14,6 +14,7 @@ class   Application_Model_Image extends Zend_Db_Table_Abstract {
                 'image' => $image,
                 'name_image' => $nameImage,
             );
+            
                  $this->insert($data);
             
         } catch (Exception $ex) {

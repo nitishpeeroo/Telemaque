@@ -117,6 +117,8 @@ class UserController extends Zend_Controller_Action {
 
     public function articleAction() {
         $ns = new Zend_Session_Namespace('user');
+        $sell = new Application_Model_Sell();
+        $images = new Application_Model_Image();
         if (empty($ns->data)) {
             $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error','type'=> 'page'), null, true));
         }
@@ -126,26 +128,30 @@ class UserController extends Zend_Controller_Action {
        
             if($this->_getParam('type') == 'ajout')
             {
-          
+                
                 $title = $_POST['productTitle'];
 
                 // image data 
                 $image = @file_get_contents($_FILES['image']['tmp_name']);
                 $nameImage = $_FILES['image']['name'];
-
+                
+                
                 // sell data
                 $quantity = $_POST['productQuantite'];
                 $category = $_POST['sous-rubrique-hidden'];
                 $price = $_POST['productPrix'];
-                $descritptionCourt = $_POST['productDescritptionCourte'];
+                
+                $descritptionCourt = $_POST['productDescritptionCourte'];               
                 $descritption = $_POST['descritption'];
                 $idUser = $ns->data['id_user'];
-
+                
+                
                 // recuperation de idSell après insertion
-                $idSell = $sell->addSell($title, $image, $quantity, $category, $price, $descritptionCourt, $descritption, $idUser);
-
+                $idSell = $sell->addSell($title, $quantity, $category, $price, $descritptionCourt, $descritption, $idUser);
+                
                 // insertion de l'image grace a l'idSell
                 $ResultImage = $images->addImage($idSell, $image, $nameImage);
+                
                 if ($ResultImage == true) {
                     $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'article'), null, true));
                 }

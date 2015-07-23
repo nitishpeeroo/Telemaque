@@ -6,8 +6,7 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
     protected $_name = DB_TABLE_SELL;
     public $data = array();
 
-    public function addSell($title, $image, $quantity, $category, $price, $descritptionCourt, $descritption, $idUser) {
-        try {
+    public function addSell($title, $quantity, $category, $price, $descritptionCourt, $descritption, $idUser) {
             $data = array(
                 'id_user' => $idUser,
                 'title' => $title,
@@ -20,6 +19,8 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
                 'dt_creation' => date('Y-m-d H:i:s'),
                 'dt_modification' => date('Y-m-d H:i:s'),
             );
+        
+        try{
             $this->insert($data);
             $idSell = $this->getLastUserIdSell($title, $idUser, $category);
         } catch (Exception $ex) {
