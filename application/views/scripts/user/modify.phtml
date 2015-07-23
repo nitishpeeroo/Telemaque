@@ -1,11 +1,15 @@
+<?= $this->error; ?>
 
 <form method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter','type'=> 'apply'), null, true); ?>">
-    first name: <input type="text" maxlength="50" value="<?= $this->firstname ?>" name="firstname"><br/>
-    last name:  <input type="text" maxlength="50" value="<?= $this->lastname ?>" name="lastname"><br/>
-    mail:       <input type="email" maxlength="50" value="<?= $this->mail ?>" name="mail"><br/>
-    phone:      <input type="tel" maxlength="30" value="<?= $this->phone ?>" name="phone"><br/>
-    adresse:    <input type="text" maxlength="255" value="<?= $this->address ?>" name="address"><br/>
-    mot de passe:        <input type="password" name="password">
-    second mot de passe: <input type="password" name="password">
+    first name : <input type="text" maxlength="50" value="<?= $this->firstname ?>" name="firstname"><br/>
+    last name :  <input type="text" maxlength="50" value="<?= $this->lastname ?>" name="lastname"><br/>
+    mail :       <input type="email" maxlength="50" value="<?= $this->mail ?>" name="mail"><br/>
+    phone :      <input type="tel" maxlength="30" value="<?= $this->phone ?>" name="phone"><br/>
+    adresse :    <input type="text" maxlength="255" value="<?= $this->address ?>" name="address"><br/>
+    ville :    <input type="text" maxlength="255" value="<?= $this->ville ?>" name="ville"><br/>
+    Code postal :    <input type="text" maxlength="255" value="<?= $this->cp ?>" name="cp"><br/>
+    ancien mot de passe : <input type="password" name="last_password"><br/>
+    mot de passe :        <input type="password" name="password"><br/>
+    second mot de passe : <input type="password" name="password"><br/>
     <input type="submit" value="valider">
 </form>
