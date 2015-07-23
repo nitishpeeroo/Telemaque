@@ -17,12 +17,6 @@ class UserController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-     
-        if ($this->_getParam('login') == true) {
-
-            echo "<script>alert('Ce login existe déjà.');</script>";
-        }
-
         if ($this->_request->isPost()) {
             //sign in
             if ($this->_getParam('type') == 'signin') {

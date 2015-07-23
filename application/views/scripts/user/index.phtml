@@ -1,8 +1,17 @@
+<div class="col-md-2">
+</div>
 <div class = "col-md-6">
-    <div class="wrapper">
-
-        <form class="form-signindefault" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'index', 'type' => 'signin'), null, true); ?>" method="post" name="Login_Form" class="form-signin">       
-            <h3 class="form-signin-heading">Identifiez vous pour poursuivre</h3>
+    <div class="wrapper form-signindefault" style="min-width: 768px!important;">
+        <div class="row">
+            <div class="col-xs-6">
+                <a href="#" class="active btn btn-primary btn-lg btn-block btn-huge" id="login-form-link">Se connecter</a>
+            </div>
+            <div class="col-xs-6">
+                <a href="#" class="btn btn-primary btn-lg btn-block btn-huge" id="register-form-link">S'inscrire</a>
+            </div>
+        </div>
+        <form id="login-form"  action="<?php echo $this->url(array('controller' => 'user', 'action' => 'index', 'type' => 'signin'), null, true); ?>" method="post" name="Login_Form" class="form-signin" style="display: block;">       
+            <h3 class="form-signin-heading"><center>Identifiez vous pour poursuivre</center></h3>
             <hr class="colorgraph"><br>
 
             <div class="form-group">
@@ -18,73 +27,147 @@
                     <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Se connecter</button>  			
                 </div>
             </div>
-        </form>			
-    </div>
-</div>
-<div class="col-md-6">
-    <div class="wrapper">
-        <form class="form-signindefault" role="form" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'index', 'type' => 'signup'), null, true); ?>" method="POST" class="form-signin" id="passwordForm">
-            <h2> Vous êtes nouveau client <small>Inscrivez vous gratuitement</small></h2>
+        </form>		
+        <form id="register-form"  role="form" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'index', 'type' => 'signup'), null, true); ?>" method="POST" class="form-signin" id="passwordForm" style="display: none;">     
+            <h3 class="form-signin-heading"><center><h2> Vous êtes nouveau client</h2></center></h3>
+            <div class="stepwizard">
+                <div class="stepwizard-row setup-panel">
+                    <div class="stepwizard-step">
+                        <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                        <p>Présentation</p>
+                    </div>
+                    <div class="stepwizard-step">
+                        <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                        <p>Coordonnée</p>
+                    </div>
+                    <div class="stepwizard-step">
+                        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                        <p>Information Personnelle</p>
+                    </div>
+                </div>
+            </div>
             <hr class="colorgraph">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <input type="text" name="last_name" id="first_name" class="form-control input-lg" placeholder="Nom" tabindex="3" required=""/>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <input type="text" name="first_name" id="last_name" class="form-control input-lg" placeholder="Prénom" tabindex="4" required=""/>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="email" name="email" id="display_name" class="form-control input-lg" placeholder="Email" tabindex="5" required=""/>
-            </div>
-            <!--            <div class="row">
-                            <div class="col-sm-6">
-                                <span class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> <br>
+            <div class="row setup-content" id="step-1">
+                <div class="col-xs-12">
+                    <div class="col-md-12">
+                        <h3><center>Bonjour je m'appelle Emma et vous ?</center></h3>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Nom" tabindex="3" required=""/>
+                                </div>
                             </div>
-                        </div>-->
-            <div class="form-group">
-                <input type="text" name="login" id="email" class="form-control input-lg" placeholder="login" tabindex="6" required=""/>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 8 caractères<br>
-                        <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 1 lettre majuscule
-                    </div>
-                    <div class="col-sm-6">
-                        <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 1 lettre minuscule<br>
-                        <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 1 chiffre
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="Prénom" tabindex="4" required=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="colorgraph">
+                        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Faisons connaissance</button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="form-group">
-                        <input type="password" name="password" id="password1" class="form-control input-lg" placeholder="Mot de passe" tabindex="7" autocomplete="off" required=""/>
+            </div>
+            <div class="row setup-content" id="step-2">
+                <div class="col-xs-12">
+                    <div class="col-md-12">
+                        <h3> <center>Bienvenue sur Telemaque <span id='name_user'></span>, <br/> pourrais je en savoir plus sur vous ?</center></h3>
+                        <div class="col-xs-12 col-sm-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">Adresse</label>
+                                <input maxlength="100" type="text" name="adresse" required="required" class="form-control" placeholder="5 rue Georges Sachet" tabindex="5"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Code Postal</label>
+                                <input name="codePostal" required="required" type="text" class="form-control" placeholder="75005" tabindex="6" />  </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Ville</label>
+                                <input name="ville" required="required" type="text" class="form-control" placeholder="Paris" tabindex="7"/>  </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">Tel (Facultatif)</label>
+                                <input name="tel"  type="tel" class="form-control" placeholder="06 08 58 45 47" tabindex="8"/>  </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <hr class="colorgraph">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="btn btn-lg btn-primary btn-block nextBtn" id="reviewProduct"value="Login" type="button">Finalisons votre inscription</button>  			
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="password" name="password2" id="password2" class="form-control input-lg" placeholder="Confirmez votre mot de passe" autocomplete="off" tabindex="8" required=""/>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Mot de passe identique
-                    </div>
-                </div>
+            </div>
+            <div class="row setup-content" id="step-3">
+                <div class="col-xs-12">
+                    <div class="col-md-12">
+                        <h3> <center>Afin de terminer votre inscription<br/>pouvez vous me remplir ces informations s'il vous plait ?</center></h3>
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="login" id="email" class="form-control input-lg" autocomplete="off" placeholder="login" tabindex="9" required=""/>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="email"  class="form-control input-lg" placeholder="Email" tabindex="10" autocomplete="off" required=""/>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-sm-6">
+                                    <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 8 caractères<br>
+                                    <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 1 lettre majuscule
+                                </div>
+                                <div class="col-sm-6">
+                                    <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 1 lettre minuscule<br>
+                                    <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 1 chiffre
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <input type="password" name="password" id="password1" class="form-control input-lg" placeholder="Mot de passe" autocomplete="off" required="required" tabindex="11"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <input type="password" name="password2" id="password2" class="form-control input-lg" placeholder="Confirmez votre mot de passe" autocomplete="off" required="required" tabindex="12"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-sm-12">
+                                    <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Mot de passe identique
+                                </div>
+                            </div>
 
-                <div class="row">
-                    <div class="col-sm-12">
-                        <center>
-                        <div class="g-recaptcha" data-sitekey="6Lc9CgoTAAAAALI9YC2yEDB5uLjXllHg8r-2B2DG"></div>
-                        </center>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <center>
+                                        <div class="g-recaptcha" data-sitekey="6Lc9CgoTAAAAALI9YC2yEDB5uLjXllHg8r-2B2DG"></div>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <hr class="colorgraph">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-lg btn-primary btn-block nextBtn" id="reviewProduct"value="Login" type="submit">Je m'inscris</button>  			
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <hr class="colorgraph">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">S'inscrire</button>  			
-                    </div>
-                </div>
-        </form>
+        </form>	
     </div>
+
+
+</div>
 </div>
