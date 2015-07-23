@@ -5,7 +5,7 @@ $attente = 0;
 $valider = 0;
 $refuser = 0;
 $vendu = 0;
-$historique =0;
+$historique = 0;
 if (count($this->articles) > 0) {
     foreach ($this->articles as $value) {
         if ($value['is_checked'] == "0") {
@@ -17,10 +17,8 @@ if (count($this->articles) > 0) {
         }
     }
 }
-$historique = count($this->commandeLine);
+$historique = count($this->command);
 $vendu = count($this->commande);
-
-
 ?>
 <!----------------FIN--------------------------------------------->
 
@@ -32,7 +30,7 @@ $vendu = count($this->commande);
             <li><a href="#service-one" data-toggle="tab">Article en attente de validation (<?= $attente; ?>)</a></li>
             <li><a href="#service-three" data-toggle="tab">Article refuser (<?= $refuser; ?>)</a></li>
             <li><a href="#service-four" data-toggle="tab">Article Vendu (<?= $vendu; ?>)</a></li>
-            <li><a href="#service-five" data-toggle="tab">Historique de mes achats (<?= $historique; ?>)</a></li>
+            <li><a href="#service-five" data-toggle="tab">Historique commande (<?= $historique; ?>)</a></li>
 
         </ul>
         <div id="myTabContent" class="tab-content">
@@ -269,15 +267,15 @@ $vendu = count($this->commande);
                                     </thead>
                                     <tbody>
                                         <?php foreach ($this->commande as $value): ?>
-                                        <tr class="accordion-toggle" data-toggle="collapse" href="#n<?= $value['id_command']; ?>">
-                                            <td>N° <?= $value['id_command']; ?></td>
-                                            <td><?= $value['quantity']*$value['price']; ?> €</td>
-                                            <td><?= $value['quantity']; ?></td>
-                                            <td><?= $value['address_user']; ?></td>
-                                            <td><?= $value['mail_user']; ?></td>
-                                            <td><?= $value['phone_user']; ?></td>
-                                            <td><?= $value['dt_command']; ?></td>
-                                        </tr>
+                                            <tr class="accordion-toggle" data-toggle="collapse" href="#n<?= $value['id_command']; ?>">
+                                                <td>N° <?= $value['id_command']; ?></td>
+                                                <td><?= $value['quantity'] * $value['price']; ?> €</td>
+                                                <td><?= $value['quantity']; ?></td>
+                                                <td><?= $value['address_user']; ?></td>
+                                                <td><?= $value['mail_user']; ?></td>
+                                                <td><?= $value['phone_user']; ?></td>
+                                                <td><?= $value['dt_command']; ?></td>
+                                            </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -286,85 +284,7 @@ $vendu = count($this->commande);
                                     <!--                                    <a class="accordion-toggle" data-toggle="collapse" href="#country1">Country</a>-->
                                 </div>
                                 <?php foreach ($this->commande as $value): ?>
-                                <div id="n<?= $value['id_command']; ?>" class="accordion-body collapse">
-                                    <div class="accordion-inner">
-                                        <table class="table table-striped table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nom du produit</th>
-                                                    <th>Quantité</th>
-                                                    <th>Prix Unitaire</th>
-                                                    <th>Total</th>
-
-                                                </tr>
-                                            </thead>   
-                                            <tbody>
-                                                
-                                                <tr>
-                                                    <td><?= $value['title']; ?></td>
-                                                    <td><?= $value['quantity']; ?></td>
-                                                    <td><?= $value['price']; ?> €</td>
-                                                    <td><?= $value['quantity']*$value['price']; ?> €</td>
-                                                </tr>
-                                                                                            
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <?php endforeach; ?>  
-                            </div>
-                        </div>
-                    </div>
-
-
-                </section>
-
-            </div>
-            <div class="tab-pane fade" id="service-five">
-                <hgroup class="mb20">
-                    <h3><strong > 
-                            Mes Commandes
-                        </strong></h3>								
-                </hgroup>
-                <section class="col-xs-12 col-sm-6 col-md-12">
-                    <div class="container">
-                        <div class="row">
-                            <div class="span12" style="margin-left: -15px;">
-                              
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <td>N° Commmande</td>
-                                            <td>Montant Total</td>
-                                            <td>Nombre de produit</td>
-                                            <td>Adresse de livraison</td>
-                                            <td>Adresse mail</td>
-                                            <td>Numéro de telephone</td>
-                                            <td>Date</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <?php foreach ($this->commandeLine as $value): ?>
-                                            <tr class="accordion-toggle" data-toggle="collapse" href="#l<?= $value['id_command_line']; ?>">
-                                                <td>N° <?= $value['id_command']; ?></td>
-                                                <td><?= $value['quantity']*$value['priceArticle']; ?> €</td>
-                                                <td><?= $value['quantity']; ?></td>
-                                                <td><?= $value['address_user']; ?></td>
-                                                <td><?= $value['mail_user']; ?></td>
-                                                <td><?= $value['phone_user']; ?></td>
-                                                <td><?= $value['dt_command']; ?></td>
-                                            </tr>
-                                        <?php endforeach; ?>
-
-                                    </tbody>
-                                </table>
-                                
-                                <div class="accordion-heading country">
-                                    <!--                                    <a class="accordion-toggle" data-toggle="collapse" href="#country1">Country</a>-->
-                                </div>
-                                <?php foreach ($this->commandeLine as $value): ?>
-                                    <div id="l<?= $value['id_command_line']; ?>" class="accordion-body collapse">
+                                    <div id="n<?= $value['id_command']; ?>" class="accordion-body collapse">
                                         <div class="accordion-inner">
                                             <table class="table table-striped table-bordered">
                                                 <thead>
@@ -377,18 +297,102 @@ $vendu = count($this->commande);
                                                     </tr>
                                                 </thead>   
                                                 <tbody>
+
                                                     <tr>
                                                         <td><?= $value['title']; ?></td>
                                                         <td><?= $value['quantity']; ?></td>
-                                                        <td><?= $value['priceArticle']; ?> €</td>
-                                                        <td><?= $value['quantity']*$value['priceArticle']; ?> €</td>
-
+                                                        <td><?= $value['price']; ?> €</td>
+                                                        <td><?= $value['quantity'] * $value['price']; ?> €</td>
                                                     </tr>
+
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
-                                <?php endforeach; ?>
+                                <?php endforeach; ?>  
+                            </div>
+                        </div>
+                    </div>
+
+
+                </section>
+
+            </div>
+            <div class="tab-pane fade" id="service-five">
+                <hgroup class="mb20">
+                    <h3><strong > Mes Commandes</strong></h3>								
+                </hgroup>
+                <section class="col-xs-12 col-sm-6 col-md-12">
+                    <div class="container">
+                        <div class="row">
+                            <div class="span12">
+                                <?php $compteurCommand = 0;
+                                $nbProduct = 0;
+                                $montantTotalCommand = 0;
+                                ?>
+                                <?php foreach ($this->command as $c) { 
+                                    
+     foreach ($this->commandeLine as $cl){
+        if($cl['id_command'] == $c['id_command']){
+            $nbProduct += $cl['quantity'];
+            $montantTotalCommand += $cl['quantity'] * $cl['price'];
+        }
+     }
+                                    ?>
+                                    <div class="accordion-toggle " data-toggle="collapse" href="#<?= $c['id_command']; ?>">
+                                       
+                                            <table class="table table-striped">
+                                                
+                                                <thead>
+                                                    <tr>
+                                                        <td>N° Commmande</td>
+                                                        <td>Montant Total</td>
+                                                        <td>Nombre de produit</td>
+                                                        <td>Date</td>
+                                                    </tr>
+                                                </thead>
+                                               
+                                                <tbody>
+                                               
+                                                <tr>
+                                                    <td>N° <?= $c['id_command']; ?></td>
+                                                    <td><?= number_format($montantTotalCommand,2,',',' '); ?> €</td>
+                                                    <td><?= $nbProduct; ?></td>
+                                                    <td><?= substr($c['dt_command'], 0,-9); ?></td>
+                                                </tr>
+                                               
+                                            </tbody>
+                                        </table>
+                                               
+                                    </div>
+                                    <div id="<?= $c['id_command']; ?>" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <table class="table table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nom du produit</th>
+                                                        <th>Quantité</th>
+                                                        <th>Prix Unitaire</th>
+                                                        <th>Total</th>
+
+                                                    </tr>
+                                                </thead>   
+                                                <tbody>
+                                                    <?php foreach ($this->commandeLine as $cl){ 
+                                                          if($cl['id_command'] == $c['id_command']){
+                                                        ?>
+                                                    <tr>
+                                                        <td><?= $cl['title']; ?></td>
+                                                        <td><?= $cl['quantity']; ?></td>
+                                                        <td><?= $cl['price']; ?></td>
+                                                        <td><?= $cl['price']*$cl['quantity']; ?> €</td>
+                                                    </tr>
+                                                    <?php } }?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

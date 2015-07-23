@@ -36,11 +36,12 @@ class Application_Model_Command extends Zend_Db_Table_Abstract {
         $this->data = $row;
         return $this->data;
     }
-    public function getUser($idCommand){
+
+    public function getUser($idCommand) {
         $select = $this->select()
                 ->setIntegrityCheck(false)
                 ->from(array('c' => DB_TABLE_COMMAND))
-                 ->joinInner(array('u' => DB_TABLE_USER), 'u.id_user = c.id_user',array('firstname_user', 'lastname_user', 'address_user', 'phone_user', 'mail_user'))
+                ->joinInner(array('u' => DB_TABLE_USER), 'u.id_user = c.id_user', array('firstname_user', 'lastname_user', 'address_user', 'phone_user', 'mail_user'))
                 ->where('c.id_command = ?', $idCommand);
         try {
             $row = $this->fetchAll($select)->toArray();
@@ -51,14 +52,14 @@ class Application_Model_Command extends Zend_Db_Table_Abstract {
         $this->data = $row;
         return $this->data;
     }
-    
-    public function getCommande($idUser){
+
+    public function getCommande($idUser) {
         $select = $this->select()
                 ->setIntegrityCheck(false)
-                ->from(array('cl' => DB_TABLE_COMMAND_LINE),array('id_command','quantity','price'))
-                ->joinInner(array('c' => DB_TABLE_COMMAND), 'cl.id_command = c.id_command',array('dt_command'))
-                ->joinInner(array('s' => DB_TABLE_SELL), 'cl.id_sell = s.id_sell',array('title'))
-                ->joinInner(array('u' => DB_TABLE_USER), 's.id_user = u.id_user',array('address_user','mail_user','phone_user'))
+                ->from(array('cl' => DB_TABLE_COMMAND_LINE), array('id_command', 'quantity', 'price'))
+                ->joinInner(array('c' => DB_TABLE_COMMAND), 'cl.id_command = c.id_command', array('dt_command'))
+                ->joinInner(array('s' => DB_TABLE_SELL), 'cl.id_sell = s.id_sell', array('title'))
+                ->joinInner(array('u' => DB_TABLE_USER), 's.id_user = u.id_user', array('address_user', 'mail_user', 'phone_user'))
                 ->where('u.id_user = ?', $idUser);
         try {
             $row = $this->fetchAll($select)->toArray();
@@ -66,9 +67,24 @@ class Application_Model_Command extends Zend_Db_Table_Abstract {
             echo 'ERROR_GETCOMMANDE : ' . $ex->getMessage();
             return false;
         }
+   
         $this->data = $row;
         return $this->data;
     }
-    
+
+    public function getIdCommand($idUser) {
+        $select = $this->select()
+                ->setIntegrityCheck(false)
+                ->from(array('c' => DB_TABLE_COMMAND))
+                ->where('c.id_user = ?', $idUser);
+        try {
+            $row = $this->fetchAll($select)->toArray();
+        } catch (Exception $ex) {
+            echo 'ERROR_getIdCommand : ' . $ex->getMessage();
+            return false;
+        }
+        $this->data = $row;
+        return $this->data;
+    }
 
 }

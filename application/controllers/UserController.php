@@ -122,7 +122,6 @@ class UserController extends Zend_Controller_Action {
        
             if($this->_getParam('type') == 'ajout')
             {
-                
                 $title = $_POST['productTitle'];
 
                 // image data 
@@ -164,9 +163,11 @@ class UserController extends Zend_Controller_Action {
         $commande = new Application_Model_Command();
         $commandeline = new Application_Model_Commandline();    
         //Les produits de l'utilisateur achetés par d'autre clients.
-        $this->view->commande = $commande->getCommande($ns->data['id_user']);     
+        //$this->view->commande = $commande->getIdCommand($ns->data['id_user']);     
         // Achat du client
-        $this->view->commandeLine = $commandeline->getCommmandLineSell($ns->data['id_user']);
+        $tabCommand =$commande->getIdCommand($ns->data['id_user']);
+        $this->view->command = $tabCommand;
+        $this->view->commandeLine = $commandeline->getCommmandLine($tabCommand);
         //var_dump($this->view->commandeLine); die;
         
         $sell = new Application_Model_Sell();
