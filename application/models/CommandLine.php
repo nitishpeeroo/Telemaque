@@ -19,11 +19,14 @@ class Application_Model_Commandline extends Zend_Db_Table_Abstract {
                     'price' => $price[0]['price']
                 );
                 $this->insert($data);
+                $QtTotal = $article->getArticle($idProduct,array());
+                $val =($QtTotal[0]['quantity'])-$qte;
+                $article->updateQuantitySell($val, $idProduct);
             } catch (Exception $ex) {
                 echo 'ERROR_INSERT_ADDCOMMANDLINE : ' . $ex->getMessage();
                 return false;
             }
-        }
+        } 
         return $flag;
     }
 
