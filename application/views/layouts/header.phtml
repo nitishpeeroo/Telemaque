@@ -90,15 +90,11 @@
                             </div>
 
                         </form>
-                        <ul class="nav navbar-nav navbar-right">
-                        <?php if($this->isadmin == 2): ?>
-                            <li><a href="http://telemaqueback.dev">AccËs ‡ la gestion du site</a></li>
-                        <?php else: ?>
-                            
+                        <ul class="nav navbar-nav navbar-right"> 
                             <?php if ($this->lvl == 0): ?>
                                 <li> <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'index'), null, true); ?>">Mon compte</a></li>
                                 <?php
-                            else:
+                            elseif($this->isadmin != 2): 
                                 if (isset($_SESSION['panier'])) {
 
 
@@ -184,10 +180,11 @@
                                         <?php } ?>
                                     </ul>
                                 </li>
+                                
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><?= $this->firstname . " " . $this->lastname; ?><span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter'), null, true); ?>"><span class="glyphicon glyphicon-wrench"></span> ParamËtre de mon compte</a></li>
+                                        <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter'), null, true); ?>"><span class="glyphicon glyphicon-wrench"></span> Param√©tre de mon compte</a></li>
                                         <li class="divider">
                                         </li>
                                         <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'article'), null, true); ?>"><span class="glyphicon glyphicon-wrench"></span> Mes articles</a></li>
@@ -197,8 +194,23 @@
                                                 Se D√©connecter</a></li>
                                     </ul>
                                 </li>
+                                <?php elseif($this->isadmin == 2): ?>
+                             <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><?= $this->firstname . " " . $this->lastname; ?><span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter'), null, true); ?>"><span class="glyphicon glyphicon-wrench"></span> Param√©tre de mon compte</a></li>
+                                        <li class="divider">
+                                        </li>
+                                        <li><a href="http://telemaqueback.dev">Acc√©s ‡ la gestion du site</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'destroy'), null, true); ?>">
+                                                <span class="glyphicon glyphicon-off"></span>
+                                                Se D√©connecter</a></li>
+                                    </ul>
+                                </li>
+                                   
+                
                             <?php endif; ?>
-                        <?php endif; ?>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
