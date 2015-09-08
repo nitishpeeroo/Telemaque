@@ -56,7 +56,7 @@ class Application_Model_Commandline extends Zend_Db_Table_Abstract {
                 ->joinInner(array('s' => DB_TABLE_SELL), 's.id_sell = cl.id_sell', array('id_sell', 'id_user', 'id_category', 'title', 'priceArticle' => 'price'))
                 ->joinInner(array('cat' => DB_TABLE_CATEGORY), 's.id_category = cat.id_category')
                 ->joinInner(array('u' => DB_TABLE_USER), 'c.id_user = u.id_user')
-                ->where('c.id_user =?', $idUser);
+                ->where('c.id_user = ?', $idUser);
         try {
             $row = $this->fetchAll($select)->toArray();
         } catch (Exception $ex) {
@@ -68,12 +68,14 @@ class Application_Model_Commandline extends Zend_Db_Table_Abstract {
     }
 
     public function getCommmandLine($tabIdCommand = array()) {
+        if(count($tabIdCommand)!= 0){
         $select = $this->select()
                 ->setIntegrityCheck(false)
                 ->from(array('cl' => DB_TABLE_COMMAND_LINE))
                 ->joinInner(array('s' => DB_TABLE_SELL), 's.id_sell = cl.id_sell', array('title'))
                 ->joinInner(array('u' => DB_TABLE_USER), 's.id_user = u.id_user', array('login_user', 'mail_user'))
                 ->where('cl.id_command IN (?)', $tabIdCommand);
+        }
         try {
             $row = $this->fetchAll($select)->toArray();
         } catch (Exception $ex) {

@@ -26,10 +26,10 @@ $vendu = count($this->commandVente);
     <div class="col-md-12">
         <ul id="myTab" class="nav nav-tabs nav_tabs" style="margin-right: -17px;">
             <li class="active"><a href="#service-zero" data-toggle="tab">Créer un article</a></li>
-            <li><a href="#service-two" data-toggle="tab">Article valider (<?= $valider; ?>)</a></li>
-            <li><a href="#service-one" data-toggle="tab">Article en attente de validation (<?= $attente; ?>)</a></li>
-            <li><a href="#service-three" data-toggle="tab">Article refuser (<?= $refuser; ?>)</a></li>
-            <li><a href="#service-four" data-toggle="tab">Vente effectuer (<?= $vendu; ?>)</a></li>
+            <li><a href="#service-two" data-toggle="tab">Article(s) validé (<?= $valider; ?>)</a></li>
+            <li><a href="#service-one" data-toggle="tab">Article(s) en attente de validation (<?= $attente; ?>)</a></li>
+            <li><a href="#service-three" data-toggle="tab">Article(s) refusé (<?= $refuser; ?>)</a></li>
+            <li><a href="#service-four" data-toggle="tab">Vente effectuée (<?= $vendu; ?>)</a></li>
             <li><a href="#service-five" data-toggle="tab">Historique commande (<?= $historique; ?>)</a></li>
 
         </ul>
@@ -43,10 +43,10 @@ $vendu = count($this->commandVente);
                         <hgroup class="mb20">
                             <h3><strong > 
                                     <?php
-                                    if ($attente == 1 || $attente == 0) {
-                                        echo $attente . " article";
+                                    if ($attente == 0) {
+                                        echo "Aucun article en attente";
                                     } else {
-                                        echo $attente . " articles";
+                                        echo $attente . " article(s)";
                                     }
                                     ?>
                                 </strong></h3>								
@@ -66,7 +66,6 @@ $vendu = count($this->commandVente);
                                         <div class="col-xs-12 col-sm-12 col-md-2">
                                             <ul class="meta-search">
                                                 <li><i class="glyphicon glyphicon-calendar"></i> <span><?php echo substr($value['dt_creation'], 0, -8); ?></span></li>
-                                                <li><i class="glyphicon glyphicon-time"></i> <span><?php echo substr($value['dt_creation'], 10, -3); ?></span></li>
                                                 <li><i class="glyphicon glyphicon-tags"></i> <span>
                                                         <?php
                                                         foreach ($this->category as $c) {
@@ -112,10 +111,10 @@ $vendu = count($this->commandVente);
                         <hgroup class="mb20">
                             <h3><strong > 
                                     <?php
-                                    if ($valider == 1 || $valider == 0) {
-                                        echo $valider . " article";
+                                    if ($valider == 0) {
+                                        echo "Aucun article validé";
                                     } else {
-                                        echo $valider . " articles";
+                                        echo $valider . " article(s)";
                                     }
                                     ?>
                                 </strong></h3>								
@@ -134,8 +133,7 @@ $vendu = count($this->commandVente);
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-2">
                                             <ul class="meta-search">
-                                                <li><i class="glyphicon glyphicon-calendar"></i> <span><?php echo substr($value['dt_creation'], 0, -8); ?></span></li>
-                                                <li><i class="glyphicon glyphicon-time"></i> <span><?php echo substr($value['dt_creation'], 10, -3); ?></span></li>
+                                                <li><i class="glyphicon glyphicon-calendar"></i><span><?php echo substr($value['dt_creation'], 0, -8); ?></span></li>
                                                 <li><i class="glyphicon glyphicon-tags"></i> <span>
                                                         <?php
                                                         foreach ($this->category as $c) {
@@ -180,10 +178,10 @@ $vendu = count($this->commandVente);
                         <hgroup class="mb20">
                             <h3><strong > 
                                     <?php
-                                    if ($refuser == 1 || $refuser == 0) {
-                                        echo $refuser . " article";
+                                    if ($refuser == 0) {
+                                        echo "Aucun article refusé";
                                     } else {
-                                        echo $refuser . " articles";
+                                        echo $refuser . " article(s)";
                                     }
                                     ?>
                                 </strong></h3>								
@@ -203,7 +201,7 @@ $vendu = count($this->commandVente);
                                         <div class="col-xs-12 col-sm-12 col-md-2">
                                             <ul class="meta-search">
                                                 <li><i class="glyphicon glyphicon-calendar"></i> <span><?php echo substr($value['dt_creation'], 0, -8); ?></span></li>
-                                                <li><i class="glyphicon glyphicon-time"></i> <span><?php echo substr($value['dt_creation'], 10, -3); ?></span></li>
+
                                                 <li><i class="glyphicon glyphicon-tags"></i> <span>
                                                         <?php
                                                         foreach ($this->category as $c) {
@@ -246,7 +244,7 @@ $vendu = count($this->commandVente);
             <div class="tab-pane fade" id="service-four">
                 <hgroup class="mb20">
                     <h3><strong > 
-                            Articles Vendus
+                            Vente(s) effectuée(s)
                         </strong></h3>								
                 </hgroup>
                 <section class="col-xs-12 col-sm-6 col-md-12">
@@ -275,8 +273,7 @@ $vendu = count($this->commandVente);
                                                         <td>Montant Encaissé</td>
                                                         <td>Nombre de produit</td>
                                                         <td>Adresse du client</td>
-                                                        <td>Email</td>
-                                                        <td>Tel</td>
+                                                        <td>Email</td>      
                                                         <td>Date</td>
                                                     </tr>
                                                 </thead>
@@ -291,8 +288,7 @@ $vendu = count($this->commandVente);
                                                             <td style="width:169.033px;"><?php echo number_format($totalCommande, 2, ',', ' '); ?> €</td>
                                                             <td style="width:175.633px;"><?= $quantite; ?></td>
                                                             <td style="width:257.5px;"><?= $i['address_user']; ?></td>
-                                                            <td style="width:158.467px;"><?= $i['mail_user']; ?></td>
-                                                            <td style="width:137.333px;"><?= $i['phone_user']; ?></td>
+                                                            <td style="width:158.467px;"><?= $i['mail_user']; ?></td>                                                    
                                                             <td style="width:116.217px;"><?php
                                                                 $explode = explode("-", substr($i['dt_command'], 0, -9));
                                                                 echo $explode[2] . "/" . $explode[1] . "/" . $explode[0];
@@ -345,7 +341,7 @@ $vendu = count($this->commandVente);
 <?php if ($historique != 0) { ?>
                 <div class="tab-pane fade" id="service-five">
                     <hgroup class="mb20">
-                        <h3><strong > Mes Commandes</strong></h3>								
+                        <h3><strong>Historique commande</strong></h3>								
                     </hgroup>
                     <section class="col-xs-12 col-sm-6 col-md-12">
                         <div class="container">
