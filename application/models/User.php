@@ -167,5 +167,34 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
         $this->data = $row;
         return $this->data;
     }
+    
+    public function getIs_blocked($id) {
+        try {
+
+            $select = $this->select()
+                    ->from($this->_name, 'is_blocked')
+                    ->setIntegrityCheck(false)
+                    ->where('id_user = ?', $id);
+            $row = $this->fetchAll($select)->toArray();
+            $this->data = $row[0];
+            return $this->data;
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
+    
+    public function getLevel_user($id) {
+        try {          
+            $select = $this->select()
+                    ->from($this->_name, 'level_user')
+                    ->setIntegrityCheck(false)
+                    ->where('id_user = ?', $id);
+            $row = $this->fetchAll($select)->toArray();
+            $this->data = $row[0];
+            return $this->data;
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    }
 
 }

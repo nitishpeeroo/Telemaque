@@ -5,8 +5,8 @@ class CategoryController extends Zend_Controller_Action {
     public function init() {
 
         parent::init();
-         $ns = new Zend_Session_Namespace('user');
-
+        $ns = new Zend_Session_Namespace('user');
+        $general = new Application_Model_General();
         if (!empty($ns->data)) {
             $this->view->firstname = $ns->data['firstname_user'];
             $this->view->lastname = $ns->data['lastname_user'];

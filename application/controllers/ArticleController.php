@@ -6,11 +6,22 @@ class ArticleController extends Zend_Controller_Action {
 
         parent::init();
         $ns = new Zend_Session_Namespace('user');
-        
+        $general = new Application_Model_General();
+       $statUser = $general->veriStatUser($ns->data);
         if (!empty($ns->data)) {
-            $this->view->firstname = $ns->data['firstname_user'];
-            $this->view->lastname = $ns->data['lastname_user'];
-            $this->view->lvl = $ns->data['id_rank'];
+                $this->view->firstname = $ns->data['firstname_user'];
+                $this->view->lastname = $ns->data['lastname_user'];
+                $this->view->lvl = $ns->data['id_rank'];
+        }
+        if($statUser == 1 OR $statUser == 2 )
+        {
+            $this->view->isadmin = $statUser;
+        }
+        else if($statUser == 3)
+        {  
+           Zend_Session:: namespaceUnset("user");
+           Zend_Session::destroy(true);
+           $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'acces'), null, true));
         }
         $this->category = new Application_Model_Category();
         

@@ -8,10 +8,24 @@ class UserController extends Zend_Controller_Action {
         zend_session::start();
 
         $ns = new Zend_Session_Namespace('user');
+        $use = new Application_Model_User();
+        $general = new Application_Model_General();
+        
+        $statUser = $general->veriStatUser($ns->data);
         if (!empty($ns->data)) {
-            $this->view->firstname = $ns->data['firstname_user'];
-            $this->view->lastname = $ns->data['lastname_user'];
-            $this->view->lvl = $ns->data['id_rank'];
+                $this->view->firstname = $ns->data['firstname_user'];
+                $this->view->lastname = $ns->data['lastname_user'];
+                $this->view->lvl = $ns->data['id_rank'];
+        }
+        if($statUser == 1 OR $statUser == 2 )
+        {
+            $this->view->isadmin = $statUser;   
+        }
+        else if($statUser == 3)
+        {  
+           Zend_Session:: namespaceUnset("user");
+           Zend_Session::destroy(true);
+           $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'acces'), null, true));
         }
     }
 
@@ -28,10 +42,19 @@ class UserController extends Zend_Controller_Action {
                 if (!isset($connection['id_user'])) {
                     echo "vous n'exister pas";
                 } else {
+                   
+                    if($connection['is_blocked'] == '0')
+                    {
                     $this->sess = new Zend_Session_Namespace('user');
                     $this->sess->data = $connection;
 
                     $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index'), null, true));
+                    }
+                    else
+                    {
+                        $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'acces'), null, true));
+                    }
+                    
                 }
                 // sign up
             } elseif ($this->_getParam('type') == 'signup') {

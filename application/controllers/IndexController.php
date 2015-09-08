@@ -6,10 +6,21 @@ class IndexController extends Zend_Controller_Action {
         parent::init();
         zend_session::start();
         $ns = new Zend_Session_Namespace('user');
+        $general = new Application_Model_General();
+        
+        $statUser = $general->veriStatUser($ns->data);
         if (!empty($ns->data)) {
-            $this->view->firstname = $ns->data['firstname_user'];
-            $this->view->lastname = $ns->data['lastname_user'];
-            $this->view->lvl = $ns->data['id_rank'];
+                $this->view->firstname = $ns->data['firstname_user'];
+                $this->view->lastname = $ns->data['lastname_user'];
+                $this->view->lvl = $ns->data['id_rank'];
+        }
+        if($statUser == 1 OR $statUser == 2 )
+        {
+            $this->view->isadmin = $statUser;
+        }
+        else if($statUser == 3)
+        {   
+           $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'acces'), null, true));
         }
         
         
@@ -47,14 +58,18 @@ class IndexController extends Zend_Controller_Action {
             $mailUser   = $_POST['mail'];
             $message    = $_POST['message'];
             $contact->sendMail($nom, $prenom , $object, $mailUser, $message);
-            $this->view->mail = "Votre message Ã  bien Ã©tÃ© envoyÃ©.";
+            $this->view->mail = "Votre message à  bien été envoyé.";
         }
     }
     
     public function errorAction(){
         if ($this->_getParam('type') == 'page') {
-            $this->view->error = "Vous devez Ãªtre connectÃ© pour accÃ©der Ã  cette page.";
+            $this->view->error = "Vous devez être connecté pour accéder à cette page.";
         }
+    }
+    
+    public function accesAction(){
+       
     }
     
 

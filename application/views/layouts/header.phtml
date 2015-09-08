@@ -1,7 +1,7 @@
 <!DOCTYPE>
-<html>
+<html lang="fr">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?= $website_name; ?></title>
         <link rel="icon" type="image/png" href="data:image/<?= $data['name_favicon'] . ';base64,' . $data['favicon'] ?>" />
@@ -91,6 +91,10 @@
 
                         </form>
                         <ul class="nav navbar-nav navbar-right">
+                        <?php if($this->isadmin == 2): ?>
+                            <li><a href="http://telemaqueback.dev">Accès à la gestion du site</a></li>
+                        <?php else: ?>
+                            
                             <?php if ($this->lvl == 0): ?>
                                 <li> <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'index'), null, true); ?>">Mon compte</a></li>
                                 <?php
@@ -183,7 +187,7 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><?= $this->firstname . " " . $this->lastname; ?><span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter'), null, true); ?>"><span class="glyphicon glyphicon-wrench"></span> ParamÃ¨tre de mon compte</a></li>
+                                        <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter'), null, true); ?>"><span class="glyphicon glyphicon-wrench"></span> Paramètre de mon compte</a></li>
                                         <li class="divider">
                                         </li>
                                         <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'article'), null, true); ?>"><span class="glyphicon glyphicon-wrench"></span> Mes articles</a></li>
@@ -194,6 +198,7 @@
                                     </ul>
                                 </li>
                             <?php endif; ?>
+                        <?php endif; ?>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
