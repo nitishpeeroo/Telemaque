@@ -150,7 +150,9 @@ class Application_Model_User extends Zend_Db_Table_Abstract {
 //inner join command_line cl on cl.id_command = c.id_command
 //where cl.id_command in (16,17,18)
 //group by cl.id_command
-
+        if(empty($id_command)){
+            return false;
+        }
         $select = $this->select()
                 ->setIntegrityCheck(false)
                 ->from(array('u' => DB_TABLE_USER), array('address_user', 'mail_user', 'codepostal_user', 'ville_user', 'phone_user'))

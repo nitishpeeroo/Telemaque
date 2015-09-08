@@ -7,7 +7,7 @@ class PanierController extends Zend_Controller_Action {
         zend_session::start();
         $ns = new Zend_Session_Namespace('user');
         if (empty($ns->data)) {
-            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error','type'=> 'page'), null, true));
+            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'error', 'type' => 'page'), null, true));
         }
         $ajaxContext = $this->_helper->getHelper('AjaxContext');
         $ajaxContext->addActionContext('index', 'html')
@@ -77,16 +77,16 @@ class PanierController extends Zend_Controller_Action {
                 $commandLine = new Application_Model_Commandline();
                 $idCommand = $command->addcommand($_SESSION['user']['data']['id_user']);
                 $dateCommand = $idCommand['dt_command'];
-                $dateCommand = substr($dateCommand,0,-9);
+                $dateCommand = substr($dateCommand, 0, -9);
                 $explode = explode("-", $dateCommand);
-                $dateCommand = $explode[2]."/".$explode[1]."/".$explode[0];
+                $dateCommand = $explode[2] . "/" . $explode[1] . "/" . $explode[0];
                 $idCommand = $idCommand['id_command'];
                 $valider = $commandLine->addcommandLine($idCommand, $_SESSION['panier']);
                 $user = $command->getUser($idCommand);
                 if ($valider === TRUE) {
                     $facture = $commandLine->getligneCommmand($idCommand);
                     $total = 0;
-                    foreach ($facture as $f){
+                    foreach ($facture as $f) {
                         $total += $f['price'] * $f['quantity'];
                     }
                     unset($_SESSION['panier']);
@@ -130,15 +130,24 @@ class PanierController extends Zend_Controller_Action {
         if (isset($_SESSION['panier'])) {
             $panier = array();
             $panier[$id]["quantite"] = $_SESSION['panier'] [$id];
+
             $panier[$id]['prix'] = 0;
+
             if (!empty($panier)) {
+
                 $sell = new Application_Model_Sell();
                 $prix = $sell->getArticle($id, array());
                 $_SESSION['panier'][$id] ++;
+
                 $panier[$id]["quantite"] ++;
                 $panier[$id]['prix'] = $prix[0]['price'];
                 $panier[$id]['prixTTC'] = $prix[0]['price'] * $_SESSION['panier'][$id];
                 $panier[$id]['total'] = $this->_request->getPost('total') + $prix[0]['price'];
+                if ($panier[$id]["quantite"] <= 10) {
+                    $panier[$id]['check'] = true;
+                } else {
+                    $panier[$id]['check'] = false;
+                }
                 $this->_helper->json($panier);
             }
         }
@@ -157,15 +166,20 @@ class PanierController extends Zend_Controller_Action {
                     $prix = $sell->getArticle($id, array());
                     $panier[$id]["quantite"] = 0;
                     $panier[$id]['total'] = $this->_request->getPost('total') - $prix[0]['price'];
+                    $panier[$id]['check'] = true;
                     $this->_helper->json($panier);
                 } else {
-
                     $prix = $sell->getArticle($id, array());
                     $_SESSION['panier'][$id] --;
                     $panier[$id]["quantite"] --;
                     $panier[$id]['prix'] = $prix[0]['price'];
                     $panier[$id]['prixTTC'] = $prix[0]['price'] * $_SESSION['panier'][$id];
                     $panier[$id]['total'] = $this->_request->getPost('total') - $prix[0]['price'];
+                    if ($panier[$id]["quantite"] <= 10) {
+                        $panier[$id]['check'] = true;
+                    } else {
+                        $panier[$id]['check'] = false;
+                    }
                     $this->_helper->json($panier);
                 }
             }

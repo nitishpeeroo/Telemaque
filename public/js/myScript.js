@@ -1,4 +1,4 @@
-$(".commander").on('click', function (e) {
+$(".commander").on('click', function(e) {
     if ($('.bg-danger').is(':visible')) {
         return false;
         e.preventdefault();
@@ -17,7 +17,7 @@ $(".commander").on('click', function (e) {
         }
     }
 
-    ).done(function (data) {
+    ).done(function(data) {
 
         if ($('.item-info').text() != "") {
             $('.item-info').hide();
@@ -43,13 +43,13 @@ $(".commander").on('click', function (e) {
 
 });
 //--------------Upload d'image
-$(".btn-default").on("click", function (e) {
+$(".btn-default").on("click", function(e) {
     var type = $(this).attr("type");
     if (type === "panier") {
         var signe = $(this).attr("data-dir");
         var id = $(this).attr("id_product");
         var total = $('#total').attr("price");
-        if (signe == "up") {
+        if (signe === "up") {
             $.ajax({
                 url: '/panier/ajoutquantite',
                 type: "POST",
@@ -59,7 +59,14 @@ $(".btn-default").on("click", function (e) {
                 }
             }
 
-            ).done(function (data) {
+            ).done(function(data) {
+                var check = data[id]['check'];
+                if (check === false) {
+                    $('.bg-danger').show();
+                }else{
+                         $('.bg-danger').hide();
+                }
+                
                 var prix = data[id]['prix'];
                 var newprix = data[id]['prixTTC'];
                 var qte = data[id]['quantite'];
@@ -70,7 +77,7 @@ $(".btn-default").on("click", function (e) {
                 $("#qte-panier-" + id).text("Quantite : " + qte);
             });
         }
-        if (signe == "dwn") {
+        if (signe === "dwn") {
             $.ajax({
                 url: '/panier/retirequantite',
                 type: "POST",
@@ -80,7 +87,12 @@ $(".btn-default").on("click", function (e) {
                 }
             }
 
-            ).done(function (data) {
+            ).done(function(data) {
+                var check = data[id]['check'];
+                if (check === true) {
+                    $('.bg-danger').hide();
+                }
+
                 var qte = data[id]['quantite'];
                 if (qte == 0) {
                     $("#tr-" + id).remove();
@@ -119,7 +131,7 @@ $(".btn-default").on("click", function (e) {
 });
 //----------------STEP Création de produit
 
-$(document).ready(function () {
+$(document).ready(function() {
 
     var navListItems = $('div.setup-panel div a'),
             allWells = $('.setup-content'),
@@ -127,7 +139,7 @@ $(document).ready(function () {
 
     allWells.hide();
 
-    navListItems.click(function (e) {
+    navListItems.click(function(e) {
         e.preventDefault();
         var $target = $($(this).attr('href')),
                 $item = $(this);
@@ -141,7 +153,7 @@ $(document).ready(function () {
         }
     });
 
-    allNextBtn.click(function () {
+    allNextBtn.click(function() {
         var curStep = $(this).closest(".setup-content"),
                 curStepBtn = curStep.attr("id"),
                 nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
@@ -163,15 +175,15 @@ $(document).ready(function () {
     $('div.setup-panel div a.btn-primary').trigger('click');
 });
 //-------------Upload d'image
-$(document).on('change', '.btn-file :file', function () {
+$(document).on('change', '.btn-file :file', function() {
     var input = $(this),
             numFiles = input.get(0).files ? input.get(0).files.length : 1,
             label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
     input.trigger('fileselect', [numFiles, label]);
 });
 
-$(document).ready(function () {
-    $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+$(document).ready(function() {
+    $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
 
         var input = $(this).parents('.input-group').find(':text'),
                 log = numFiles > 1 ? numFiles + ' files selected' : label;
@@ -185,7 +197,7 @@ $(document).ready(function () {
     });
 });
 //------------Liste dynamique
-$(".clickListRubrique").on("click", function (e) {
+$(".clickListRubrique").on("click", function(e) {
     var id_category = $(this).attr("data");
     $(".sous-category").hide();
     $("#" + id_category).show();
@@ -194,7 +206,7 @@ $(".clickListRubrique").on("click", function (e) {
 });
 //Gestion des category lors de la création d'une vente
 
-$(".select-sous-category").on("click", function (e) {
+$(".select-sous-category").on("click", function(e) {
     var id_sous_category = $(this).attr("data");
     $(".select-sous-category").attr("class", "active select-sous-category");
     $(this).attr("class", "danger select-sous-category");
@@ -206,7 +218,7 @@ $(".select-sous-category").on("click", function (e) {
 
 
 //Visualisation du produit créer
-$("#reviewProduct").on("click", function (e) {
+$("#reviewProduct").on("click", function(e) {
     var title = $("input[name='productTitle']").val();
     var descriptionCourte = $("input[name='productDescritptionCourte']").val();
     var quantite = $("input[name='productQuantite']").val();
@@ -228,23 +240,23 @@ $("#reviewProduct").on("click", function (e) {
 $(function() {
 
     $('#login-form-link').click(function(e) {
-		$("#login-form").delay(100).fadeIn(100);
- 		$("#register-form").fadeOut(100);
-		$('#register-form-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
-	});
-	$('#register-form-link').click(function(e) {
-		$("#register-form").delay(100).fadeIn(100);
- 		$("#login-form").fadeOut(100);
-		$('#login-form-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
-	});
+        $("#login-form").delay(100).fadeIn(100);
+        $("#register-form").fadeOut(100);
+        $('#register-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+    $('#register-form-link').click(function(e) {
+        $("#register-form").delay(100).fadeIn(100);
+        $("#login-form").fadeOut(100);
+        $('#login-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
 
 });
 //*-------------Form Inscription ----Bonjour <prenom>....
-$('#first_name').on("keyup",function(){
-    var prenom =$(this).val(); 
+$('#first_name').on("keyup", function() {
+    var prenom = $(this).val();
     $("#name_user").text(prenom);
 });
