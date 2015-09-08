@@ -1,8 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
-            <?php if ($this->panier != null && $this->session != null) {
-          ?>
+            <?php
+            if ($this->panier != null && $this->session != null) {
+                ?>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -17,7 +18,7 @@
                         <?php
                         $total = 0;
                         foreach ($this->panier as $key => $val) {
-                           
+
                             $total += $val['price'] * $this->session[$val['id_sell']];
                             ?>
                             <tr id="tr-<?php echo $val['id_sell']; ?>">
@@ -32,26 +33,34 @@
                                             <span>Disponibilité: </span><span class="text-success"><strong>En Stock</strong></span>
 
                                         </div>
+
                                     </div></td>
-<!--                                <td class="col-sm-1 col-md-1" style="text-align: center">
+        <!--                                <td class="col-sm-1 col-md-1" style="text-align: center">
                                     <input type="email" class="form-control" id="exampleInputEmail1" value=" <?php echo $this->session[$val['id_sell']]; ?>">
                                 </td>-->
-                                      <td class="col-sm-1 col-md-2" style="text-align: center">
-                      
-                            <div class="input-group number-spinner">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" data-dir="dwn" type="panier" id_product="<?php echo $val['id_sell']; ?>"><span class="glyphicon glyphicon-minus"></span></button>
-                                </span>
-                                <input type="text" class="form-control text-center" class="modifQuantite" value="<?php echo $this->session[$val['id_sell']]; ?>">
+                                <td class="col-sm-1 col-md-2" style="text-align: center">
 
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" data-dir="up" type="panier" id_product="<?php echo $val['id_sell']; ?>"><span class="glyphicon glyphicon-plus"></span></button>
-                                </span>
-                            </div>
-                                          
-                        
-                              </td>
-                              <td class="col-sm-1 col-md-1 text-center"><strong><?php echo number_format($val['price'], '2', ',', ' ') . " €"; ?></strong></td>
+                                    <div class="input-group number-spinner">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" data-dir="dwn" type="panier" id_product="<?php echo $val['id_sell']; ?>"><span class="glyphicon glyphicon-minus"></span></button>
+                                        </span>
+                                        <input type="text" class="form-control text-center" class="modifQuantite"  value="<?php echo $this->session[$val['id_sell']]; ?>">
+
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" data-dir="up" type="panier" id_product="<?php echo $val['id_sell']; ?>"><span class="glyphicon glyphicon-plus"></span></button>
+                                        </span>
+                                    </div>
+                                    <?php 
+                                   
+                                    if (intval($this->session[$val['id_sell']]) > 10) {  ?>
+                                        <div class="bg-danger">Veuiller saisir une quantité inférieur</div>  
+                                    <?php }else{
+                                        ?>
+                                        <div class="bg-danger" style='display:none!important;'>Veuiller saisir une quantité inférieur</div>
+                                        <?php
+                                    } ?>
+                                </td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong><?php echo number_format($val['price'], '2', ',', ' ') . " €"; ?></strong></td>
                                 <td class="col-sm-1 col-md-1 text-center"><strong id="ttc-<?php echo $val['id_sell']; ?>"><?php echo number_format($val['price'] * $this->session[$val['id_sell']], '2', ',', ' ') . " €"; ?></strong></td>
                                 <td class="col-sm-1 col-md-1">
                                     <form method="GET" action="<?php echo $this->url(array('controller' => 'panier', 'action' => 'index', 'type' => 'delete', 'id' => $val['id_sell']), null, true); ?>">
@@ -62,23 +71,23 @@
                                 </td>
                             </tr>
                         <?php } ?>
-        <!--<tr>
-            <td>   </td>
-            <td>   </td>
-            <td>   </td>
-            <td><h5>Subtotal</h5></td>
-            <td class="text-right"><h5><strong>$24.59</strong></h5></td>
-        </tr>
-        <tr>
-            <td>   </td>
-            <td>   </td>
-            <td>   </td>
-            <td><h5>Estimated shipping</h5></td>
-            <td class="text-right"><h5><strong>$6.94</strong></h5></td>
-        </tr>-->
+    <!--<tr>
+        <td>   </td>
+        <td>   </td>
+        <td>   </td>
+        <td><h5>Subtotal</h5></td>
+        <td class="text-right"><h5><strong>$24.59</strong></h5></td>
+    </tr>
+    <tr>
+        <td>   </td>
+        <td>   </td>
+        <td>   </td>
+        <td><h5>Estimated shipping</h5></td>
+        <td class="text-right"><h5><strong>$6.94</strong></h5></td>
+    </tr>-->
                         <tr>
                             <td class="text-left">  
-                                
+
                             </td>
                             <td>   </td>
 
@@ -97,15 +106,15 @@
                                 </form></td>
                             <td>
                                 <form method="POST" action="<?php echo $this->url(array('controller' => 'panier', 'action' => 'paiement'), null, true); ?>">
-                                    <button type="submit" class="btn btn-success">
-                                        Commander <span class="glyphicon glyphicon-play"></span>
+                                    <button type="submit" class="btn btn-success commander">
+                                        Commander <span class="glyphicon glyphicon-play "></span>
                                     </button>
                                 </form>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            <div  style="display:none;" class="paniervide">
+                <div  style="display:none;" class="paniervide">
                     <a href="/" class="sbt btGreen">Continuez vos achats !</a>
                 </div>
             <?php } else { ?>

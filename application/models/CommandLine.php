@@ -87,6 +87,10 @@ class Application_Model_Commandline extends Zend_Db_Table_Abstract {
     }
 
     public function getCommandLineByArrayIdProduct($tabProduct = array(), $groupBy = false) {
+     
+       if(empty($tabProduct)){
+           return false;
+       }
         if ($groupBy == false) {
             $select = $this->select()
                     ->setIntegrityCheck(false)

@@ -6,24 +6,12 @@
             <div class="container">	
                 <div class="col-md-5">
                     <div class="product col-md-7 service-image-left">
-                        <center>
+                    
                             <a class="example-image-link" href="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" data-lightbox="example-1">
-                            <img style="padding-top: 30%;"   width="240" height="auto" src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" /></a>
-                        </center>
+                            <img  style="max-height: 319px; max-width: 259px;"  src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" /></a>
+                        
                     </div>
-                    <div class="container service1-items col-sm-5 col-md-5 pull-left">
-                        <center>
-                            <a id="item-1" class="service1-item" data-lightbox="example-set" href="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" data-lightbox="example-1">
-                                <img src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" alt=""></img>
-                            </a>
-                            <a id="item-2" class="service1-item" data-lightbox="example-set" href="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" data-lightbox="example-1">
-                                <img src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" alt=""></img>
-                            </a>
-                            <a id="item-3" class="service1-item" data-lightbox="example-set" href="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" data-lightbox="example-1">
-                                <img src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" alt=""></img>
-                            </a>
-                        </center>
-                    </div>
+
                     <input type="file" name="image" enctype="multipart/form-data" />
                     <input type="hidden" name="MAX_FILE_SIZE" value="6000" />
                 </div>
@@ -35,7 +23,7 @@
                     <hr>
                     <div class="container">
                         <div class="col-md-2">
-                            <div class="product-price">Prix :<input type="number" max="999999.99" min="0"  name="price" value="<?php echo $p['price']; ?>" /></div>
+                            <div class="product-price">Prix :<input type="text"   name="price" value="<?php echo $p['price']; ?>" required=""/></div>
                         </div>      
                     </div> 
                     <div class="container">

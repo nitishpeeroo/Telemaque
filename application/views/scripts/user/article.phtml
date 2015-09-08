@@ -18,7 +18,11 @@ if (count($this->articles) > 0) {
     }
 }
 $historique = count($this->command);
-$vendu = count($this->commandVente);
+if ($this->commandVente == false) {
+    $vendu = 0;
+} else {
+    $vendu = count($this->commandVente);
+}
 ?>
 <!----------------FIN--------------------------------------------->
 
@@ -26,7 +30,7 @@ $vendu = count($this->commandVente);
     <div class="col-md-12">
         <ul id="myTab" class="nav nav-tabs nav_tabs" style="margin-right: -17px;">
             <li class="active"><a href="#service-zero" data-toggle="tab">Créer un article</a></li>
-            <li><a href="#service-two" data-toggle="tab">Article(s) validé (<?= $valider; ?>)</a></li>
+            <li><a href="#service-two" data-toggle="tab">Article(s) validé(s) (<?= $valider; ?>)</a></li>
             <li><a href="#service-one" data-toggle="tab">Article(s) en attente de validation (<?= $attente; ?>)</a></li>
             <li><a href="#service-three" data-toggle="tab">Article(s) refusé (<?= $refuser; ?>)</a></li>
             <li><a href="#service-four" data-toggle="tab">Vente effectuée (<?= $vendu; ?>)</a></li>
@@ -38,6 +42,11 @@ $vendu = count($this->commandVente);
                 <?php include 'createProduct.phtml'; ?>
             </div>
             <div class="tab-pane fade" id="service-one">
+                <hgroup class="mb20">
+                    <h3><strong > 
+                           Article(s) en attente de validation
+                        </strong></h3>								
+                </hgroup>
                 <?php if (count($this->articles) > 0) { ?>
                     <div class="container">
                         <hgroup class="mb20">
@@ -106,6 +115,11 @@ $vendu = count($this->commandVente);
                 <?php } ?>
             </div>
             <div class="tab-pane fade" id="service-two">
+                 <hgroup class="mb20">
+                    <h3><strong > 
+                            Article(s) validé(s)
+                        </strong></h3>								
+                </hgroup>
                 <?php if (count($this->articles) > 0) { ?>
                     <div class="container">
                         <hgroup class="mb20">
@@ -173,6 +187,11 @@ $vendu = count($this->commandVente);
                 <?php } ?>
             </div>
             <div class="tab-pane fade" id="service-three">
+                <hgroup class="mb20">
+                    <h3><strong > 
+                            Article(s) refusé(s)
+                        </strong></h3>								
+                </hgroup>
                 <?php if (count($this->articles) > 0) { ?>
                     <div class="container">
                         <hgroup class="mb20">
@@ -290,9 +309,9 @@ $vendu = count($this->commandVente);
                                                             <td style="width:257.5px;"><?= $i['address_user']; ?></td>
                                                             <td style="width:158.467px;"><?= $i['mail_user']; ?></td>                                                    
                                                             <td style="width:116.217px;"><?php
-                                                                $explode = explode("-", substr($i['dt_command'], 0, -9));
-                                                                echo $explode[2] . "/" . $explode[1] . "/" . $explode[0];
-                                                                ?></td>
+                                            $explode = explode("-", substr($i['dt_command'], 0, -9));
+                                            echo $explode[2] . "/" . $explode[1] . "/" . $explode[0];
+                                                        ?></td>
                                                         </tr>
                                                         <?php
                                                     }
@@ -325,24 +344,26 @@ $vendu = count($this->commandVente);
                                                                 <td><?php echo number_format($c['price'], 2, ',', ' '); ?> €</td>
                                                                 <td><?php echo number_format($c['quantity'] * $c['price'], 2, ',', ' '); ?> €</td>
                                                             </tr>
-                                                        <?php }
+                                                        <?php
+                                                        }
                                                     }
                                                     ?>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
-<?php } ?>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
                 </section>
             </div>
-<?php if ($historique != 0) { ?>
-                <div class="tab-pane fade" id="service-five">
+             <div class="tab-pane fade" id="service-five">
                     <hgroup class="mb20">
                         <h3><strong>Historique commande</strong></h3>								
                     </hgroup>
+            <?php if ($historique != 0) { ?>
+               
                     <section class="col-xs-12 col-sm-6 col-md-12">
                         <div class="container">
                             <div class="row">
@@ -366,7 +387,7 @@ $vendu = count($this->commandVente);
                                         <div class="accordion-toggle " data-toggle="collapse" href="#<?= $c['id_command']; ?>">
 
                                             <table class="table table-striped">
-        <?php if ($compteurCommand == 0) { ?>
+                                                <?php if ($compteurCommand == 0) { ?>
                                                     <thead>
                                                         <tr>
                                                             <td>N° Commmande</td>
@@ -375,7 +396,7 @@ $vendu = count($this->commandVente);
                                                             <td>Date</td>
                                                         </tr>
                                                     </thead>
-        <?php } $compteurCommand++; ?>
+                                                <?php } $compteurCommand++; ?>
 
                                                 <tbody>
 
@@ -428,13 +449,13 @@ $vendu = count($this->commandVente);
                                                 </table>
                                             </div>
                                         </div>
-    <?php } ?>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
                     </section>
                 </div>
-<?php } ?>
+            <?php } ?>
 
         </div>
     </div>
