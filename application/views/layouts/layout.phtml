@@ -6,7 +6,6 @@ $general = new Application_Model_General();
 
 $data_webite = $general->getGeneral();
 $data = $data_webite[0];
-
 $website_name = $data['website_name'];
 $data['favicon'] = base64_encode($data['favicon']);
 $data['name_favicon'] = pathinfo($data['name_favicon'], PATHINFO_EXTENSION);

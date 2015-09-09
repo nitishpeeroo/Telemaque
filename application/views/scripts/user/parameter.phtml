@@ -1,14 +1,15 @@
-<div class = "col-md-6">
-    <div class="wrapper form-signindefault" style="min-width: 768px!important;">
-        
-        <label class="control-label">Prénom : </label><label class="control-label"><?= $this->firstname; ?></label><br/>
-        <label class="control-label">Nom : </label><label class="control-label"><?= $this->lastname; ?></label><br/>
-        <label class="control-label">Email : </label><label class="control-label"><?= $this->mail; ?></label><br/>
-        <label class="control-label">Numéro de téléphone : </label><label class="control-label"><?= $this->phone; ?></label><br/>
-        <label class="control-label">Adresse : </label><label class="control-label"><?= $this->address; ?></label><br/>
-        <label class="control-label">Ville : </label<label class="control-label"><?= $this->ville; ?></label><br/>
-        <label class="control-label">Code postal : </label><label class="control-label"><?= $this->cp; ?></label><br/>
-        <a  href="<?php echo $this->url(array('controller' => 'user', 'action' => 'modify'), null, true); ?>" ><button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >modifier</button></a>  
-        
-    </div>   
-</div
+    <div class = "col-md-6">
+        <div class="wrapper form-signindefault" style="min-width: 768px!important; margin-left: 25%; " >
+
+            <label class="control-label">Prénom : </label><label class="control-label"><?= $this->firstname; ?></label><br/>
+            <label class="control-label">Nom : </label><label class="control-label"><?= $this->lastname; ?></label><br/>
+            <label class="control-label">Email : </label><label class="control-label"><?= $this->mail; ?></label><br/>
+            <label class="control-label">Numéro de téléphone : </label><label class="control-label"><?= $this->phone; ?></label><br/>
+            <label class="control-label">Adresse : </label><label class="control-label"><?= $this->address; ?></label><br/>
+            <label class="control-label">Ville : </label<label class="control-label"><?= $this->ville; ?></label><br/>
+            <label class="control-label">Code postal : </label><label class="control-label"><?= $this->cp; ?></label><br/>
+            <a  href="<?php echo $this->url(array('controller' => 'user', 'action' => 'modify'), null, true); ?>" ><button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >modifier</button></a>  
+
+        </div>   
+    </div>
+</div>

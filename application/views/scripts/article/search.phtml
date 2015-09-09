@@ -9,11 +9,12 @@
             <?php foreach ($this->produit as $p) { 
                
                 ?>
+            <a href="<?php echo $this->url(array('controller' => 'article', 'action' => 'product',"fiche"=> $p['id_sell']),null,true); ?>">
                 <div class="col-sm-4 col-lg-4 col-md-4">
                     <div class="thumbnail">
-                        <a href="<?php echo $this->url(array('controller' => 'article', 'action' => 'product',"fiche"=> $p['id_sell']),null,true); ?>">
+                        
                         <img style="min-height: 250px; max-height: 250px;"  src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" />
-                        </a>
+                        
                         <div class="caption">
                             <h4 class="pull-right"><?php echo $p['price']." €"; ?></h4>
                             <h4><a href="<?php echo $this->url(array('controller' => 'article', 'action' => 'product',"fiche"=> $p['id_sell']),null,true); ?>"><?php echo $p['title']; ?></a>
@@ -22,7 +23,7 @@
                         </div>
                     </div>
                 </div>
-
+            </a>
             <?php } ?>
         </div>
     </div>

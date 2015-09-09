@@ -58,13 +58,13 @@ class IndexController extends Zend_Controller_Action {
             $mailUser   = $_POST['mail'];
             $message    = $_POST['message'];
             $contact->sendMail($nom, $prenom , $object, $mailUser, $message);
-            $this->view->mail = "Votre message à  bien été envoyé.";
+            $this->view->mail = "Votre message ï¿½ bien ï¿½tï¿½ envoyï¿½.";
         }
     }
     
     public function errorAction(){
         if ($this->_getParam('type') == 'page') {
-            $this->view->error = "Vous devez être connecté pour accéder à cette page.";
+            $this->view->error = "Vous devez ï¿½tre connectï¿½ pour accï¿½der ï¿½ cette page.";
         }
     }
     

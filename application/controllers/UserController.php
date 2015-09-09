@@ -27,6 +27,19 @@ class UserController extends Zend_Controller_Action {
            Zend_Session::destroy(true);
            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'acces'), null, true));
         }
+        if($this->_getParam('message') != null ){
+            switch($this->_getParam('message')){
+                case 'deconnection':
+                    $this->view->message = "Vous êtes déconnecté";
+                break;
+                case 'done':
+                    $this->view->message = "Un article à été ajouté";
+                break;
+                case 'connecter':
+                    $this->view->message = "Vous êtes connecter";
+                break;
+            }
+        }
     }
 
     public function indexAction() {
@@ -48,7 +61,7 @@ class UserController extends Zend_Controller_Action {
                     $this->sess = new Zend_Session_Namespace('user');
                     $this->sess->data = $connection;
 
-                    $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index'), null, true));
+                    $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index','message'=>'connecter'), null, true));
                     }
                     else
                     {
@@ -76,9 +89,9 @@ class UserController extends Zend_Controller_Action {
                 $stat = $user->inscription($login, $mdp, $firstname, $lastname, $mail, $phone, $address, $cp, $ville);
                 $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index'), null, true));
                 if ($stat != -1) {
-                    echo "vous êtes inscrit";
+                     $this->view->message = "Vous êtes inscrit";
                 } else {
-                    echo "erreur lors de l'enregistrement";
+                     $this->view->message = "Erreur lors de l'enregistrement";
                 }
             }
         }
@@ -87,7 +100,7 @@ class UserController extends Zend_Controller_Action {
     public function destroyAction() {
         Zend_Session:: namespaceUnset("user");
         Zend_Session::destroy(true);
-        $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'index'), null, true));
+        $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'index', 'message'=>'deconnection'), null, true));
     }
 
     public function parameterAction() {
@@ -119,6 +132,7 @@ class UserController extends Zend_Controller_Action {
             }
             $stat = $user->updateUser($mdp, $firstname, $lastname, $mail, $phone, $address, $ville, $cp, $ns->data['id_user']);
             $ns->data = $stat;
+            $this->view->message = "Modification sauvegard�";
         }
 
         $this->view->firstname = $ns->data['firstname_user'];
@@ -187,7 +201,7 @@ class UserController extends Zend_Controller_Action {
                 $ResultImage = $images->addImage($idSell, $image, $nameImage);
 
                 if ($ResultImage == true) {
-                    $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'article'), null, true));
+                    $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'article','message'=>'done'), null, true));
                 }
             }
             if ($this->_getParam('type') == 'update') {
@@ -195,6 +209,7 @@ class UserController extends Zend_Controller_Action {
                 $quantity = $_POST['quantity'];
                 $price = $_POST['price'];
                 $sell->updatePriceQuantity($quantity, $price, $idSell);
+                $this->view->message = "Modification(s) sauvegard�(s)";
             }
         }
 

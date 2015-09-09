@@ -16,7 +16,7 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-default" role="navigation" style="max-height: 51.3px;">
+            <nav class="navbar navbar-default" role="navigation" style="max-height: 51.3px; ">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
@@ -26,7 +26,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" style="" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, true); ?>"><img src="data:image/<?= $data['name_logo'] . ';base64,' . $data['logo'] ?>" class="navbar-brand" style="padding:0;" /></a>
+                        <a class="navbar-brand" style="margin-left: 0px;" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, true); ?>"><img src="data:image/<?= $data['name_logo'] . ';base64,' . $data['logo'] ?>" class="navbar-brand" style="padding:0;" /></a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
@@ -142,8 +142,8 @@
                                                             <img  style="max-height: 50px; max-width: 50px;" src="data:image/<?php echo $val['type'] . ' ;base64,' . $val['img64'] ?>" />
                                                             <span class="item-info">
                                                                 <span><center><a href="<?php echo $this->url(array('controller' => 'article', 'action' => 'product', "fiche" => $val['id_sell']), null, true); ?>"><?php echo $val['title']; ?></a></center></span>
-                                                                <span>Prix : <?php echo $val['price'] . " € "; ?> </span>
-                                                                <span id="qte-panier-<?php echo $val['id_sell']; ?>">Quantité : <?php echo $session[$val['id_sell']]; ?></span>
+                                                                <span>Prix : <?php echo $val['price'] . " â‚¬ "; ?> </span>
+                                                                <span id="qte-panier-<?php echo $val['id_sell']; ?>">QuantitÃ© : <?php echo $session[$val['id_sell']]; ?></span>
                                                             </span>
                                                         </span>
                                                     </span>
@@ -184,7 +184,7 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><?= $this->firstname . " " . $this->lastname; ?><span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter'), null, true); ?>"><span class="glyphicon glyphicon-wrench"></span> Paramétre de mon compte</a></li>
+                                        <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter'), null, true); ?>"><span class="glyphicon glyphicon-wrench"></span> Paramètre de mon compte</a></li>
                                         <li class="divider">
                                         </li>
                                         <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'article'), null, true); ?>"><span class="glyphicon glyphicon-wrench"></span> Mes articles</a></li>
@@ -198,10 +198,10 @@
                              <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><?= $this->firstname . " " . $this->lastname; ?><span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter'), null, true); ?>"><span class="glyphicon glyphicon-wrench"></span> Paramétre de mon compte</a></li>
+                                        <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter'), null, true); ?>"><span class="glyphicon glyphicon-wrench"></span> Paramètre de mon compte</a></li>
                                         <li class="divider">
                                         </li>
-                                        <li><a href="http://telemaqueback.dev">Accés � la gestion du site</a></li>
+                                        <li><a href="<?= $data['url_back']; ?>">Accés à la gestion du site</a></li>
                                         <li class="divider"></li>
                                         <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'destroy'), null, true); ?>">
                                                 <span class="glyphicon glyphicon-off"></span>
@@ -218,4 +218,16 @@
 
         </header>
         <div class="main">
-            <div class = "container" style="margin-bottom: 10px;">               
+            <div class = "container" style="margin-bottom: 10px;">      
+                <?php if(isset($this->message) && !empty($this->message)): ?>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <div class="alert alert-success">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                                <span class="glyphicon glyphicon-ok"></span> <strong><?= $this->message; ?></strong>                       
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>

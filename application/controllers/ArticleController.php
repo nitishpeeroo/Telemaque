@@ -25,6 +25,9 @@ class ArticleController extends Zend_Controller_Action {
         }
         $this->category = new Application_Model_Category();
         
+        if($this->_getParam('message') != null){
+            $this->view->message = "Modification sauvegarder";
+        }
     }
 
     public function searchAction() {
@@ -87,8 +90,7 @@ class ArticleController extends Zend_Controller_Action {
         $sell = new Application_Model_Sell();
         $images = new Application_Model_Image();
         $categorys = new Application_Model_Category();
-        $produit = $article->getArticle($fiche); 
-        
+        $produit = $article->getArticle($fiche);  
         if($this->_request->isPost())
         {        
             $title = $_POST['title'];
@@ -116,7 +118,7 @@ class ArticleController extends Zend_Controller_Action {
             }
             if($ResultImage == true)
             {
-                $this->_redirect($this->view->url(array('controller' => 'article', 'action' => 'modify','fiche'=> $fiche), null, true));
+                $this->_redirect($this->view->url(array('controller' => 'article', 'action' => 'modify','fiche'=> $fiche,'message'=>'done'), null, true));
             }    
         }           
         

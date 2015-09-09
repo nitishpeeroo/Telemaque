@@ -1,19 +1,35 @@
 
 
 <div class = "col-md-6">
-    <div class="wrapper form-signindefault" style="min-width: 768px!important;">
+    <div class="wrapper form-signindefault" style="min-width: 768px!important; margin-left: 30%;">
         
 <form method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter','type'=> 'apply'), null, true); ?>">
-    <label class="control-label">Prénom</label><input type="text" maxlength="50" value="<?= $this->firstname ?>" name="firstname" required="required" class="form-control" placeholder="Prénom"><br/>
-    <label class="control-label">Nom</label><input type="text" maxlength="50" value="<?= $this->lastname ?>" name="lastname" required="required" class="form-control" placeholder="Nom"><br/>
-    <label class="control-label">Email</label><input type="email" maxlength="50" value="<?= $this->mail ?>" name="mail" required="required" class="form-control" placeholder="Email"><br/>
-    <label class="control-label">Numéro de téléphone</label><input type="tel" maxlength="30" value="<?= $this->phone ?>" name="phone" class="form-control" placeholder="numéro de téléphone"><br/>
-    <label class="control-label">Adresse</label><input type="text" maxlength="255" value="<?= $this->address ?>" name="address" required="required" class="form-control" placeholder="adresse"><br/>
-    <label class="control-label">Ville</label><input type="text" maxlength="255" value="<?= $this->ville ?>" name="ville" required="required" class="form-control" placeholder="ville"><br/>
-    <label class="control-label">Code postal</label><input type="text" maxlength="255" value="<?= $this->cp ?>" name="cp" required="required" class="form-control" placeholder="Code postal"><br/>
-    <label class="control-label">Ancien mot de passe</label><input type="password" name="last_password" class="form-control" placeholder="mot de passe"><label class="control-label"><?= $this->error; ?></label><br/>
-    <label class="control-label">Nouveau mot de passe</label><input  type="password" name="password" class="form-control" placeholder="mot de passe"><br/>
-    <label class="control-label">Confirmez votre nouveau mot de passe</label><input type="password" name="password" class="form-control" placeholder="mot de passe"><br/>
+    <label class="control-label">Prénom</label><input type="text" maxlength="50" value="<?= $this->firstname ?>" name="firstname" required="required" class="input-lg form-control" placeholder="Prénom"><br/>
+    <label class="control-label">Nom</label><input type="text" maxlength="50" value="<?= $this->lastname ?>" name="lastname" required="required" class="input-lg form-control" placeholder="Nom"><br/>
+    <label class="control-label">Email</label><input type="email" maxlength="50" value="<?= $this->mail ?>" name="mail" required="required" class="input-lg form-control" placeholder="Email"><br/>
+    <label class="control-label">Numéro de téléphone</label><input type="tel" maxlength="30" value="<?= $this->phone ?>" name="phone" class="input-lg form-control" placeholder="numéro de téléphone"><br/>
+    <label class="control-label">Adresse</label><input type="text" maxlength="255" value="<?= $this->address ?>" name="address" required="required" class="input-lg form-control" placeholder="adresse"><br/>
+    <label class="control-label">Ville</label><input type="text" maxlength="255" value="<?= $this->ville ?>" name="ville" required="required" class="input-lg form-control" placeholder="ville"><br/>
+    <label class="control-label">Code postal</label><input type="text" maxlength="255" value="<?= $this->cp ?>" name="cp" required="required" class="input-lg form-control" placeholder="Code postal"><br/>
+    <label class="control-label">Changer de mot de passe (Ne pas remplir dans le cas contraire)</label>
+    <input type="password" class="input-lg form-control" name="password" id="password1" placeholder="nouveau mot de passe" autocomplete="off">
+    <div class="row">
+    <div class="col-sm-6">
+    <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 8 Charactères minimum<br>
+    <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Une Lettre majuscule
+    </div>
+    <div class="col-sm-6">
+    <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Lowercase Letter<br>
+    <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Un chiffre
+    </div>
+    </div>
+    <input type="password" class="input-lg form-control" name="password2" id="password2" placeholder="repéter votre mot de passe" autocomplete="off">
+    <div class="row">
+    <div class="col-sm-12">
+    <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span>    Identique
+    </div>
+    </div>
+    <br/>
     <button class="btn btn-lg btn-primary btn-block nextBtn" id="reviewProduct" type="submit">Enregistrer</button>  
 </form>
 
