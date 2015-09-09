@@ -1,15 +1,64 @@
-    <div class = "col-md-6">
-        <div class="wrapper form-signindefault" style="min-width: 768px!important; margin-left: 25%; " >
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad" >
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><?= $this->login_user; ?></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://comps.canstockphoto.fr/can-stock-photo_csp21530099.jpg" class="img-circle img-responsive"> </div>
+                        <div class=" col-md-9 col-lg-9 "> 
+                            <table class="table table-user-information">
+                                <tbody>
+                                    <tr>
+                                        <td>Prénom:</td>
+                                        <td><?= $this->firstname; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nom:</td>
+                                        <td><?= $this->lastname; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email:</td>
+                                        <td><a href="<?= $this->mail; ?>"><?= $this->mail; ?></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Numéro de téléphone :</td>
+                                        <td><?= $this->phone; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Adresse :</td>
+                                        <td><?= $this->address; ?></td>
+                                    </tr>
 
-            <label class="control-label">Prénom : </label><label class="control-label"><?= $this->firstname; ?></label><br/>
-            <label class="control-label">Nom : </label><label class="control-label"><?= $this->lastname; ?></label><br/>
-            <label class="control-label">Email : </label><label class="control-label"><?= $this->mail; ?></label><br/>
-            <label class="control-label">Numéro de téléphone : </label><label class="control-label"><?= $this->phone; ?></label><br/>
-            <label class="control-label">Adresse : </label><label class="control-label"><?= $this->address; ?></label><br/>
-            <label class="control-label">Ville : </label<label class="control-label"><?= $this->ville; ?></label><br/>
-            <label class="control-label">Code postal : </label><label class="control-label"><?= $this->cp; ?></label><br/>
-            <a  href="<?php echo $this->url(array('controller' => 'user', 'action' => 'modify'), null, true); ?>" ><button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >modifier</button></a>  
+                                    <tr>
+                                    <tr>
+                                        <td>Ville :</td>
+                                        <td><?= $this->ville; ?></td>
+                                    </tr>
 
-        </div>   
+                                    <tr>
+                                        <td>Code postal :</td>
+                                        <td><?= $this->cp; ?></td>
+                                    </tr>
+
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a data-original-title="Broadcast Message" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'contact'), null, true); ?>" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                    <span class="pull-right">
+                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'modify'), null, true); ?>" class="btn btn-primary">Modifier mes informations personnelles</a>
+                    </span>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>

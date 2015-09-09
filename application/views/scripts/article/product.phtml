@@ -18,43 +18,49 @@
                     <div class="product-desc"><?php echo $p['description_courte']; ?></div>
 
                     <hr>
+
                     <div class="col-md-3">
-                        <div class="product-price"><?php echo number_format($p['price'], 2, ',', ' '); ?> €</div></div>
-                    <div class="col-md-3"><div class="product-quantity"><?php
-                            if ($p['quantity'] > 10) {
-                                echo "Plus de <span id='qteMax'>10</span> disponibles";
-                            } else {
-                                if ($p['quantity'] == 1) {
-                                    echo "<span id='qteMax'>1</span> disponible";
+                        <div class="product-price"><?php echo number_format($p['price'], 2, ',', ' '); ?> €</div>
+                    </div>
+                    <?php if ($p['quantity'] > 0) { ?>
+                        <div class="col-md-3"><div class="product-quantity"><?php
+                                if ($p['quantity'] > 10) {
+                                    echo "Plus de <span id='qteMax'>10</span> disponibles";
                                 } else {
-                                    echo "<span id='qteMax'>" . $p['quantity'] . "</span> disponibles";
+                                    if ($p['quantity'] == 1) {
+                                        echo "<span id='qteMax'>1</span> disponible";
+                                    } else {
+                                        echo "<span id='qteMax'>" . $p['quantity'] . "</span> disponibles";
+                                    }
                                 }
-                            }
-                            ?>
+                                ?>
 
-                        </div></div>
-
-                    <?php
-                    if (isset($_SESSION)) {
-                        $rank = $_SESSION['user']['data']['id_rank'];
-                        if (($rank == "1" || $rank == 2) && $rank != null) {
-                            ?>
-                            <div class="container">
-                                <div class="col-md-2">
-                                    <div class="input-group number-spinner">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                        </span>
-                                        <input type="text" class="form-control text-center" id="number_product" value="1">
-
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                        </span>
-                                    </div>
-                                    <div style="display: none;" class="bg-danger"><center>Veuiller saisir une quantité inférieur</center></div>
-                                </div>
                             </div>
-                            <?php
+                        </div>
+
+
+                        <?php
+                        if (isset($_SESSION)) {
+                            $rank = $_SESSION['user']['data']['id_rank'];
+                            if (($rank == "1" || $rank == 2) && $rank != null) {
+                                ?>
+                                <div class="container">
+                                    <div class="col-md-2">
+                                        <div class="input-group number-spinner">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                            </span>
+                                            <input type="text" class="form-control text-center" id="number_product" value="1">
+
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                            </span>
+                                        </div>
+                                        <div style="display: none;" class="bg-danger"><center>Veuiller saisir une quantité inférieur</center></div>
+                                    </div>
+                                </div>
+                                <?php
+                            }
                         }
                     }
                     ?>
@@ -124,6 +130,7 @@
                         if (isset($_SESSION)) {
                             $rank = $_SESSION['user']['data']['id_rank'];
                             if (($rank == "1" || $rank == 2) && $rank != null) {
+                                if ($p['quantity'] > 0) { 
                                 ?>
                                 <div class="bs-example bs-example-padded-bottom">
                                     <input type="hidden" name="id_product" value="<?php echo $p['id_sell']; ?>">
@@ -131,16 +138,17 @@
                                         Commander
                                     </button>
                                 </div><!-- /example -->
-                                <?php
-                            }else{?>
+                                <?php }} else {
+                                ?>
                                 <div class="bs-example bs-example-padded-bottom">
                                     <form method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'index'), null, true); ?>">
-                                    <button type="submit" class="btn btn-success btn-lg">
-                                        Connecter vous pour commander
-                                    </button>
+                                        <button type="submit" class="btn btn-success btn-lg">
+                                            Connecter vous pour commander
+                                        </button>
                                     </form>
                                 </div><!-- /example -->
-                          <?php  }
+                            <?php
+                            }
                         }
                         ?>
 
@@ -159,7 +167,7 @@
                         <div class="tab-pane fade in active" id="service-one">
 
                             <section class="container product-info">
-                                <?php echo $p['description']; ?>
+<?php echo $p['description']; ?>
                             </section>
 
                         </div>

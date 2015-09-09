@@ -1,39 +1,80 @@
-
-
-<div class = "col-md-6">
-    <div class="wrapper form-signindefault" style="min-width: 768px!important; margin-left: 30%;">
-        
-<form method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter','type'=> 'apply'), null, true); ?>">
-    <label class="control-label">Prénom</label><input type="text" maxlength="50" value="<?= $this->firstname ?>" name="firstname" required="required" class="input-lg form-control" placeholder="Prénom"><br/>
-    <label class="control-label">Nom</label><input type="text" maxlength="50" value="<?= $this->lastname ?>" name="lastname" required="required" class="input-lg form-control" placeholder="Nom"><br/>
-    <label class="control-label">Email</label><input type="email" maxlength="50" value="<?= $this->mail ?>" name="mail" required="required" class="input-lg form-control" placeholder="Email"><br/>
-    <label class="control-label">Numéro de téléphone</label><input type="tel" maxlength="30" value="<?= $this->phone ?>" name="phone" class="input-lg form-control" placeholder="numéro de téléphone"><br/>
-    <label class="control-label">Adresse</label><input type="text" maxlength="255" value="<?= $this->address ?>" name="address" required="required" class="input-lg form-control" placeholder="adresse"><br/>
-    <label class="control-label">Ville</label><input type="text" maxlength="255" value="<?= $this->ville ?>" name="ville" required="required" class="input-lg form-control" placeholder="ville"><br/>
-    <label class="control-label">Code postal</label><input type="text" maxlength="255" value="<?= $this->cp ?>" name="cp" required="required" class="input-lg form-control" placeholder="Code postal"><br/>
-    <label class="control-label">Changer de mot de passe (Ne pas remplir dans le cas contraire)</label>
-    <input type="password" class="input-lg form-control" name="password" id="password1" placeholder="nouveau mot de passe" autocomplete="off">
+<div class="container">
     <div class="row">
-    <div class="col-sm-6">
-    <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 8 Charactères minimum<br>
-    <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Une Lettre majuscule
-    </div>
-    <div class="col-sm-6">
-    <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Lowercase Letter<br>
-    <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Un chiffre
-    </div>
-    </div>
-    <input type="password" class="input-lg form-control" name="password2" id="password2" placeholder="repéter votre mot de passe" autocomplete="off">
-    <div class="row">
-    <div class="col-sm-12">
-    <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span>    Identique
-    </div>
-    </div>
-    <br/>
-    <button class="btn btn-lg btn-primary btn-block nextBtn" id="reviewProduct" type="submit">Enregistrer</button>  
-</form>
+               <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-2 toppad" >
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><?= $this->login_user; ?></h3>
+                </div>
+                <form method="POST" action="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter', 'type' => 'apply'), null, true); ?>">
 
-     
-    </div>   
-</div
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://comps.canstockphoto.fr/can-stock-photo_csp21530099.jpg" class="img-circle img-responsive"> </div>
+                            <div class=" col-md-9 col-lg-9 "> 
+                                <table class="table table-user-information">
+                                    <tbody>
+                                        <tr>
+                                            <td>Prénom:</td>
+                                            <td><input type="text" maxlength="50" value="<?= $this->firstname ?>" name="firstname" required="required" placeholder="Prénom"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nom:</td>
+                                            <td><input type="text" maxlength="50" value="<?= $this->lastname ?>" name="lastname" required="required" placeholder="Nom"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email:</td>
+                                            <td><input type="email" maxlength="50" value="<?= $this->mail ?>" name="mail" required="required"  placeholder="Email"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Numéro de téléphone :</td>
+                                            <td><input type="tel" maxlength="30" value="<?= $this->phone ?>" name="phone"  placeholder="numéro de téléphone"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Adresse :</td>
+                                            <td><input type="text" maxlength="255" value="<?= $this->address ?>" name="address" required="required" placeholder="adresse"></td>
+                                        </tr>
+                                        <tr>
+                                        <tr>
+                                            <td>Ville :</td>
+                                            <td><input type="text" maxlength="255" value="<?= $this->ville ?>" name="ville" required="required"  placeholder="ville"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Code postal :</td>
+                                            <td><input type="text" maxlength="255" value="<?= $this->cp ?>" name="cp" required="required" placeholder="Code postal"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <label class="control-label">Changer de mot de passe (Ne pas remplir dans le cas contraire)</label>
+                                <input type="password" class="form-control" name="password" id="password1" placeholder="nouveau mot de passe" autocomplete="off">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 8 Charactères minimum<br>
+                                        <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Une lettre majuscule
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Une lettre minuscule<br>
+                                        <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Un chiffre
+                                    </div>
+                                </div>
+                                <input type="password" class=" form-control" name="password2" id="password2" placeholder="repéter votre mot de passe" autocomplete="off">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span>    Mot de passe identique
+                                    </div>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <a data-original-title="Remove this user" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'parameter'), null, true); ?>" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon glyphicon-arrow-left"></i></a>
+                        <span class="pull-right">
+                            <button type="submit" class="btn btn-primary">Valider mes modifications</button>
+                        </span>
+                    </div>
+                </form>
 
+            </div>
+        </div>
+    </div>
+</div>
