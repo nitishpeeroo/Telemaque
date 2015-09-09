@@ -55,7 +55,7 @@ class PanierController extends Zend_Controller_Action {
                     foreach ($session as $key => $val) {
                         $checkQte = $sell->checkArticle($key, $val);
                         $session[$key] = $checkQte;
-                        $_SESSION['panier'][$key]= $checkQte;
+                        $_SESSION['panier'][$key] = $checkQte;
                         $tab[] = $key;
                     }
                     $panier = $sell->getArticle(null, $tab);
@@ -148,12 +148,13 @@ class PanierController extends Zend_Controller_Action {
 
                 $sell = new Application_Model_Sell();
                 $prix = $sell->getArticle($id, array());
-                $_SESSION['panier'][$id] ++;
+                $qteMax = $prix[0]['quantity'];
+                    $_SESSION['panier'][$id] ++;
+                    $panier[$id]["quantite"] ++;
+                    $panier[$id]['prix'] = $prix[0]['price'];
+                    $panier[$id]['prixTTC'] = $prix[0]['price'] * $_SESSION['panier'][$id];
+                    $panier[$id]['total'] = $this->_request->getPost('total') + $prix[0]['price'];
 
-                $panier[$id]["quantite"] ++;
-                $panier[$id]['prix'] = $prix[0]['price'];
-                $panier[$id]['prixTTC'] = $prix[0]['price'] * $_SESSION['panier'][$id];
-                $panier[$id]['total'] = $this->_request->getPost('total') + $prix[0]['price'];
                 if ($panier[$id]["quantite"] <= 10) {
                     $panier[$id]['check'] = true;
                 } else {

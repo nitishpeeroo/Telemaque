@@ -117,7 +117,7 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
                 ->setIntegrityCheck(false)
                 ->from(array('s' => DB_TABLE_SELL))
                 ->joinInner(array('i' => DB_TABLE_IMAGE), 's.id_sell = i.id_sell')
-                ->where('s.is_checked != 2')
+                ->where('s.is_checked = 1')
                 ->order('s.dt_creation')
                 ->limit($nb);
         try {
