@@ -167,13 +167,13 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
             return false;
         }
     }
-    
+
     public function updateQuantitySell($Quantity, $idSell) {
         try {
-            $data = array(              
+            $data = array(
                 'quantity' => $Quantity,
             );
-            
+
             $this->update($data, 'id_sell = ' . $idSell);
         } catch (Exception $ex) {
             echo 'ERROR_UPDATE_QUANTITYSELL : ' . $ex->getMessage();
@@ -197,6 +197,15 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
 
         $this->data = $row;
         return $this->data;
+    }
+
+    public function checkArticle($id, $number) {
+        $article = $this->getArticle($id);
+        $qteMax = $article[0]['quantity'];
+        if ($number > $qteMax) {
+            $number = $qteMax;
+        }
+        return $number;
     }
 
 }

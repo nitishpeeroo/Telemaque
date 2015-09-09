@@ -21,19 +21,16 @@ class PanierController extends Zend_Controller_Action {
 
         $statUser = $general->veriStatUser($ns->data);
         if (!empty($ns->data)) {
-                $this->view->firstname = $ns->data['firstname_user'];
-                $this->view->lastname = $ns->data['lastname_user'];
-                $this->view->lvl = $ns->data['id_rank'];
+            $this->view->firstname = $ns->data['firstname_user'];
+            $this->view->lastname = $ns->data['lastname_user'];
+            $this->view->lvl = $ns->data['id_rank'];
         }
-        if($statUser == 1 OR $statUser == 2 )
-        {
+        if ($statUser == 1 OR $statUser == 2) {
             $this->view->isadmin = $statUser;
-        }
-        else if($statUser == 3)
-        {   
-           Zend_Session:: namespaceUnset("user");
-           Zend_Session::destroy(true);
-           $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'acces'), null, true));
+        } else if ($statUser == 3) {
+            Zend_Session:: namespaceUnset("user");
+            Zend_Session::destroy(true);
+            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'acces'), null, true));
         }
     }
 
@@ -56,7 +53,9 @@ class PanierController extends Zend_Controller_Action {
                 if (!empty($session)) {
                     $tab = array();
                     foreach ($session as $key => $val) {
-
+                        $checkQte = $sell->checkArticle($key, $val);
+                        $session[$key] = $checkQte;
+                        $_SESSION['panier'][$key]= $checkQte;
                         $tab[] = $key;
                     }
                     $panier = $sell->getArticle(null, $tab);
