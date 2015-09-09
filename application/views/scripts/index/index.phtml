@@ -14,7 +14,7 @@
         </div>
     </div>
 </div>
-<?php if( !empty($slider)):?>
+<?php if( !empty($this->slider)):?>
     <div class="row carousel-holder">
         <div class="col-md-2"></div>
         <div class="col-md-8">
@@ -25,11 +25,14 @@
                     <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner">
-                    <?php foreach ($slider as $p): ?>
-                        <div class="item active">
-                            <img class="slide-image" src="data:image/<?php echo $p['type'] . ' ;base64,' . $p['img64'] ?>" alt="" />
+                    <?php $i=0; foreach ($this->slider as $p): 
+                            $p['image'] = base64_encode($p['image']);
+                            $p['image_name'] = pathinfo($p['image_name'], PATHINFO_EXTENSION);
+                    ?>
+                        <div class="item <?= $i==0?"active":"" ?>">
+                            <img class="slide-image" src="data:image/<?php echo $p['image_name'] . ' ;base64,' . $p['image'] ?>" alt="" />
                         </div>
-                    <?php endforeach; ?>
+                    <?php $i++; endforeach; ?>
                 </div>
                 <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left"></span>

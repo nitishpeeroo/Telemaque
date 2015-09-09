@@ -7,7 +7,7 @@ class IndexController extends Zend_Controller_Action {
         zend_session::start();
         $ns = new Zend_Session_Namespace('user');
         $general = new Application_Model_General();
-        
+        $slider = $general->getSlider(); 
         $statUser = $general->veriStatUser($ns->data);
         if (!empty($ns->data)) {
                 $this->view->firstname = $ns->data['firstname_user'];
@@ -36,7 +36,9 @@ class IndexController extends Zend_Controller_Action {
         $data_webite = $general->getGeneral();
         $data = $data_webite[0];
         $this->view->catchphrase = $data['catchphrase'];
-     
+        $general = new Application_Model_General();
+        $slider = $general->getSlider();
+        $this->view->slider = $slider;
     }
     
     public function contactAction(){
@@ -58,13 +60,13 @@ class IndexController extends Zend_Controller_Action {
             $mailUser   = $_POST['mail'];
             $message    = $_POST['message'];
             $contact->sendMail($nom, $prenom , $object, $mailUser, $message);
-            $this->view->mail = "Votre message � bien �t� envoy�.";
+            $this->view->mail = "Votre message à bien été envoyé.";
         }
     }
     
     public function errorAction(){
         if ($this->_getParam('type') == 'page') {
-            $this->view->error = "Vous devez �tre connect� pour acc�der � cette page.";
+            $this->view->error = "Vous devez être connecté pour accéder à cette page.";
         }
     }
     
