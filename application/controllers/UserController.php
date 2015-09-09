@@ -142,6 +142,7 @@ class UserController extends Zend_Controller_Action {
         $this->view->address = $ns->data['address_user'];
         $this->view->ville = $ns->data['ville_user'];
         $this->view->cp = $ns->data['codepostal_user'];
+         $this->view->login_user = $ns->data['login_user'];
     }
 
     public function modifyAction() {
@@ -163,6 +164,7 @@ class UserController extends Zend_Controller_Action {
         $this->view->address = $ns->data['address_user'];
         $this->view->cp = $ns->data['codepostal_user'];
         $this->view->ville = $ns->data['ville_user'];
+           $this->view->login_user = $ns->data['login_user'];
     }
 
     public function articleAction() {
