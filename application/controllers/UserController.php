@@ -36,7 +36,13 @@ class UserController extends Zend_Controller_Action {
                     $this->view->message = "Un article à été ajouté";
                 break;
                 case 'connecter':
-                    $this->view->message = "Vous êtes connecter";
+                    $this->view->message = "Vous êtes connecté";
+                break;
+                case 'enregistrer':
+                    $this->view->message = "Vous êtes inscrit";
+                break;
+                case 'erreur':
+                    $this->view->message = "Une erreur c'est produite lors de votre inscription.<br/>Veuillez contactez un administrateur";
                 break;
             }
         }
@@ -87,12 +93,13 @@ class UserController extends Zend_Controller_Action {
                     $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'index', 'login' => false), null, true));
                 }
                 $stat = $user->inscription($login, $mdp, $firstname, $lastname, $mail, $phone, $address, $cp, $ville);
-                $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index'), null, true));
                 if ($stat != -1) {
-                     $this->view->message = "Vous êtes inscrit";
-                } else {
-                     $this->view->message = "Erreur lors de l'enregistrement";
+                     $val='enregistrer';
+                     
+                } else {    
+                     $val='erreur';
                 }
+                $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index','message' => $val), null, true));
             }
         }
     }

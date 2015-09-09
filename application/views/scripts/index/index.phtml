@@ -20,9 +20,9 @@
         <div class="col-md-8">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="margin-bottom: 20px;">
                 <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    <?php $i=0; foreach ($this->slider as $p): ?>
+                    <li data-target="#carousel-example-generic" data-slide-to="<?= $i ?>" class="<?= $i==0?"active":"" ?>"></li>
+                    <?php $i++; endforeach; ?>
                 </ol>
                 <div class="carousel-inner">
                     <?php $i=0; foreach ($this->slider as $p): 
