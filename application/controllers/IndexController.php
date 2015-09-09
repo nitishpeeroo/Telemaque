@@ -22,7 +22,25 @@ class IndexController extends Zend_Controller_Action {
         {   
            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'acces'), null, true));
         }
-        
+        if($this->_getParam('message') != null ){
+            switch($this->_getParam('message')){
+                case 'deconnection':
+                    $this->view->message = "Vous êtes déconnecté";
+                break;
+                case 'done':
+                    $this->view->message = "Un article à été ajouté";
+                break;
+                case 'connecter':
+                    $this->view->message = "Vous êtes connecté";
+                break;
+                case 'enregistrer':
+                    $this->view->message = "Vous êtes inscrit";
+                break;
+                case 'erreur':
+                    $this->view->message = "Une erreur c'est produite lors de votre inscription.<br/>Veuillez contactez un administrateur";
+                break;
+            }
+        }
         
     }
 
