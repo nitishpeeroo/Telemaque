@@ -21,12 +21,10 @@
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
+                         
                         </button>
-                        <a class="navbar-brand" style="margin-left: 0px;" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, true); ?>"><img src="data:image/<?= $data['name_logo'] . ';base64,' . $data['logo'] ?>" class="navbar-brand" style="padding:0;" /></a>
+                        <a class="navbar-brand" style="margin-left: 0px;" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, false); ?>"><img src="data:image/<?= $data['name_logo'] . ';base64,' . $data['logo'] ?>" class="navbar-brand" style="padding:0;" /></a>
+                        <a id="brand" class="navbar-brand" style="padding:15px;" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, false); ?>"><?= $website_name; ?></a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
@@ -79,7 +77,7 @@
                                 </div>				
                             </li>
                         </ul>
-                        <form method="GET" class="navbar-form navbar-left" role="search" action="<?php echo $this->url(array('controller' => 'article', 'action' => 'search', 'page' => '1'), null, true); ?>" style="width: 50%; margin-left: 15%!important;">
+                        <form method="GET" class="navbar-form navbar-left" role="search" action="<?php echo $this->url(array('controller' => 'article', 'action' => 'search', 'page' => '1'), null, true); ?>" style="width: 45%; margin-left: 15%!important;">
                             <div class="input-group col-md-12">
                                 <input type="text" class="search-query form-control" name="search" placeholder="rechercher"/>
                                 <span class="input-group-btn">
@@ -231,3 +229,5 @@
                     </div>
                 </div>
                 <?php endif; ?>
+
+                

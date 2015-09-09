@@ -48,4 +48,25 @@ class Application_Model_General extends Zend_Db_Table_Abstract {
         }         
         return $result;
     }
+    
+    public function getSlider()
+    {       
+        $select = $this->select()
+                ->setIntegrityCheck(false)
+                ->from('slider')
+                ->where('is_active = ?',1)
+                ->order('position');
+
+        try {
+
+            $tab = $this->fetchAll($select)->toArray();
+        } catch (Exception $ex) {
+
+            echo 'ERROR_SELECT_GETGENERAL : ' . $ex->getMessage();
+            return false;
+        }
+
+        $this->data = $tab;
+        return $this->data;
+    }
 }

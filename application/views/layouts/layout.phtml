@@ -5,6 +5,7 @@ echo $this->doctype('HTML5');
 $general = new Application_Model_General();
 
 $data_webite = $general->getGeneral();
+$slider = $general->getSlider();
 $data = $data_webite[0];
 $website_name = $data['website_name'];
 $data['favicon'] = base64_encode($data['favicon']);
@@ -13,6 +14,8 @@ $data['logo'] = base64_encode($data['logo']);
 $data['name_logo'] = pathinfo($data['name_logo'], PATHINFO_EXTENSION);
 $data['website_background_image'] = base64_encode($data['website_background_image']);
 $data['website_background_name'] = pathinfo($data['website_background_image'], PATHINFO_EXTENSION);
+$slider['image'] = base64_encode($slider['image']);
+$slider['image_name'] = pathinfo($slider['image_name'], PATHINFO_EXTENSION);
 
 include ('header.phtml');
 echo $this->headTitle();
