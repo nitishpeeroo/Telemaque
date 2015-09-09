@@ -24,8 +24,8 @@
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
                          
                         </button>
-                        <a class="navbar-brand" style="margin-left: 0px;" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, false); ?>"><img src="data:image/<?= $data['name_logo'] . ';base64,' . $data['logo'] ?>" class="navbar-brand" style="padding:0;" /></a>
-                        <a id="brand" class="navbar-brand" style="padding:15px;" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, false); ?>"><?= $website_name; ?></a>
+                        <a class="navbar-brand" style="margin-left: 0px;" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, true); ?>"><img src="data:image/<?= $data['name_logo'] . ';base64,' . $data['logo'] ?>" class="navbar-brand" style="padding:0;" /></a>
+                        <a id="brand" class="navbar-brand" style="padding:15px;" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, true); ?>"><?= $website_name; ?></a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
