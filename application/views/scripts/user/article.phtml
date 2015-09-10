@@ -245,7 +245,7 @@ if ($this->commandVente == false) {
                                                     Prix :<input type="text" name="price" />Qt :<input type="text" name="quantity" /><input type="hidden" value="<?= $value['id_sell'] ?>" name="idSell" /><input type="submit" />
                                                 </form>
                                             <?php endif; ?>
-                                            <?php if ($value['is_checked'] == 0): ?>
+                                            <?php if ($value['is_checked'] == 2): ?>
                                                 <span class="plus"><a href="<?= $this->url(array('controller' => 'article', 'action' => 'modify', 'fiche' => $value['id_sell']), null, true); ?>" title="Lorem ipsum"><i class="glyphicon glyphicon glyphicon-wrench"></i></a></span>
                                             <?php endif; ?>
                                         </div>

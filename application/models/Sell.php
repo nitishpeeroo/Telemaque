@@ -138,7 +138,8 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
         return $ssrubrique;
     }
 
-    public function updateSell($title, $image, $quantity, $price, $descritptionCourt, $descritption, $idSell) {
+    public function updateSell($title, $image, $quantity, $price, $descritptionCourt, $descritption, $idSell, $sousrubrique) {
+   
         try {
             $data = array(
                 'title' => $title,
@@ -146,6 +147,8 @@ class Application_Model_Sell extends Zend_Db_Table_Abstract {
                 'price' => $price,
                 'description_courte' => $descritptionCourt,
                 'description' => $descritption,
+                'id_category' => $sousrubrique,
+                'is_checked' => 0,
                 'dt_modification' => date('Y-m-d H:i:s'),
             );
             $this->update($data, 'id_sell = ' . $idSell);

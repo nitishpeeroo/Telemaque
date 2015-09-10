@@ -10,40 +10,37 @@ class UserController extends Zend_Controller_Action {
         $ns = new Zend_Session_Namespace('user');
         $use = new Application_Model_User();
         $general = new Application_Model_General();
-        
+
         $statUser = $general->veriStatUser($ns->data);
         if (!empty($ns->data)) {
-                $this->view->firstname = $ns->data['firstname_user'];
-                $this->view->lastname = $ns->data['lastname_user'];
-                $this->view->lvl = $ns->data['id_rank'];
-        }        
-        if($statUser == 1 OR $statUser == 2 )
-        {
-            $this->view->isadmin = $statUser;   
+            $this->view->firstname = $ns->data['firstname_user'];
+            $this->view->lastname = $ns->data['lastname_user'];
+            $this->view->lvl = $ns->data['id_rank'];
         }
-        else if($statUser == 3)
-        {  
-           Zend_Session:: namespaceUnset("user");
-           Zend_Session::destroy(true);
-           $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'acces'), null, true));
+        if ($statUser == 1 OR $statUser == 2) {
+            $this->view->isadmin = $statUser;
+        } else if ($statUser == 3) {
+            Zend_Session:: namespaceUnset("user");
+            Zend_Session::destroy(true);
+            $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'acces'), null, true));
         }
-        if($this->_getParam('message') != null ){
-            switch($this->_getParam('message')){
+        if ($this->_getParam('message') != null) {
+            switch ($this->_getParam('message')) {
                 case 'deconnection':
                     $this->view->message = "Vous êtes déconnecté";
-                break;
+                    break;
                 case 'done':
                     $this->view->message = "Un article à été ajouté";
-                break;
+                    break;
                 case 'connecter':
                     $this->view->message = "Vous êtes connecté";
-                break;
+                    break;
                 case 'enregistrer':
                     $this->view->message = "Vous êtes inscrit";
-                break;
+                    break;
                 case 'erreur':
                     $this->view->message = "Une erreur c'est produite lors de votre inscription.<br/>Veuillez contactez un administrateur";
-                break;
+                    break;
             }
         }
     }
@@ -61,19 +58,15 @@ class UserController extends Zend_Controller_Action {
                 if (!isset($connection['id_user'])) {
                     echo "vous n'exister pas";
                 } else {
-                   
-                    if($connection['is_blocked'] == '0')
-                    {
-                    $this->sess = new Zend_Session_Namespace('user');
-                    $this->sess->data = $connection;
 
-                    $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index','message'=>'connecter'), null, true));
-                    }
-                    else
-                    {
+                    if ($connection['is_blocked'] == '0') {
+                        $this->sess = new Zend_Session_Namespace('user');
+                        $this->sess->data = $connection;
+
+                        $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index', 'message' => 'connecter'), null, true));
+                    } else {
                         $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'acces'), null, true));
                     }
-                    
                 }
                 // sign up
             } elseif ($this->_getParam('type') == 'signup') {
@@ -94,12 +87,11 @@ class UserController extends Zend_Controller_Action {
                 }
                 $stat = $user->inscription($login, $mdp, $firstname, $lastname, $mail, $phone, $address, $cp, $ville);
                 if ($stat != -1) {
-                     $val='enregistrer';
-                     
-                } else {    
-                     $val='erreur';
+                    $val = 'enregistrer';
+                } else {
+                    $val = 'erreur';
                 }
-                $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index','message' => $val), null, true));
+                $this->_redirect($this->view->url(array('controller' => 'index', 'action' => 'index', 'message' => $val), null, true));
             }
         }
     }
@@ -107,7 +99,7 @@ class UserController extends Zend_Controller_Action {
     public function destroyAction() {
         Zend_Session:: namespaceUnset("user");
         Zend_Session::destroy(true);
-        $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'index', 'message'=>'deconnection'), null, true));
+        $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'index', 'message' => 'deconnection'), null, true));
     }
 
     public function parameterAction() {
@@ -149,7 +141,7 @@ class UserController extends Zend_Controller_Action {
         $this->view->address = $ns->data['address_user'];
         $this->view->ville = $ns->data['ville_user'];
         $this->view->cp = $ns->data['codepostal_user'];
-         $this->view->login_user = $ns->data['login_user'];
+        $this->view->login_user = $ns->data['login_user'];
     }
 
     public function modifyAction() {
@@ -162,7 +154,7 @@ class UserController extends Zend_Controller_Action {
             $this->view->error = "<b style='color:red;'>Ancien mot de passe incorrect</b>";
         }
         $this->view->headTitle('modification utilisateur');
-
+   
         $ns = new Zend_Session_Namespace('user');
         $this->view->firstname = $ns->data['firstname_user'];
         $this->view->lastname = $ns->data['lastname_user'];
@@ -171,7 +163,7 @@ class UserController extends Zend_Controller_Action {
         $this->view->address = $ns->data['address_user'];
         $this->view->cp = $ns->data['codepostal_user'];
         $this->view->ville = $ns->data['ville_user'];
-           $this->view->login_user = $ns->data['login_user'];
+        $this->view->login_user = $ns->data['login_user'];
     }
 
     public function articleAction() {
@@ -210,7 +202,7 @@ class UserController extends Zend_Controller_Action {
                 $ResultImage = $images->addImage($idSell, $image, $nameImage);
 
                 if ($ResultImage == true) {
-                    $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'article','message'=>'done'), null, true));
+                    $this->_redirect($this->view->url(array('controller' => 'user', 'action' => 'article', 'message' => 'done'), null, true));
                 }
             }
             if ($this->_getParam('type') == 'update') {
@@ -244,7 +236,7 @@ class UserController extends Zend_Controller_Action {
         $complementCommand = $commandeline->getCommandLineByArrayIdProduct($idProduct);
         $this->view->complementCommande = $complementCommand;
         $this->view->detailCommand = $detailCommand;
-      
+
         $infoUser = $user->getUserByCommandLine($Commande);
         $this->view->infoBuyer = $infoUser;
 

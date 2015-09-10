@@ -219,7 +219,7 @@
         <div class="main">
             <div class = "container" style="margin-bottom: 10px;">      
                 <?php if(isset($this->message) && !empty($this->message)): ?>
-                <div class="container">
+                <div class="container popup">
                     <div class="row">
                         <div class="col-sm-6 col-md-12">
                             <div class="alert alert-success">
@@ -230,5 +230,8 @@
                     </div>
                 </div>
                 <?php endif; ?>
+                <script>
+                setTimeout(function(){ $(".popup").hide(); }, 5000);
+                            </script>
 
                 
