@@ -16,7 +16,7 @@ class UserController extends Zend_Controller_Action {
                 $this->view->firstname = $ns->data['firstname_user'];
                 $this->view->lastname = $ns->data['lastname_user'];
                 $this->view->lvl = $ns->data['id_rank'];
-        }
+        }        
         if($statUser == 1 OR $statUser == 2 )
         {
             $this->view->isadmin = $statUser;   

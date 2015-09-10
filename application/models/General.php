@@ -32,7 +32,7 @@ class Application_Model_General extends Zend_Db_Table_Abstract {
         $result = 0;   
         if(!empty($ns) and $ns != null) {          
             $user = new Application_Model_User();                
-            $Leveluser = $user->getLevel_user($ns['id_user']); //Renvoi le r�le de l'utilisateur      
+            $Leveluser = $user->getLevel_user($ns['id_user']); //Renvoi le role de l'utilisateur      
             
             switch ($Leveluser['level_user']) {
                 case '1':
@@ -42,10 +42,12 @@ class Application_Model_General extends Zend_Db_Table_Abstract {
                     $result = 2;
                     break;
             }
-            if($user->getIs_blocked($ns['id_user']) == 0) { //Si l'utilisateur est block� 
+            $val = $user->getIs_blocked($ns['id_user']);
+            if($val['is_blocked'] == '1') { //Si l'utilisateur est blocké
                 $result = 3;
             }     
-        }         
+        }      
+     
         return $result;
     }
     
