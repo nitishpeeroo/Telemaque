@@ -77,7 +77,8 @@ class IndexController extends Zend_Controller_Action {
             $object     = $_POST['object'];
             $mailUser   = $_POST['mail'];
             $message    = $_POST['message'];
-            $contact->sendMail($nom, $prenom , $object, $mailUser, $message);
+            $contact->sendMail($nom, $prenom , $object, $mailUser, $message);          	
+            mail($mailUser , $object , $message);
             $this->view->mail = "Votre message à bien été envoyé.";
         }
     }
